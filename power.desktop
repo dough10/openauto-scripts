@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Power
+Terminal=false
+Exec=/usr/bin/python3 /home/pi/power.py
