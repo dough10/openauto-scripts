@@ -40,5 +40,4 @@ while 1:
 			call("sudo shutdown -h now", shell=True)
 	else:
 		ignLowCounter = 0
-		brightness(255)
 		time.sleep(1)
