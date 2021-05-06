@@ -12,19 +12,22 @@ YELLOW=$CODE'1;33m'
 WHITE=$CODE'1;37m'
 NC=$CODE'0m'
 
-echo -e $YELLOW"Creating autostart directory"$NC 
-if [ -d "/home/pi/.config/autostart" ]
-then
-    echo -e $RED"Directory exists."$NC
-else
-    mkdir /home/pi/.config/autostart
-    echo -e $RED"Directory created."$NC
-fi
+checkFolder () {
+    if [ -d "$1" ]
+    then
+        echo -e "Directory ${GREEN}$1${NC} exists."
+    else
+        echo -e "Creating ${GREEN}$1${NC} folder"
+        mkdir $1
+    fi 
+}
 
-echo -e $YELLOW'Copying Python scripts'$NC
+checkFolder "/home/pi/.config/autostart"
+
+echo -e "${YELLOW}Copying Python scripts${NC}"
 cp -u -p -v power.py /home/pi
 cp -u -p -v vol.py /home/pi
 
-echo -e $YELLOW'Copying autostart shortcuts'$NC
+echo -e "${YELLOW}Copying autostart shortcuts${NC}"
 cp -u -p -v vol.desktop /home/pi/.config/autostart
 cp -u -p -v power.desktop /home/pi/.config/autostart
