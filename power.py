@@ -25,6 +25,10 @@ def brightness(val):
 	file.write(str(val))
 	file.close()
 
+def keypress(key):
+	keycontroller.press(key)
+	keycontroller.release(key)
+
 brightness(255)
 
 while 1:
@@ -34,8 +38,7 @@ while 1:
 		if ignLowCounter > IGN_LOW_TIME:
 			brightness(5)
 			print("Shutting Down")
-			keycontroller.press(Key.f12)
-			keycontroller.release(Key.f12)
+			keypress(Key.f12)
 			time.sleep(5)
 			call("sudo shutdown -h now", shell=True)
 	else:
