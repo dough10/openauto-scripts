@@ -13,13 +13,13 @@ WHITE=$CODE'1;37m'
 NC=$CODE'0m'
 
 checkFolder () {
-    if [ -d "$1" ]
-    then
-        echo -e "Directory ${GREEN}$1${NC} exists."
-    else
-        echo -e "Creating ${GREEN}$1${NC} folder"
-        mkdir $1
-    fi 
+  if [ -d "$1" ]
+  then
+    echo -e "Directory ${GREEN}$1${NC} exists."
+  else
+    echo -e "Creating ${GREEN}$1${NC} folder"
+    mkdir $1
+  fi 
 }
 
 checkFolder "/home/pi/.config/autostart"
