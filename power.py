@@ -40,6 +40,7 @@ while 1:
 			print("Shutting Down")
 			keypress(Key.f12)
 			time.sleep(5)
+			GPIO.output(EN_POWER_PIN, 0)
 			call("sudo shutdown -h now", shell=True)
 	else:
 		ignLowCounter = 0
