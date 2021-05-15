@@ -24,10 +24,10 @@ checkFolder () {
 
 checkFolder "/home/pi/.config/autostart"
 
-echo -e "${YELLOW}Copying / Updating Python scripts${NC}"
+echo -e "${YELLOW}Installing / Updating Python scripts${NC}"
 cp -u -p -v power.py /home/pi
 cp -u -p -v vol.py /home/pi
 
-echo -e "${YELLOW}Copying / Updating autostart shortcuts${NC}"
+echo -e "${YELLOW}Installing / Updating autostart shortcuts${NC}"
 cp -u -p -v vol.desktop /home/pi/.config/autostart
 cp -u -p -v power.desktop /home/pi/.config/autostart
