@@ -40,7 +40,7 @@ echo "${YELLOW}Installing PIP${NC}"
 sudo apt-get install python3-pip
 
 echo "${YELLOW}Installing pynput${NC}"
-python -m pip install pynput
+python3 -m pip install pynput
 
 echo "${YELLOW}Checking for autostart folder${NC}"
 checkFolder "/home/pi/.config/autostart"
