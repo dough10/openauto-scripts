@@ -33,8 +33,11 @@ echo "${PURPLE}                                               ${NC}";
 echo "${YELLOW}Updating app cache${NC}"
 sudo apt-get update
 
+echo "${YELLOW}Installing Python3${NC}"
+sudo apt install python3
+
 echo "${YELLOW}Installing PIP${NC}"
-sudo apt-get install python-pip
+sudo apt-get install python3-pip
 
 echo "${YELLOW}Installing pynput${NC}"
 python -m pip install pynput
