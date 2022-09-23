@@ -33,6 +33,9 @@ echo "${PURPLE}                                               ${NC}";
 echo "${YELLOW}Updating app cache${NC}"
 sudo apt-get update
 
+echo "${YELLOW}Installing Xterm${NC}"
+sudo apt install xterm -y
+
 echo "${YELLOW}Installing Python3${NC}"
 sudo apt install python3
 
