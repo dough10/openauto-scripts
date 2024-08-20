@@ -21,27 +21,27 @@ GPIO.output(EN_POWER_PIN, 1)
 ignLowCounter = 0
 
 def brightness(val):
-	file = open("/sys/class/backlight/rpi_backlight/brightness","w")
-	file.write(str(val))
-	file.close()
+  file = open("/sys/class/backlight/rpi_backlight/brightness","w")
+  file.write(str(val))
+  file.close()
 
 def keypress(key):
-	keycontroller.press(key)
-	keycontroller.release(key)
+  keycontroller.press(key)
+  keycontroller.release(key)
 
 brightness(255)
 
 while 1:
-	if GPIO.input(IGN_PIN) != 1:
-		time.sleep(1)
-		ignLowCounter += 1
-		if ignLowCounter > IGN_LOW_TIME:
-			brightness(5)
-			print("Shutting Down")
-			keypress(Key.f12)
-			time.sleep(5)
-			GPIO.output(EN_POWER_PIN, 0)
-			call("sudo shutdown -h now", shell=True)
-	else:
-		ignLowCounter = 0
-		time.sleep(1)
+  if GPIO.input(IGN_PIN) != 1:
+    time.sleep(1)
+    ignLowCounter += 1
+    if ignLowCounter > IGN_LOW_TIME:
+      brightness(5)
+      print("Shutting Down")
+      keypress(Key.f12)
+      time.sleep(5)
+      GPIO.output(EN_POWER_PIN, 0)
+      call("sudo shutdown -h now", shell=True)
+  else:
+    ignLowCounter = 0
+    time.sleep(1)
