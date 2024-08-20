@@ -33,14 +33,8 @@ echo "${PURPLE}                                               ${NC}";
 echo "${YELLOW}Updating app cache${NC}"
 sudo apt-get update
 
-echo "${YELLOW}Installing Xterm${NC}"
-sudo apt install xterm -y
-
-echo "${YELLOW}Installing Python3${NC}"
-sudo apt install python3
-
-echo "${YELLOW}Installing PIP${NC}"
-sudo apt-get install python3-pip
+echo "${YELLOW}Installing Requirments${NC}"
+sudo apt install xterm python3 python3-pip -y
 
 echo "${YELLOW}Installing pynput${NC}"
 python -m pip install pynput
@@ -53,5 +47,5 @@ cp -u -p -v power.py /home/pi
 cp -u -p -v vol.py /home/pi
 
 echo "${YELLOW}Installing / Updating autostart shortcuts${NC}"
-cp -u -p -v vol.desktop /home/pi/.config/autostart
 cp -u -p -v power.desktop /home/pi/.config/autostart
+cp -u -p -v vol.desktop /home/pi/.config/autostart
