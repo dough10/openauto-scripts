@@ -37,7 +37,7 @@ echo "${YELLOW}Installing Requirments${NC}"
 sudo apt install xterm python3 python3-pip -y
 
 echo "${YELLOW}Installing pynput${NC}"
-python -m pip install pynput
+python3 -m pip install pynput
 
 echo "${YELLOW}Checking for autostart folder${NC}"
 checkFolder "/home/pi/.config/autostart"
