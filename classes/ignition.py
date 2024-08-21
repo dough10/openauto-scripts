@@ -22,7 +22,7 @@ class Ignition:
     self.__remote.on()
     print('ignition started')
 
-  def isRunning(self):
+  def main(self):
     if GPIO.input(self.__pin) != 1:
       self.__ignLowCounter += 1
       time.sleep(1)

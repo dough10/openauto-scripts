@@ -9,5 +9,5 @@ ignition = Ignition(IGN_PIN, REMOTE_PIN)
 fan = Pwnfan(FAN_PIN)
 
 while True:
-	fan.getCPUTemp()
-	ignition.isRunning()
+	fan.main()
+	ignition.main()

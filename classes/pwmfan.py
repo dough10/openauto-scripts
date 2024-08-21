@@ -13,7 +13,7 @@ class Pwnfan:
     self.__fan.start(0)
     print('PWN started')
 
-  def getCPUTemp(self):
+  def main(self):
     reading = self.__cpu.temperature
     if reading >= 75.0:
       self.__fan.ChangeDutyCycle(100.0)
