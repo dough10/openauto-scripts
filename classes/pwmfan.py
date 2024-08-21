@@ -1,8 +1,6 @@
 import RPi.GPIO as GPIO
-import logging
 from gpiozero import CPUTemperature
 
-logging.basicConfig(level=logging.warning)
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 

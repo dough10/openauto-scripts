@@ -1,13 +1,12 @@
 import time
 import RPi.GPIO as GPIO
-import logging
+
 
 from subprocess import call
 from pynput.keyboard import Key, Controller
 
 from classes.remote import Remote
 
-logging.basicConfig(level=logging.warning)
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 keycontroller = Controller()

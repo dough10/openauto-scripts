@@ -43,6 +43,7 @@ echo "${YELLOW}Checking for autostart folder${NC}"
 checkFolder "/home/pi/.config/autostart"
 
 echo "${YELLOW}Installing / Updating Python scripts${NC}"
+cp -u -p -v -r classes /home/pi
 cp -u -p -v power.py /home/pi
 cp -u -p -v vol.py /home/pi
 
