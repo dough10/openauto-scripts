@@ -3,7 +3,6 @@ from pynput.keyboard import Key, Controller
 
 keycontroller = Controller()
 
-# Monitor times F12 is pressed
 class Volume:
   __default_level = 10
   __pressed = 10
