@@ -1,18 +1,22 @@
 import RPi.GPIO as GPIO
 
+from classes.logs import Logs
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
+logger = Logs().get_logger()
+
 class Remote:
-  def __init__(self, pin):
+  def __init__(self, pin) -> None:
     self.__pin = pin
     GPIO.setup(self.__pin, GPIO.OUT)
-    print('remote started')
+    logger.info('remote started')
 
-  def on(self):
+  def on(self) -> None:
     GPIO.output(self.__pin, 1)
-    print('Remote on')
+    logger.info('Remote on')
 
-  def off(self):
+  def off(self) -> None:
     GPIO.output(self.__pin, 0)
-    print('remote off')
+    logger.info('remote off')

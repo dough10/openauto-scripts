@@ -1,19 +1,23 @@
 import RPi.GPIO as GPIO
 from gpiozero import CPUTemperature
 
+from classes.logs import Logs
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
+logger = Logs().get_logger()
+
 class Pwnfan:
-  def __init__(self, fan_pin):
+  def __init__(self, fan_pin:int) -> None:
     self.__pin = fan_pin
     self.__cpu = CPUTemperature()
     GPIO.setup(self.__pin, GPIO.OUT)
     self.__fan = GPIO.PWM(self.__pin, 1000)
     self.__fan.start(0)
-    print('PWN started')
+    logger.info('PWN started')
 
-  def main(self):
+  def main(self) -> None:
     reading = self.__cpu.temperature
     if reading >= 75.0:
       self.__fan.ChangeDutyCycle(100.0)
