@@ -9,5 +9,5 @@ ignition = Ignition(IGN_PIN, REMOTE_PIN)
 fan = Pwnfan(FAN_PIN)
 
 while True:
-	fan.main()
-	ignition.main()
+  fan.main()
+  ignition.main()
