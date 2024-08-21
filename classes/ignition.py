@@ -21,12 +21,13 @@ class Ignition:
   __ignLowCounter = 0
 
   def __init__(self, ign_pin, remote_pin, fan_pin):
+    print('ignition starting')
     self.__pin = ign_pin
-    GPIO.setup(self.__pin, GPIO.IN)
     self.__remote = Remote(remote_pin)
-    self.__remote.on()
     self.__fan = Pwnfan(fan_pin)
-    print('ignition started')
+    GPIO.setup(self.__pin, GPIO.IN)
+    time.sleep(5)
+    self.__remote.on()
 
   def main(self):
     self.__fan.main()
