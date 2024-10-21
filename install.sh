@@ -59,8 +59,6 @@ createFolder "~/.config/autostart"
 echo -e "${YELLOW}Installing autostart shortcuts${NC}"
 cp -u -p -v ~/openauto-scripts/*.desktop ~/.config/autostart
 
-chmod +x ~/.config/autostart/vol.desktop
-chmod +x ~/.config/autostart/power.desktop
-
+chmod +x ~/.config/autostart/*.desktop
 
 echo -e "${YELLOW}Install complete${NC}"
