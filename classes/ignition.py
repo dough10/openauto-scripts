@@ -1,9 +1,9 @@
 import time
-import RPi.GPIO as GPIO
-
-
 from subprocess import call
+
+import RPi.GPIO as GPIO
 from pynput.keyboard import Key, Controller
+
 
 try:
   # from classes.pwmfan import Pwnfan
