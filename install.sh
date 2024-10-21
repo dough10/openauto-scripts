@@ -49,7 +49,7 @@ python3 -m venv ~/openauto-scripts/.venv
 echo -e "${YELLOW}virtual enviroment ~/openauto-scripts/.venv created${NC}"
 
 echo -e "${YELLOW}Installing pynput${NC}"
-~/openauto-scripts/.venv/bin/python3 -m pip install -r requirments.txt
+~/openauto-scripts/.venv/bin/python3 -m pip install -r ~/openauto-scripts/requirments.txt
 echo -e "${YELLOW}pynput installed${NC}"
 
 echo -e "${YELLOW}Creating autostart folder${NC}"
