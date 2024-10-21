@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
-Name=Power
+Name=Power.py
 Terminal=false
-Exec=/usr/bin/python3 /home/pi/power.py
+Exec=~/openauto-scripts/.venv/bin/python3 ~/openauto-scripts/power.py

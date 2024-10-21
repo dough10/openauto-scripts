@@ -22,7 +22,6 @@ class Volume:
       pressed -= 1
 
   def __resetVol(self) -> None:
-    print('volume reset')
     while self.__pressed > self.__default_level:
       keycontroller.press(Key.f7)
       keycontroller.release(Key.f7)

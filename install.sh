@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 version="1.0"
 
 BLACK='\033[0;30m'
@@ -13,7 +14,7 @@ YELLOW='\033[1;33m'
 WHITE='\033[1;37m'
 NC='\033[0m'
 
-checkFolder () {
+createFolder () {
   if [ -d "$1" ]
   then
     echo -e "Directory ${GREEN}$1${NC} exists."
@@ -28,25 +29,34 @@ echo -e "${PURPLE}| | \ \  / |  | \ | |  | | | | ____ | |  | |   ${NC}";
 echo -e "${PURPLE}| | | |  | |  | | | |  | | | |  | | | |--| |   ${NC}";
 echo -e "${PURPLE}|_|_/_/  \_|__|_/ \_|__|_| |_|__|_| |_|  |_|   ${NC}";
 echo -e "${WHITE}Openauto Script Installer v${NC}${GREEN}${version}${NC}";
-echo -e "${PURPLE}                                               ${NC}";
+echo -e ""
 
-echo -e "${YELLOW}Updating app cache${NC}"
-sudo apt-get update
+echo -e "${YELLOW}Install Dependencies${NC}"
+sudo apt-get update && sudo apt install git xterm python3 python3-pip -y
+PYTHON_VERSION=$(python3 --version | awk '{print $2}' | cut -d. -f1-2)
+PYTHON_VENV_PACKAGE="python${PYTHON_VERSION}-venv"
+if ! sudo apt install "$PYTHON_VENV_PACKAGE" -y; then
+  echo -e "${RED}Warning: ${PYTHON_VENV_PACKAGE} installation failed. Attempting to continue...${NC}"
+fi
+echo -e "${YELLOW}Dependencies Installed${NC}"
 
-echo -e "${YELLOW}Installing Requirments${NC}"
-sudo apt install xterm python3 python3-pip -y
+echo -e "${YELLOW}Clone Github repo${NC}"
+git clone https://github.com/dough10/openauto-scripts
+echo -e "${YELLOW}Github repo cloned${NC}"
+
+echo -e "${YELLOW}Setup virtual enviroment${NC}"
+python3 -m venv ~/openauto-scripts/.venv
+echo -e "${YELLOW}virtual enviroment ~/openauto-scripts/.venv created${NC}"
 
 echo -e "${YELLOW}Installing pynput${NC}"
-python3 -m pip install pynput
+~/openauto-scripts/.venv/bin/python3 -m pip install -r requirments.txt
+echo -e "${YELLOW}pynput installed${NC}"
 
-echo -e "${YELLOW}Checking for autostart folder${NC}"
-checkFolder "/home/pi/.config/autostart"
+echo -e "${YELLOW}Creating autostart folder${NC}"
+createFolder "~/.config/autostart"
 
-echo -e "${YELLOW}Installing / Updating Python scripts${NC}"
-cp -u -p -v -r classes /home/pi
-cp -u -p -v power.py /home/pi
-cp -u -p -v vol.py /home/pi
+echo -e "${YELLOW}Installing autostart shortcuts${NC}"
+cp -u -p -v power.desktop ~/.config/autostart
+cp -u -p -v vol.desktop ~/.config/autostart
 
-echo -e "${YELLOW}Installing / Updating autostart shortcuts${NC}"
-cp -u -p -v power.desktop /home/pi/.config/autostart
-cp -u -p -v vol.desktop /home/pi/.config/autostart
+echo -e "${YELLOW}Install complete${NC}"
