@@ -38,7 +38,7 @@ class Ignition:
     keycontroller.release(key)
 
   def main(self) -> None:
-    self.__fan.main()
+    # self.__fan.main()
     if GPIO.input(self.__pin) != 1:
       self.__ignLowCounter += 1
       time.sleep(1)

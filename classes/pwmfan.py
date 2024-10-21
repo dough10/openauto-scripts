@@ -30,3 +30,9 @@ class Pwnfan:
       self.__fan.ChangeDutyCycle(45.0)
     else:
       self.__fan.ChangeDutyCycle(30.0)
+      
+
+if __name__ == "__main__":
+  fan = Pwnfan(18)
+  while True:
+    fan.main()  
