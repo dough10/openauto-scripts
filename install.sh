@@ -15,12 +15,13 @@ WHITE='\033[1;37m'
 NC='\033[0m'
 
 createFolder () {
-  if [ -d "$1" ]
+  folderPath="${1/#\~/$HOME}"
+  if [ -d "$folderPath" ]
   then
-    echo -e "Directory ${GREEN}$1${NC} exists."
+    echo -e "Directory ${GREEN}$folderPath${NC} exists."
   else
-    echo -e "Creating ${GREEN}$1${NC} folder"
-    mkdir $1
+    echo -e "Creating ${GREEN}$folderPath${NC} folder"
+    mkdir -p "$folderPath"
   fi 
 }
 
