@@ -57,7 +57,7 @@ echo -e "${YELLOW}Creating autostart folder${NC}"
 createFolder "~/.config/autostart"
 
 echo -e "${YELLOW}Installing autostart shortcuts${NC}"
-cp -u -p -v ~/openauto-scripts/*.desktop ~/.config/autostart
+cp -u -p -v ~/openauto-scripts/shortcuts/*.desktop ~/.config/autostart
 
 chmod +x ~/.config/autostart/*.desktop
 
