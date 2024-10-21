@@ -1,3 +1,2 @@
 pynput
 RPi.GPIO
-gpiozero
