@@ -2,4 +2,4 @@
 Type=Application
 Name=power
 Terminal=false
-Exec=$HOME/openauto-scripts/.venv/bin/python3 $HOME/openauto-scripts/power.py
+Exec=${HOME}/openauto-scripts/.venv/bin/python3 ${HOME}/openauto-scripts/power.py
