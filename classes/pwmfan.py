@@ -1,4 +1,4 @@
-from subprocess import call
+import subprocess
 
 import RPi.GPIO as GPIO
 
@@ -18,7 +18,8 @@ class Pwnfan:
     logger.info('PWN started')
 
   def main(self) -> None:
-    reading = 30 #call('/opt/vc/bin/vcgencmd measure_temp')
+    result = subprocess.run(['/usr/bin/vcgencmd', 'measure_temp'], capture_output=True, text=True)
+    reading = result.stdout.split('=')[1].split("'")[0]
     if reading >= 75.0:
       self.__fan.ChangeDutyCycle(100.0)
     elif reading >= 70:
