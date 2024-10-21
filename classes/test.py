@@ -1,4 +1,4 @@
-from subprocess import call
+import subprocess
 
-temp = call(['/usr/bin/vcgencmd', 'measure_temp'])
+temp = subprocess.check_output(['/usr/bin/vcgencmd', 'measure_temp']).decode('UTF-8')
 print(temp)
