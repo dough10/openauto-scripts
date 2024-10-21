@@ -2,4 +2,4 @@
 Type=Application
 Name=vol
 Terminal=false
-Exec=~/openauto-scripts/.venv/bin/python3 ~/openauto-scripts/vol.py
+Exec=/home/pi/openauto-scripts/.venv/bin/python3 /home/pi/openauto-scripts/vol.py
