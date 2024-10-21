@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
-Name=Vol.py
+Name=vol
 Terminal=false
 Exec=~/openauto-scripts/.venv/bin/python3 ~/openauto-scripts/vol.py

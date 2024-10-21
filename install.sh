@@ -60,4 +60,8 @@ echo -e "${YELLOW}Installing autostart shortcuts${NC}"
 cp -u -p -v ~/openauto-scripts/power.desktop ~/.config/autostart
 cp -u -p -v ~/openauto-scripts/vol.desktop ~/.config/autostart
 
+chmod +x ~/.config/autostart/vol.desktop
+chmod +x ~/.config/autostart/power.desktop
+
+
 echo -e "${YELLOW}Install complete${NC}"
