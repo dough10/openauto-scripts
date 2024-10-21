@@ -1,6 +1,9 @@
 import RPi.GPIO as GPIO
 
-from classes.logs import Logs
+try:
+  from classes.logs import Logs
+except ModuleNotFoundError:
+  from logs import Logs
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)

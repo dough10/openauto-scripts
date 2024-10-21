@@ -1,6 +1,7 @@
 import subprocess
 
 import RPi.GPIO as GPIO
+
 try:
   from classes.logs import Logs
 except ModuleNotFoundError:
@@ -23,8 +24,10 @@ class Pwnfan:
   def main(self) -> None:
     result = subprocess.run(['/usr/bin/vcgencmd', 'measure_temp'], capture_output=True, text=True)
     reading = float(result.stdout.split('=')[1].split("'")[0])
+    logger.info(reading)
     if reading >= 75.0:
       self.__fan.ChangeDutyCycle(100.0)
+      logger.info('PWM fan maxxed')
     elif reading >= 70:
       self.__fan.ChangeDutyCycle(75.0)
     elif reading >= 65:

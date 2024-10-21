@@ -15,6 +15,7 @@ def main():
 
     
 if __name__ == "__main__":
+  logger.info('Starting power.py')
   try:
     main()
   except Exception as e:
