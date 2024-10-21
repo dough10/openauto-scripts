@@ -31,7 +31,6 @@ echo -e "${PURPLE}| | | |  | |  | | | |  | | | |  | | | |--| |   ${NC}";
 echo -e "${PURPLE}|_|_/_/  \_|__|_/ \_|__|_| |_|__|_| |_|  |_|   ${NC}";
 echo -e "${WHITE}Openauto Script Installer v${NC}${GREEN}${version}${NC}";
 echo -e ""
-
 echo -e "${YELLOW}Install Dependencies${NC}"
 sudo apt-get update && sudo apt install git xterm python3 python3-pip -y
 PYTHON_VERSION=$(python3 --version | awk '{print $2}' | cut -d. -f1-2)
@@ -42,6 +41,7 @@ fi
 echo -e "${YELLOW}Dependencies Installed${NC}"
 
 echo -e "${YELLOW}Clone Github repo${NC}"
+cd ~/
 git clone https://github.com/dough10/openauto-scripts
 echo -e "${YELLOW}Github repo cloned${NC}"
 
