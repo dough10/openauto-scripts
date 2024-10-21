@@ -1,4 +1,4 @@
 pynput
 RPi.GPIO
 gpiozero
-importlib.metadata
+importlib.metadata.entry_points
