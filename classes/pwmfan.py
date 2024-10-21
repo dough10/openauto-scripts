@@ -18,7 +18,7 @@ class Pwnfan:
     logger.info('PWN started')
 
   def main(self) -> None:
-    reading = call('/opt/vc/bin/vcgencmd measure_temp')
+    reading = 30 #call('/opt/vc/bin/vcgencmd measure_temp')
     if reading >= 75.0:
       self.__fan.ChangeDutyCycle(100.0)
     elif reading >= 70:
