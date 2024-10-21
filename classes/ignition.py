@@ -28,7 +28,7 @@ class Ignition:
     logger.info('ignition starting')
     self.__pin = ign_pin
     self.__remote = Remote(remote_pin)
-    # self.__fan = Pwnfan(fan_pin)
+    self.__fan = Pwnfan(fan_pin)
     GPIO.setup(self.__pin, GPIO.IN)
     time.sleep(5)
     self.__remote.on()
@@ -38,7 +38,7 @@ class Ignition:
     keycontroller.release(key)
 
   def main(self) -> None:
-    # self.__fan.main()
+    self.__fan.main()
     if GPIO.input(self.__pin) != 1:
       self.__ignLowCounter += 1
       time.sleep(1)
