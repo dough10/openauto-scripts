@@ -1,7 +1,6 @@
-import json
 import logging
 import logging.config
-
+from datetime import datetime
 class Logs:
   def __init__(self):
     self.__logger = logging.getLogger('')
