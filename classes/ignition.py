@@ -6,11 +6,11 @@ from pynput.keyboard import Key, Controller
 
 
 try:
-  # from classes.pwmfan import Pwnfan
+  from classes.pwmfan import Pwnfan
   from classes.remote import Remote
   from classes.logs import Logs
 except ModuleNotFoundError:
-  # from pwmfan import Pwnfan
+  from pwmfan import Pwnfan
   from remote import Remote
   from logs import Logs
 
