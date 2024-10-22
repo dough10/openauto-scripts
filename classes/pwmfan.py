@@ -19,15 +19,13 @@ class Pwnfan:
     GPIO.setup(self.__pin, GPIO.OUT)
     self.__fan = GPIO.PWM(self.__pin, 1000)
     self.__fan.start(0)
-    logger.info('PWN started')
 
   def main(self) -> None:
     result = subprocess.run(['/usr/bin/vcgencmd', 'measure_temp'], capture_output=True, text=True)
     reading = float(result.stdout.split('=')[1].split("'")[0])
-    # logger.info(reading)
+    logger.info(reading)
     if reading >= 75.0:
       self.__fan.ChangeDutyCycle(100.0)
-      logger.info('PWM fan maxxed')
     elif reading >= 70:
       self.__fan.ChangeDutyCycle(75.0)
     elif reading >= 65:
