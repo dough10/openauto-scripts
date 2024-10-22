@@ -26,9 +26,12 @@ class Pwnfan:
     logger.info(reading)
     duty_cycles = [
         (75.0, 100.0),
-        (70.0, 75.0),
-        (65.0, 60.0),
-        (60.0, 45.0)
+        (70.0, 70.0),
+        (57.0, 55.0),
+        (55.0, 53.0),
+        (34.0, 47.0),
+        (32.0, 45.0),
+        (30.0, 30.0)
     ]
 
     for threshold, duty in duty_cycles:
@@ -36,7 +39,7 @@ class Pwnfan:
             self.__fan.ChangeDutyCycle(duty)
             return
 
-    self.__fan.ChangeDutyCycle(30.0)
+    self.__fan.ChangeDutyCycle(20.0)
       
 
 if __name__ == "__main__":
