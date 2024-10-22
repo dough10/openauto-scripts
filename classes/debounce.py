@@ -12,5 +12,5 @@ def debounce(wait_time):
         last_called[0] = current_time
         return fn(*args, **kwargs)
 
-      return debounced_function
+    return debounced_function
   return decorator
