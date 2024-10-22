@@ -24,16 +24,19 @@ class Pwnfan:
     result = subprocess.run(['/usr/bin/vcgencmd', 'measure_temp'], capture_output=True, text=True)
     reading = float(result.stdout.split('=')[1].split("'")[0])
     logger.info(reading)
-    if reading >= 75.0:
-      self.__fan.ChangeDutyCycle(100.0)
-    elif reading >= 70:
-      self.__fan.ChangeDutyCycle(75.0)
-    elif reading >= 65:
-      self.__fan.ChangeDutyCycle(60.0)
-    elif reading >= 60:
-      self.__fan.ChangeDutyCycle(45.0)
-    else:
-      self.__fan.ChangeDutyCycle(30.0)
+    duty_cycles = [
+        (75.0, 100.0),
+        (70.0, 75.0),
+        (65.0, 60.0),
+        (60.0, 45.0)
+    ]
+
+    for threshold, duty in duty_cycles:
+        if reading >= threshold:
+            self.__fan.ChangeDutyCycle(duty)
+            return
+
+    self.__fan.ChangeDutyCycle(30.0)
       
 
 if __name__ == "__main__":
