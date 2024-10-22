@@ -23,7 +23,7 @@ class Pwnfan:
   def main(self) -> None:
     result = subprocess.run(['/usr/bin/vcgencmd', 'measure_temp'], capture_output=True, text=True)
     reading = float(result.stdout.split('=')[1].split("'")[0])
-    # logger.info(f"Temperature reading: {reading}")
+    logger.info(f"Temperature reading: {reading}")
 
     duty_cycles = [
       (75.0, 100.0),
@@ -38,11 +38,11 @@ class Pwnfan:
     for threshold, duty in duty_cycles:
       if reading >= threshold:
         self.__fan.ChangeDutyCycle(duty)
-        # logger.info(f"Fan speed adjusted to {duty}% for temperature {reading}°C")
+        logger.info(f"Fan speed adjusted to {duty}% for temperature {reading}°C")
         return
 
     self.__fan.ChangeDutyCycle(20.0)
-    # logger.info("Fan speed set to 20% (default)")
+    logger.info("Fan speed set to 20% (default)")
       
 
 if __name__ == "__main__":
