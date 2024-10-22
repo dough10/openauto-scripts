@@ -22,7 +22,7 @@ class Pwnfan:
     self.__fan = GPIO.PWM(self.__pin, 1000)
     self.__fan.start(0)
 
-  @debounce(120)
+  @debounce(30)
   def main(self) -> None:
     result = subprocess.run(['/usr/bin/vcgencmd', 'measure_temp'], capture_output=True, text=True)
     reading = float(result.stdout.split('=')[1].split("'")[0])
