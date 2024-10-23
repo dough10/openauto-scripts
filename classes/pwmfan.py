@@ -49,6 +49,6 @@ class Pwnfan:
       
 
 if __name__ == "__main__":
-  fan = Pwnfan(18)
+  fan = Pwnfan(12)
   while True:
     fan.main()  

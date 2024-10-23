@@ -19,7 +19,7 @@ logger = Logs().get_logger()
 
 
 class Ignition:
-  __IGN_LOW_TIME:int = 5
+  __IGN_LOW_TIME:int = 3
   __ignLowCounter:int = 0
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int) -> None:
@@ -54,7 +54,7 @@ class Ignition:
 if __name__ == "__main__":
   IGN_PIN = 17
   REMOTE_PIN = 25
-  FAN_PIN = 18
+  FAN_PIN = 12
 
   ignition = Ignition(IGN_PIN, REMOTE_PIN, FAN_PIN)
     
