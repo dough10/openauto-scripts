@@ -23,6 +23,7 @@ class Ignition:
   __ignLowCounter:int = 0
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int) -> None:
+    logger.info('Starting power.py')
     self.__pin = ign_pin
     self.__remote = Remote(remote_pin)
     self.__fan = Pwnfan(fan_pin)
@@ -57,8 +58,7 @@ if __name__ == "__main__":
   FAN_PIN = 12
 
   ignition = Ignition(IGN_PIN, REMOTE_PIN, FAN_PIN)
-    
-  logger.info('Starting power.py')
+
   try:
     while True:
       ignition.main()
