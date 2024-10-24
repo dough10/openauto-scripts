@@ -24,13 +24,13 @@ class Ignition:
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int) -> None:
     logger.info('Starting power.py')
+    logger.info(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}')
     self.__pin = ign_pin
     self.__remote = Remote(remote_pin)
     self.__fan = Pwnfan(fan_pin)
     GPIO.setup(self.__pin, GPIO.IN)
     time.sleep(5)
     self.__remote.on()
-    logger.info(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}')
 
   def __keypress(self, key:str) -> None:
     keycontroller.press(key)
