@@ -1,4 +1,5 @@
-from pynput.keyboard import Key, Controller, Listener
+from pynput import keyboard
+from pynput.keyboard import Controller, Listener
 
 
 from classes.logs import Logs
@@ -18,22 +19,22 @@ class Volume:
       monitor.join()
 
   def __on_release(self, key:str) -> None:
-    if key == Key.f12:
+    if key == keyboard.Key.f12:
       logger.info('volume reset')
       self.__resetVol()
 
   def __on_press(self, key:str) -> None:
-    if key == Key.f8 and self.__pressed < 102:
+    if key == keyboard.Key.f8 and self.__pressed < 102:
       pressed += 1
       logger.info('volume increased')
-    if key == Key.f7 and self.__pressed > 0:
+    if key == keyboard.Key.f7 and self.__pressed > 0:
       pressed -= 1
       logger.info('volume decreased')
 
   def __resetVol(self) -> None:
     while self.__pressed > self.__default_level:
-      keycontroller.press(Key.f7)
-      keycontroller.release(Key.f7)
+      keycontroller.press(keyboard.Key.f7)
+      keycontroller.release(keyboard.Key.f7)
     # while self.__pressed < self.__default_level:
     #   keycontroller.press(Key.f8)
     #   keycontroller.release(Key.f8)
