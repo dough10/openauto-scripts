@@ -29,7 +29,7 @@ class Ignition:
     GPIO.setup(self.__pin, GPIO.IN)
     time.sleep(5)
     self.__remote.on()
-    logger.debug(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}')
+    logger.info(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}')
 
   def __keypress(self, key:str) -> None:
     keycontroller.press(key)
@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
   ignition = Ignition(IGN_PIN, REMOTE_PIN, FAN_PIN)
     
-  logger.debug('Starting power.py')
+  logger.info('Starting power.py')
   try:
     while True:
       ignition.main()

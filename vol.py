@@ -13,7 +13,7 @@ class Volume:
   __pressed = 10
 
   def __init__(self) -> None:
-    logger.debug('Starting vol.py')
+    logger.info('Starting vol.py')
     with Listener(on_press=self.__on_press, on_release=self.__on_release) as monitor:
       monitor.join()
 
