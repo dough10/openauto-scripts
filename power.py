@@ -25,7 +25,7 @@ class Ignition:
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, latch_pin:int) -> None:
     logger.info('Starting power.py')
-    logger.info(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}')
+    logger.info(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}, latch pin:{latch_pin}')
     self.__pin = ign_pin
     self.__latch_pin = latch_pin
     self.__remote = Remote(remote_pin)
@@ -34,6 +34,7 @@ class Ignition:
     GPIO.setup(self.__latch_pin, GPIO.OUT)
     time.sleep(5)
     self.__remote.on()
+    logger.info(f'latching pin:{latch_pin} high')
     GPIO.output(self.__latch_pin, 1)
 
   def __keypress(self, key:str) -> None:
