@@ -26,7 +26,6 @@ class Pwnfan:
   def main(self) -> None:
     result = subprocess.run(['/usr/bin/vcgencmd', 'measure_temp'], capture_output=True, text=True)
     reading = float(result.stdout.split('=')[1].split("'")[0])
-    logger.info(f"Temperature reading: {reading}")
 
     duty_cycles = [
       (75.0, 100.0),
