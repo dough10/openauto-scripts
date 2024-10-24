@@ -35,9 +35,9 @@ class Volume:
     while self.__pressed > self.__default_level:
       keycontroller.press(keyboard.Key.f7)
       keycontroller.release(keyboard.Key.f7)
-    # while self.__pressed < self.__default_level:
-    #   keycontroller.press(keyboard.Key.f8)
-    #   keycontroller.release(keyboard.Key.f8)
+    while self.__pressed < self.__default_level:
+      keycontroller.press(keyboard.Key.f8)
+      keycontroller.release(keyboard.Key.f8)
 
 
 if __name__ == "__main__":
