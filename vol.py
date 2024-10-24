@@ -6,7 +6,7 @@ from classes.logs import Logs
 
   
 keycontroller = Controller()
-logger = Logs('vol.log').get_logger()
+logger = Logs().get_logger()
 
 
 class Volume:
