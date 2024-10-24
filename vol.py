@@ -10,8 +10,8 @@ logger = Logs().get_logger()
 
 
 class Volume:
-  __default_level = 10
-  __pressed = 10
+  __default_level = 0
+  __pressed = 0
 
   def __init__(self) -> None:
     logger.info('Starting vol.py')
