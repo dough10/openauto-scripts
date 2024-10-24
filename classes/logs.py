@@ -7,7 +7,7 @@ class Logs:
     self.__logger.setLevel(logging.INFO)
 
     if not self.__logger.handlers:
-      file_handler = logging.FileHandler(filename, mode='w')
+      file_handler = logging.FileHandler(filename)
       formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
       file_handler.setFormatter(formatter)
       self.__logger.addHandler(file_handler)
