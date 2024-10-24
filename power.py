@@ -34,8 +34,8 @@ class Ignition:
     GPIO.setup(self.__latch_pin, GPIO.OUT)
     time.sleep(5)
     self.__remote.on()
-    logger.info(f'latching pin:{latch_pin} high')
     GPIO.output(self.__latch_pin, 1)
+    logger.info(f'latch on')
 
   def __keypress(self, key:str) -> None:
     keycontroller.press(key)
@@ -50,7 +50,7 @@ class Ignition:
         logger.info('shutting down')
         self.__remote.off()
         self.__keypress(keyboard.Key.f12)
-        time.sleep(5)
+        time.sleep(1)
         call("sudo shutdown -h now", shell=True)
     else:
       self.__ignLowCounter = 0
