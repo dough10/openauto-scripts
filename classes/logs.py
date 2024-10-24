@@ -2,12 +2,12 @@ import logging
 import logging.config
 
 class Logs:
-  def __init__(self):
+  def __init__(self, filename):
     self.__logger = logging.getLogger('openauto-scripts')
     self.__logger.setLevel(logging.INFO)
 
     if not self.__logger.handlers:
-      file_handler = logging.FileHandler('info.log')
+      file_handler = logging.FileHandler(filename, mode='w')
       formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
       file_handler.setFormatter(formatter)
       self.__logger.addHandler(file_handler)

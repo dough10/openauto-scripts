@@ -16,7 +16,7 @@ GPIO.setwarnings(False)
 
 
 keycontroller = Controller()
-logger = Logs().get_logger()
+logger = Logs('power.log').get_logger()
 
 
 class Ignition:
