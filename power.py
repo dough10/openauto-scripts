@@ -2,7 +2,8 @@ import time
 from subprocess import call
 
 import RPi.GPIO as GPIO
-from pynput.keyboard import Key, Controller
+from pynput import keyboard
+from pynput.keyboard import Controller
 
 
 from classes.pwmfan import Pwnfan
@@ -44,7 +45,7 @@ class Ignition:
       if self.__ignLowCounter >= self.__IGN_LOW_TIME:
         logger.info('shutting down')
         self.__remote.off()
-        self.__keypress(Key.f12)
+        self.__keypress(keyboard.Key.f12)
         time.sleep(5)
         call("sudo shutdown -h now", shell=True)
     else:
