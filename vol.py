@@ -10,8 +10,8 @@ logger = Logs().get_logger()
 
 
 class Volume:
-  __default_level = 0
-  __pressed = 0
+  __default_level = 10
+  __pressed = 10
 
   def __init__(self) -> None:
     logger.info('Starting vol.py')
@@ -23,7 +23,7 @@ class Volume:
       self.__resetVol()
 
   def __on_press(self, key:str) -> None:
-    if key == keyboard.Key.f8 and self.__pressed < 102:
+    if key == keyboard.Key.f8 and self.__pressed < 100:
       self.__pressed += 1
     if key == keyboard.Key.f7 and self.__pressed > 0:
       self.__pressed -= 1
