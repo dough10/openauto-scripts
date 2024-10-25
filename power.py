@@ -32,7 +32,7 @@ class Ignition:
     self.__fan = Pwnfan(fan_pin)
     GPIO.setup(self.__pin, GPIO.IN)
     GPIO.setup(self.__latch_pin, GPIO.OUT)
-    time.sleep(5)
+    time.sleep(2)
     self.__remote.on()
     GPIO.output(self.__latch_pin, 1)
     logger.info(f'latch on')
