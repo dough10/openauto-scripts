@@ -35,7 +35,7 @@ class Ignition:
     time.sleep(2)
     self.__remote.on()
     GPIO.output(self.__latch_pin, 1)
-    logger.info(f'latch on')
+    logger.info('latch on')
 
   def __keypress(self, key:str) -> None:
     keycontroller.press(key)
