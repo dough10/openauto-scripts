@@ -48,8 +48,8 @@ class Ignition:
       time.sleep(1)
       if self.__ignLowCounter >= self.__IGN_LOW_TIME:
         logger.info('shutting down')
-        self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
         self.__keypress(keyboard.Key.f12)
+        self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
         time.sleep(2) # leave enough time for volume to fully reset
         call("sudo shutdown -h now", shell=True)
     else:
