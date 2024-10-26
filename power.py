@@ -32,7 +32,7 @@ class Ignition:
     self.__fan = Pwnfan(fan_pin)
     GPIO.setup(self.__pin, GPIO.IN)
     GPIO.setup(self.__latch_pin, GPIO.OUT)
-    time.sleep(2)
+    time.sleep(3) # give time for system to complete boot before turning on remote
     self.__remote.on()
     GPIO.output(self.__latch_pin, 1)
     logger.info('latch on')
@@ -48,9 +48,9 @@ class Ignition:
       time.sleep(1)
       if self.__ignLowCounter >= self.__IGN_LOW_TIME:
         logger.info('shutting down')
-        self.__remote.off()
+        self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
         self.__keypress(keyboard.Key.f12)
-        time.sleep(1)
+        time.sleep(2) # leave enough time for volume to fully reset
         call("sudo shutdown -h now", shell=True)
     else:
       self.__ignLowCounter = 0

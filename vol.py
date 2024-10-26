@@ -27,6 +27,7 @@ class Volume:
       self.__pressed += 1
     if key == keyboard.Key.f7 and self.__pressed > 0:
       self.__pressed -= 1
+    logger.debug(f'volume pressed: {self.__pressed}')
 
   def __resetVol(self) -> None:
     while self.__pressed > self.__default_level:
