@@ -25,7 +25,7 @@ class Ignition:
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, latch_pin:int) -> None:
     logger.info('Starting power.py')
-    logger.info(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}, latch pin:{latch_pin}')
+    logger.debug(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}, latch pin:{latch_pin}')
     self.__pin = ign_pin
     self.__latch_pin = latch_pin
     self.__remote = Remote(remote_pin)
