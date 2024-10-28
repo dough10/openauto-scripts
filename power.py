@@ -16,7 +16,7 @@ GPIO.setwarnings(False)
 
 
 keycontroller = Controller()
-logger = Logs().get_logger()
+logger = Logs(__file__).get_logger()
 
 
 class Ignition:
@@ -24,7 +24,7 @@ class Ignition:
   __ignLowCounter:int = 0
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, latch_pin:int) -> None:
-    logger.info('Starting power.py')
+    logger.info(f'Starting {__file__}')
     logger.debug(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}, latch pin:{latch_pin}')
     self.__pin = ign_pin
     self.__latch_pin = latch_pin
@@ -50,11 +50,17 @@ class Ignition:
         logger.info('shutting down')
         self.__keypress(keyboard.Key.f12)
         self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
+        self.cleanup()
         time.sleep(2) # leave enough time for volume to fully reset
         call("sudo shutdown -h now", shell=True)
     else:
       self.__ignLowCounter = 0
       time.sleep(1)
+
+  def cleanup(self):
+    self.__fan.cleanup()
+    self.__remote.cleanup()
+    
 
 
 if __name__ == "__main__":
@@ -70,3 +76,5 @@ if __name__ == "__main__":
       ignition.main()
   except Exception as e:
     logger.exception("main crashed. Error: %s", e) 
+  except KeyboardInterrupt:
+    ignition.cleanup()
