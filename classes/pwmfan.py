@@ -43,8 +43,8 @@ class Pwnfan:
         logger.info(f"Fan speed adjusted to {duty}% for temperature {reading}°C")
         return
 
-    self.__fan.ChangeDutyCycle(0.0)
-    logger.info("Fan speed set to 0% (default)")
+    self.__fan.ChangeDutyCycle(20.0)
+    logger.info("Fan speed set to 20% (default)")
       
 
 if __name__ == "__main__":
