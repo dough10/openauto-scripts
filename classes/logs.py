@@ -8,15 +8,14 @@ class Logs:
     self.__logger = logging.getLogger('openauto-scripts')
     self.__logger.setLevel(level)
 
-    if not self.__logger.handlers:
-      file_handler = RotatingFileHandler(f'{os.path.basename(filename)}.log', maxBytes=max_bytes, backupCount=backup_count)
-      formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-      file_handler.setFormatter(formatter)
-      self.__logger.addHandler(file_handler)
+    file_handler = RotatingFileHandler(f'{os.path.basename(filename)}.log', maxBytes=max_bytes, backupCount=backup_count)
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    self.__logger.addHandler(file_handler)
 
-      stream_handler = logging.StreamHandler()
-      stream_handler.setFormatter(formatter)
-      self.__logger.addHandler(stream_handler)
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(formatter)
+    self.__logger.addHandler(stream_handler)
 
   def get_logger(self):
     return self.__logger
