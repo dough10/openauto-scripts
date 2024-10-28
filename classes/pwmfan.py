@@ -39,12 +39,10 @@ class Pwnfan:
       
 
 if __name__ == "__main__":
-  '''
-  [
-    (temperature threshold, fan speed precentage)
-  ]
-  '''
-  fan = Pwnfan(12, [
+  # GPIO pin number
+  pin = 12
+  # (temperature threshold, fan speed precentage)
+  duty_cycles = [
     (75.0, 100.0),
     (70.0, 85.0),
     (65.0, 70.0),
@@ -52,6 +50,7 @@ if __name__ == "__main__":
     (50.0, 45.0),
     (40.0, 35.0),
     (30.0, 30.0)
-  ])
+  ]
+  fan = Pwnfan(pin, duty_cycles)
   while True:
     fan.main()  
