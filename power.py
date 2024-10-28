@@ -5,17 +5,16 @@ import RPi.GPIO as GPIO
 from pynput import keyboard
 from pynput.keyboard import Controller
 
-from classes.logs import Logs
-logger = Logs(__file__).get_logger()
-from classes.pwmfan import Pwnfan
-from classes.remote import Remote
-
-
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-
-
 keycontroller = Controller()
+
+
+from classes.logs import Logs
+logger = Logs(__file__).get_logger()
+
+from classes.pwmfan import Pwnfan
+from classes.remote import Remote
 
 
 class Ignition:
