@@ -13,7 +13,7 @@ logger = Logs().get_logger()
 class Remote:
   def __init__(self, pin) -> None:
     self.__pin = pin
-    GPIO.setup(self.__pin, GPIO.OUT)
+    GPIO.setup(self.__pin, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
 
   def on(self) -> None:
     GPIO.output(self.__pin, 1)

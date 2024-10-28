@@ -18,7 +18,7 @@ logger = Logs().get_logger()
 class Pwnfan:
   def __init__(self, fan_pin:int) -> None:
     self.__pin = fan_pin
-    GPIO.setup(self.__pin, GPIO.OUT)
+    GPIO.setup(self.__pin, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     self.__fan = GPIO.PWM(self.__pin, 1000)
     self.__fan.start(0)
 

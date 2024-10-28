@@ -30,8 +30,8 @@ class Ignition:
     self.__latch_pin = latch_pin
     self.__remote = Remote(remote_pin)
     self.__fan = Pwnfan(fan_pin)
-    GPIO.setup(self.__pin, GPIO.IN)
-    GPIO.setup(self.__latch_pin, GPIO.OUT)
+    GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(self.__latch_pin, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     time.sleep(3) # give time for system to complete boot before turning on remote
     self.__remote.on()
     GPIO.output(self.__latch_pin, 1)
