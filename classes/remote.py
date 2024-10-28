@@ -14,7 +14,7 @@ class Remote:
   def __init__(self, pin) -> None:
     logger.info(f'Starting {__file__}')
     self.__pin = pin
-    GPIO.setup(self.__pin, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(self.__pin, GPIO.OUT)
 
   def on(self) -> None:
     GPIO.output(self.__pin, 1)
