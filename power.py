@@ -5,10 +5,10 @@ import RPi.GPIO as GPIO
 from pynput import keyboard
 from pynput.keyboard import Controller
 
-
+from classes.logs import Logs
+logger = Logs(__file__).get_logger()
 from classes.pwmfan import Pwnfan
 from classes.remote import Remote
-from classes.logs import Logs
 
 
 GPIO.setmode(GPIO.BCM)
@@ -16,7 +16,6 @@ GPIO.setwarnings(False)
 
 
 keycontroller = Controller()
-logger = Logs(__file__).get_logger()
 
 
 class Ignition:
@@ -76,5 +75,6 @@ if __name__ == "__main__":
       ignition.main()
   except Exception as e:
     logger.exception("main crashed. Error: %s", e) 
+    ignition.cleanup()
   except KeyboardInterrupt:
     ignition.cleanup()
