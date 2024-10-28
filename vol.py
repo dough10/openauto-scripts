@@ -6,7 +6,7 @@ from classes.logs import Logs
 
   
 keycontroller = Controller()
-logger = Logs().get_logger()
+logger = Logs(__file__).get_logger()
 
 
 class Volume:
@@ -14,7 +14,7 @@ class Volume:
   __pressed = 10
 
   def __init__(self) -> None:
-    logger.info('Starting vol.py')
+    logger.info(f'Starting {__file__}')
     with Listener(on_press=self.__on_press, on_release=self.__on_release) as monitor:
       monitor.join()
 
