@@ -1,4 +1,5 @@
 import subprocess
+from typing import List, Tuple
 
 import RPi.GPIO as GPIO
 
@@ -16,7 +17,7 @@ GPIO.setwarnings(False)
 logger = Logs(__file__).get_logger()
 
 class Pwnfan:
-  def __init__(self, fan_pin:int, duty_cycles:list[tuple[float, float]], default_duty: float = 20.0) -> None:
+  def __init__(self, fan_pin:int, duty_cycles:List[Tuple[float, float]], default_duty: float = 20.0) -> None:
     logger.info(f'Starting {__file__}')
     self.__duty_cycles = duty_cycles
     self.__default_duty = default_duty
