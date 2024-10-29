@@ -37,12 +37,11 @@ class Pwnfan:
   
   def __init__(self, fan_pin:int, speed_pin:int) -> None:
     logger.info(f'Starting {__file__}')
-  
     GPIO.setup(fan_pin, GPIO.OUT)
     self.__fan = GPIO.PWM(fan_pin, self.__frequency)
-    self.__fan.start(0)
     GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
+    self.__fan.start(0)
     
   @debounce(30)
   def main(self) -> None:
