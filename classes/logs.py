@@ -4,7 +4,7 @@ import logging.config
 from logging.handlers import RotatingFileHandler
 
 class Logs:
-  def __init__(self, filename: str, level: int = logging.INFO, max_bytes: int = 5_000_000, backup_count: int = 5):
+  def __init__(self, filename: str, level: int = logging.DEBUG, max_bytes: int = 5_000_000, backup_count: int = 5):
     self.__logger = logging.getLogger('openauto-scripts')
     self.__logger.setLevel(level)
 

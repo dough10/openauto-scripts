@@ -41,7 +41,9 @@ class Ignition:
 
   def main(self) -> None:
     self.__fan.main()
-    if GPIO.input(self.__pin) != 1:
+    state = GPIO.input(self.__pin)
+    logger.debug(f'ign pin state: {state}')
+    if state != 1:
       self.__ignLowCounter += 1
       time.sleep(1)
       if self.__ignLowCounter >= self.__IGN_LOW_TIME:
