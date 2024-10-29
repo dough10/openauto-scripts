@@ -33,7 +33,7 @@ class Pwnfan:
     self.__default_duty: float = 20.0
     self.__pin = fan_pin
     GPIO.setup(self.__pin, GPIO.OUT)
-    self.__fan = GPIO.PWM(self.__pin, 1000)
+    self.__fan = GPIO.PWM(self.__pin, 25000)
     self.__fan.start(0)
 
   @debounce(30)
