@@ -1,4 +1,5 @@
 import subprocess
+import time
 from typing import List, Tuple
 
 import RPi.GPIO as GPIO
@@ -17,8 +18,15 @@ GPIO.setwarnings(False)
 logger = Logs(__file__).get_logger()
 
 class Pwnfan:
-  def __init__(self, fan_pin:int) -> None:
+  def __init__(self, fan_pin:int, speed_pin:int) -> None:
     logger.info(f'Starting {__file__}')
+    
+    # fan pulse per second
+    self.rpm:int = 0
+    self.__t = time.time()
+    self.__pulse:int = 2
+    self.__frequency:int = 25000
+    self.__default_duty:float = 20.0
     # (temperature threshold, fan speed precentage)
     self.__duty_cycles:List[Tuple[float, float]] = [
       (75.0, 100.0),
@@ -28,12 +36,14 @@ class Pwnfan:
       (50.0, 45.0),
       (40.0, 35.0),
       (30.0, 30.0)
-    ]
-    self.__default_duty:float = 20.0
-    self.__pin = fan_pin
-    GPIO.setup(self.__pin, GPIO.OUT)
-    self.__fan = GPIO.PWM(self.__pin, 25000)
+    ]   
+    
+    GPIO.setup(fan_pin, GPIO.OUT)
+    self.__fan = GPIO.PWM(fan_pin, self.__frequency)
     self.__fan.start(0)
+    GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
+    
 
   @debounce(30)
   def main(self) -> None:
@@ -48,22 +58,31 @@ class Pwnfan:
     for threshold, duty in self.__duty_cycles:
       if reading >= threshold:
         self.__fan.ChangeDutyCycle(duty)
-        logger.info(f"Fan speed adjusted to {duty}% for temperature {reading}°C")
+        logger.info(f"Fan speed ({self.rpm}rpm) adjusted to {duty}% for temperature {reading}°C")
         return
 
     self.__fan.ChangeDutyCycle(self.__default_duty)
-    logger.info(f"Fan speed set to {self.__default_duty}% (default)")
+    logger.info(f"Fan speed ({self.rpm}rpm) set to {self.__default_duty}% (default)")
 
   def cleanup(self) -> None:
     self.__fan.stop()
     GPIO.cleanup()
 
+  def fell(self, n):
+    dt = time.time() - self.__t
+    if dt < 0.005: return # Reject spuriously short pulses
+
+    freq = 1 / dt
+    self.rpm = (freq / self.__pulse) * 60
+    self.__t = time.time()
+
 
 if __name__ == "__main__":
   # GPIO pin number
-  pin = 12
+  fan_pin = 12
+  fan_tach = 24
   
-  fan = Pwnfan(pin)
+  fan = Pwnfan(fan_pin, fan_tach)
   
   try:
     while True:

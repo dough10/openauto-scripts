@@ -21,18 +21,18 @@ class Ignition:
   __IGN_LOW_TIME:int = 3
   __ignLowCounter:int = 0
 
-  def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, latch_pin:int) -> None:
+  def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, fan_speed_pin:int, latch_pin:int) -> None:
     logger.info(f'Starting {__file__}')
     logger.debug(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}, latch pin:{latch_pin}')
     self.__pin = ign_pin
-    self.__latch_pin = latch_pin
+    self.__fan_speed = fan_speed_pin
     self.__remote = Remote(remote_pin)
-    self.__fan = Pwnfan(fan_pin)
+    self.__fan = Pwnfan(fan_pin, fan_speed_pin)
     GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(self.__latch_pin, GPIO.OUT)
+    GPIO.setup(latch_pin, GPIO.OUT)
     time.sleep(3) # give time for system to complete boot before turning on remote
     self.__remote.on()
-    GPIO.output(self.__latch_pin, 1)
+    GPIO.output(latch_pin, 1)
     logger.info('latch on')
 
   def __keypress(self, key:str) -> None:
@@ -51,6 +51,7 @@ class Ignition:
         self.__keypress(keyboard.Key.f12)
         self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
         self.__remote.cleanup()
+        self.__fan.cleanup()
         time.sleep(2) # leave enough time for volume to fully reset
         call("sudo shutdown -h now", shell=True)
     else:
@@ -64,8 +65,9 @@ if __name__ == "__main__":
   REMOTE_PIN = 25
   FAN_PIN = 12
   LATCH_PIN = 4
+  FAN_SPEED_PIN = 24
 
-  ignition = Ignition(IGN_PIN, REMOTE_PIN, FAN_PIN, LATCH_PIN)
+  ignition = Ignition(IGN_PIN, REMOTE_PIN, FAN_PIN, FAN_SPEED_PIN, LATCH_PIN)
 
   try:
     while True:
