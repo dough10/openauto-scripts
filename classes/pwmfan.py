@@ -68,7 +68,7 @@ class Pwnfan:
     self.__fan.stop()
     GPIO.cleanup()
 
-  def fell(self, n):
+  def __fell(self, n):
     dt = time.time() - self.__t
     if dt < 0.005: return # Reject spuriously short pulses
 
