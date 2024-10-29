@@ -59,10 +59,12 @@ class Pwnfan:
       if reading >= threshold:
         self.__fan.ChangeDutyCycle(duty)
         logger.info(f"Fan speed ({self.rpm}rpm) adjusted to {duty}% for temperature {reading}°C")
+        self.rpm = 0
         return
 
     self.__fan.ChangeDutyCycle(self.__default_duty)
     logger.info(f"Fan speed ({self.rpm}rpm) set to {self.__default_duty}% (default)")
+    self.rpm = 0
 
   def cleanup(self) -> None:
     self.__fan.stop()
