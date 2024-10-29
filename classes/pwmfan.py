@@ -72,6 +72,7 @@ class Pwnfan:
     GPIO.cleanup()
 
   def __fell(self, n) -> None:
+    logger.debug(f'fell: {n}')
     dt = time.time() - self.__t
     if dt < 0.005: return
 
