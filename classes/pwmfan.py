@@ -18,7 +18,7 @@ GPIO.setwarnings(False)
 logger = Logs(__file__).get_logger()
 
 class Pwnfan:
-    # (temperature threshold, fan speed precentage)
+  # (temperature threshold, fan speed precentage)
   __duty_cycles:List[Tuple[float, float]] = [
     (75.0, 100.0),
     (70.0, 85.0),
