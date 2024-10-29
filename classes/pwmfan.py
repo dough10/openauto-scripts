@@ -18,26 +18,27 @@ GPIO.setwarnings(False)
 logger = Logs(__file__).get_logger()
 
 class Pwnfan:
+    # (temperature threshold, fan speed precentage)
+  __duty_cycles:List[Tuple[float, float]] = [
+    (75.0, 100.0),
+    (70.0, 85.0),
+    (65.0, 70.0),
+    (60.0, 55.0),
+    (50.0, 45.0),
+    (40.0, 35.0),
+    (30.0, 30.0)
+  ]  
+  __default_duty:float = 20.0
+  __t = time.time()
+  __pulse:int = 2
+  __frequency:int = 25000
+  
+  rpm:int = 0
+  
+    
   def __init__(self, fan_pin:int, speed_pin:int) -> None:
     logger.info(f'Starting {__file__}')
-    
-    # fan pulse per second
-    self.rpm:int = 0
-    self.__t = time.time()
-    self.__pulse:int = 2
-    self.__frequency:int = 25000
-    self.__default_duty:float = 20.0
-    # (temperature threshold, fan speed precentage)
-    self.__duty_cycles:List[Tuple[float, float]] = [
-      (75.0, 100.0),
-      (70.0, 85.0),
-      (65.0, 70.0),
-      (60.0, 55.0),
-      (50.0, 45.0),
-      (40.0, 35.0),
-      (30.0, 30.0)
-    ]   
-    
+  
     GPIO.setup(fan_pin, GPIO.OUT)
     self.__fan = GPIO.PWM(fan_pin, self.__frequency)
     self.__fan.start(0)
@@ -70,9 +71,9 @@ class Pwnfan:
     self.__fan.stop()
     GPIO.cleanup()
 
-  def __fell(self, n):
+  def __fell(self, n) -> None:
     dt = time.time() - self.__t
-    if dt < 0.005: return # Reject spuriously short pulses
+    if dt < 0.005: return
 
     freq = 1 / dt
     self.rpm = (freq / self.__pulse) * 60
