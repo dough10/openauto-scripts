@@ -27,10 +27,9 @@ class Pwnfan:
       (60.0, 55.0),
       (50.0, 45.0),
       (40.0, 35.0),
-      (30.0, 30.0),
-      (20.0, 0.0)
+      (30.0, 30.0)
     ]
-    self.__default_duty: float = 20.0
+    self.__default_duty:float = 20.0
     self.__pin = fan_pin
     GPIO.setup(self.__pin, GPIO.OUT)
     self.__fan = GPIO.PWM(self.__pin, 25000)
@@ -40,11 +39,12 @@ class Pwnfan:
   def main(self) -> None:
     try:
       result = subprocess.run(['/usr/bin/vcgencmd', 'measure_temp'], capture_output=True, text=True, check=True)
-      reading = float(result.stdout.split('=')[1].split("'")[0])
     except (subprocess.CalledProcessError, ValueError, IndexError) as e:
       logger.error(f"Error reading temperature: {e}")
       return
 
+    reading = float(result.stdout.split('=')[1].split("'")[0])
+    
     for threshold, duty in self.__duty_cycles:
       if reading >= threshold:
         self.__fan.ChangeDutyCycle(duty)
