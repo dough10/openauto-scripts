@@ -73,7 +73,7 @@ class Pwnfan:
     if dt < 0.005: return
 
     freq = 1 / dt
-    self.rpm = (freq / self.__pulse) * 60
+    self.rpm = round((freq / self.__pulse) * 60, 1)
     self.__t = time.time()
 
 
