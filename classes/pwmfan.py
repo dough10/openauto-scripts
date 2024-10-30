@@ -52,7 +52,7 @@ class Pwnfan:
       return
 
     reading_c = float(result.stdout.split('=')[1].split("'")[0])
-    reading_f = round(((reading_c * 9) / 5) + 32, 2)
+    reading_f = round(((reading_c * 9) / 5) + 32, 1)
     
     for threshold, duty in self.__duty_cycles:
       if reading_c >= threshold:
