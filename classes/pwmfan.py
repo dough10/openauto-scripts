@@ -28,7 +28,7 @@ class Pwnfan:
     (40.0, 35.0),
     (30.0, 30.0)
   ]  
-  __default_duty:float = 20.0
+  __default_duty:float = 25.0
   __t = time.time()
   __pulse:int = 2
   __frequency:int = 25000
