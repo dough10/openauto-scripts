@@ -25,7 +25,6 @@ class Ignition:
     logger.info(f'Starting {__file__}')
     logger.debug(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}, latch pin:{latch_pin}')
     self.__pin = ign_pin
-    self.__fan_speed = fan_speed_pin
     self.__remote = Remote(remote_pin)
     self.__fan = Pwnfan(fan_pin, fan_speed_pin)
     GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
