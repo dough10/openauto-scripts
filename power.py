@@ -44,7 +44,6 @@ class Ignition:
     logger.debug(f'ign pin state: {state}')
     if state != 1:
       self.__ignLowCounter += 1
-      time.sleep(1)
       if self.__ignLowCounter >= self.__IGN_LOW_TIME:
         logger.info('shutting down')
         self.__keypress(keyboard.Key.f12)
@@ -56,7 +55,7 @@ class Ignition:
         return
     else:
       self.__ignLowCounter = 0
-      time.sleep(1)
+    time.sleep(1)
     
 
 
