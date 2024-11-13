@@ -1,2 +1,4 @@
+os
 pynput
 RPi.GPIO
+python-dotenv
