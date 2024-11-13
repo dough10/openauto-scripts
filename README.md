@@ -20,8 +20,8 @@ environment config is only needed if you need to change a pin configuration and 
 
 ## reinstall
 
-`sh ~/openauto-scripts/uninstall.sh cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh`
+`bash ~/openauto-scripts/uninstall.sh cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh`
 
 ## uninstall
 
-`sh ~/openauto-scripts/uninstall.sh`
+`bash ~/openauto-scripts/uninstall.sh`
