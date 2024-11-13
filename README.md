@@ -16,7 +16,7 @@
 `LATCH_PIN=4`<br>
 `FAN_SPEED_PIN=24`
 
-environment config is only needed if you need to change a pin configuration and only the changes values need to be added to .env file
+environment config is only needed if you need to change a pin configuration and only the changed values need to be added to .env file
 
 ## reinstall
 
