@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-version="1.1"
+version="1.2"
 
 BLACK='\033[0;30m'
 RED='\033[0;31m'
@@ -45,9 +45,9 @@ cd ~/
 git clone https://github.com/dough10/openauto-scripts
 echo -e "${YELLOW}Github repo cloned${NC}"
 
-echo -e "${YELLOW}Setup virtual enviroment${NC}"
+echo -e "${YELLOW}Setup virtual environment${NC}"
 python3 -m venv ~/openauto-scripts/.venv
-echo -e "${YELLOW}virtual enviroment ~/openauto-scripts/.venv created${NC}"
+echo -e "${YELLOW}virtual environment ~/openauto-scripts/.venv created${NC}"
 
 echo -e "${YELLOW}Installing pynput${NC}"
 ~/openauto-scripts/.venv/bin/python3 -m pip install -r ~/openauto-scripts/requirments.txt
