@@ -23,7 +23,7 @@ class Ignition:
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, fan_speed_pin:int, latch_pin:int) -> None:
     logger.info(f'Starting {__file__}')
-    logger.debug(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}, latch pin:{latch_pin}')
+    logger.info(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}, latch pin:{latch_pin}')
     self.__pin = ign_pin
     self.__remote = Remote(remote_pin)
     self.__fan = Pwnfan(fan_pin, fan_speed_pin)
