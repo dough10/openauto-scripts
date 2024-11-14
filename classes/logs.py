@@ -16,12 +16,14 @@ except AttributeError:
 
 class Logs:
   def __init__(self, filename: str, max_bytes: int = 5_000_000, backup_count: int = 5):
-    self.__logger = logging.getLogger('openauto-scripts')
+    filename = os.path.basename(filename)
+    
+    self.__logger = logging.getLogger(filename)
     self.__logger.setLevel(log_level)
 
     if not self.__logger.hasHandlers():
       # Create a rotating file handler
-      file_handler = RotatingFileHandler(f'{os.path.basename(filename)}.log', maxBytes=max_bytes, backupCount=backup_count)
+      file_handler = RotatingFileHandler(f'{filename}.log', maxBytes=max_bytes, backupCount=backup_count)
       formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
       file_handler.setFormatter(formatter)
       self.__logger.addHandler(file_handler)
