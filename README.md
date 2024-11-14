@@ -31,7 +31,7 @@ logs are saved to users home directory. *(**vol.py.log** and **power.py.log**)* 
 
 Options: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
 
-to view log stream `tail -f ~/power.py.log` or `tail -f ~/vol.py.log`
+to view log stream `tail -f ~/openauto-scripts.log`
 
 ## reinstall
 

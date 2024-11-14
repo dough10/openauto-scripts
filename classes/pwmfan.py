@@ -15,7 +15,7 @@ except ModuleNotFoundError:
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-logger = Logs(__file__).get_logger()
+logger = Logs().get_logger()
 
 class Pwnfan:
   # (temperature threshold, fan speed precentage)
