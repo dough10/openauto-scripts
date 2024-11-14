@@ -17,12 +17,22 @@ class Remote:
     GPIO.setup(self.__pin, GPIO.OUT)
 
   def on(self) -> None:
-    GPIO.output(self.__pin, 1)
-    logger.info('Remote on')
+    try:
+      GPIO.output(self.__pin, GPIO.HIGH)
+      logger.info('Remote on')
+    except GPIO.error as e:
+      logger.error(f"Error setting GPIO pin {self.__pin} high: {e}")
+    except Exception as e:
+      logger.critical(f"Unexpected error: {e}")
 
   def off(self) -> None:
-    GPIO.output(self.__pin, 0)
-    logger.info('remote off')
+    try:
+      GPIO.output(self.__pin, GPIO.LOW)
+      logger.info('remote off')
+    except GPIO.error as e:
+      logger.error(f"Error setting GPIO pin {self.__pin} low: {e}")
+    except Exception as e:
+      logger.critical(f"Unexpected error: {e}")
     
   def cleanup(self) -> None:
     GPIO.cleanup()
