@@ -23,7 +23,7 @@ GPIO pin are using `GPIO.BCM` numbering standard
 
 ## Logging
 
-logs are saved to users home directory. *(**vol.py.log** and **power.py.log**)* Default logging level can be changed in the environment config file
+logs are saved to users home directory. *(**openauto-scripts.log**)* Default logging level can be changed in the environment config file
 
 ### default value
 
