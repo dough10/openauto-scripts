@@ -33,7 +33,7 @@ class Logs:
       stream_handler.setFormatter(formatter)
       self.__logger.addHandler(stream_handler)
 
-    self.__logger.info(f"Log level set to: {log_level_str}")
+      self.__logger.info(f"Log level set to: {log_level_str}")
 
   def get_logger(self):
     return self.__logger
