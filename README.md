@@ -8,7 +8,10 @@
 
 `nano ~/openauto-scripts/.env` to create or edit the environment config file.  
 
-environment config is only needed if you need to change the GPIO configuration or log level and only changed values need to be added
+environment config is only needed if you need to change the GPIO configuration or log level and only changed values need to be added  
+
+GPIO pin are using `GPIO.BCM` numbering standard  
+<img src='https://roboticsbackend.com/wp-content/uploads/2019/05/raspberry-pi-3-pinout.jpg' alt='GPIO header' height='400px' width='400px'>
 
 ### GPIO configuration defaults
 
@@ -25,6 +28,8 @@ logs are saved to users home directory. *(**vol.py.log** and **power.py.log**)* 
 ### default value
 
 `LOG_LEVEL=WARNING`
+
+Options: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
 
 to view log stream `tail -f ~/power.py.log` or `tail -f ~/vol.py.log`
 
