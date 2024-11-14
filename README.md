@@ -4,7 +4,7 @@
 
 `cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh`
 
-## Envoronment configuration
+## Environment configuration
 
 `nano ~/openauto-scripts/.env` to create or edit the environment config file.  
 
