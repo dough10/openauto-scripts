@@ -14,6 +14,7 @@ class Logs:
   def __init__(self, filename: str, max_bytes: int = 5_000_000, backup_count: int = 5):
     self.__logger = logging.getLogger('openauto-scripts')
     self.__logger.setLevel(level=log_level)
+    self.__logger.debug(log_level)
 
     if not self.__logger.handlers:
       file_handler = RotatingFileHandler(f'{os.path.basename(filename)}.log', maxBytes=max_bytes, backupCount=backup_count)
