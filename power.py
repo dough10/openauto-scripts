@@ -30,8 +30,13 @@ class Ignition:
     GPIO.setup(latch_pin, GPIO.OUT)
     time.sleep(3) # give time for system to complete boot before turning on remote
     self.__remote.on()
-    GPIO.output(latch_pin, 1)
-    logger.info('latch on')
+    try:
+      GPIO.output(latch_pin, GPIO.HIGH)
+      logger.info('latch on')
+    except GPIO.error as e:
+      logger.error(f"Error setting GPIO pin {latch_pin} high: {e}")
+    except Exception as e:
+      logger.critical(f"Unexpected error: {e}")
 
   def __keypress(self, key:str) -> None:
     keycontroller.press(key)
