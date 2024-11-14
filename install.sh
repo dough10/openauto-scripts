@@ -32,7 +32,7 @@ echo -e "${PURPLE}|_|_/_/  \_|__|_/ \_|__|_| |_|__|_| |_|  |_|   ${NC}";
 echo -e "${WHITE}Openauto Script Installer v${NC}${GREEN}${version}${NC}";
 echo -e ""
 echo -e "${YELLOW}Install Dependencies${NC}"
-sudo apt-get update && sudo apt install git xterm python3 python3-pip -y
+sudo apt-get update && sudo apt-get install git xterm python3 python3-pip -y
 PYTHON_VERSION=$(python3 --version | awk '{print $2}' | cut -d. -f1-2)
 PYTHON_VENV_PACKAGE="python${PYTHON_VERSION}-venv"
 if ! sudo apt install "$PYTHON_VENV_PACKAGE" -y; then
