@@ -66,9 +66,9 @@ if __name__ == "__main__":
   load_dotenv()
   
   IGN_PIN = int(os.getenv('IGN_PIN', 17))
+  LATCH_PIN = int(os.getenv('LATCH_PIN', 4))
   REMOTE_PIN = int(os.getenv('REMOTE_PIN', 25))
   FAN_PIN = int(os.getenv('FAN_PIN', 12))
-  LATCH_PIN = int(os.getenv('LATCH_PIN', 4))
   FAN_SPEED_PIN = int(os.getenv('FAN_SPEED_PIN', 24))
 
   ignition = Ignition(IGN_PIN, REMOTE_PIN, FAN_PIN, FAN_SPEED_PIN, LATCH_PIN)
