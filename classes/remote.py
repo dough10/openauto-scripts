@@ -12,7 +12,7 @@ logger = Logs(__file__).get_logger()
 
 class Remote:
   def __init__(self, pin) -> None:
-    logger.info(f'Starting {__file__}')
+    logger.info(f'Starting {__file__}, REMOTE_PIN:{pin}')
     self.__pin = pin
     GPIO.setup(self.__pin, GPIO.OUT)
 

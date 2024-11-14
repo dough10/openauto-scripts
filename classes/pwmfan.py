@@ -66,6 +66,7 @@ class Pwnfan:
   def cleanup(self) -> None:
     self.__fan.stop()
     GPIO.cleanup()
+    logger.info('stopping fan and cleaning up GPIO')
 
   def __fell(self, n) -> None:
     logger.debug(f'fell: {n}')
@@ -89,3 +90,4 @@ if __name__ == "__main__":
       fan.main()
   except KeyboardInterrupt:
     fan.cleanup()
+    logger.debug('Keyboard interupt pressed')

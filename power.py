@@ -22,8 +22,7 @@ class Ignition:
   __ignLowCounter:int = 0
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, fan_speed_pin:int, latch_pin:int) -> None:
-    logger.info(f'Starting {__file__}')
-    logger.info(f'ignotion pin:{ign_pin}, remote pin:{remote_pin}, fan pin:{fan_pin}, latch pin:{latch_pin}')
+    logger.info(f'Starting {__file__}, ign_pin:{ign_pin}, remote_pin:{remote_pin}, fan_pin:{fan_pin}, fan_speed_pin:{fan_speed_pin}, latch_pin:{latch_pin}')
     self.__pin = ign_pin
     self.__remote = Remote(remote_pin)
     self.__fan = Pwnfan(fan_pin, fan_speed_pin)
@@ -37,6 +36,7 @@ class Ignition:
   def __keypress(self, key:str) -> None:
     keycontroller.press(key)
     keycontroller.release(key)
+    logger.debug('F12 keypress fired')
 
   def main(self) -> None:
     self.__fan.main()
