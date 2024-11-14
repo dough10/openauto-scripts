@@ -18,7 +18,7 @@ class Logs:
   def __init__(self, filename: str, max_bytes: int = 5_000_000, backup_count: int = 5):
     filename = os.path.basename(filename)
     
-    self.__logger = logging.getLogger(filename)
+    self.__logger = logging.getLogger('openauto-scripts')
     self.__logger.setLevel(log_level)
 
     if not self.__logger.hasHandlers():
