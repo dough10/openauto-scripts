@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-version="1.2"
+version="1.3"
 
 BLACK='\033[0;30m'
 RED='\033[0;31m'
@@ -25,10 +25,10 @@ createFolder () {
   fi 
 }
 
-echo -e "${PURPLE} _____    ______   _    _   ______   _    _  10${NC}";
-echo -e "${PURPLE}| | \ \  / |  | \ | |  | | | | ____ | |  | |   ${NC}";
-echo -e "${PURPLE}| | | |  | |  | | | |  | | | |  | | | |--| |   ${NC}";
-echo -e "${PURPLE}|_|_/_/  \_|__|_/ \_|__|_| |_|__|_| |_|  |_|   ${NC}";
+echo -e "${ORANGE} _____    ______   _    _   ______   _    _  10${NC}";
+echo -e "${ORANGE}| | \ \  / |  | \ | |  | | | | ____ | |  | |   ${NC}";
+echo -e "${ORANGE}| | | |  | |  | | | |  | | | |  | | | |--| |   ${NC}";
+echo -e "${ORANGE}|_|_/_/  \_|__|_/ \_|__|_| |_|__|_| |_|  |_|   ${NC}";
 echo -e "${WHITE}Openauto Script Installer v${NC}${GREEN}${version}${NC}";
 echo -e ""
 echo -e "${YELLOW}Install Dependencies${NC}"
