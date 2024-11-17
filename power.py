@@ -47,7 +47,7 @@ class Ignition:
     self.__fan.main()
     state = GPIO.input(self.__pin)
     if state != GPIO.HIGH:
-      logger.debug(f'ign pin state: {state}')
+      logger.debug(f'IGN_PIN state: {state} __ignLowCounter: {self.__ignLowCounter}')
       self.__ignLowCounter += 1
       if self.__ignLowCounter >= self.__IGN_LOW_TIME:
         self.__keypress(keyboard.Key.f12)
