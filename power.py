@@ -18,10 +18,32 @@ from classes.remote import Remote
 
 
 class Ignition:
+  """
+  The Ignition class controls the startup and shutdown process of a system.
+  It interacts with hardware components such as GPIO pins, a remote control,
+  and a PWM fan, as well as triggering system shutdown procedures.
+
+  Attributes:
+      __IGN_LOW_TIME (int): Threshold time (in seconds) for low ignition state to trigger shutdown.
+      __ignLowCounter (int): Counter for tracking consecutive ignition pin low states.
+      __pin (int): GPIO pin used to monitor ignition state (e.g., car ignition signal).
+      __remote (Remote): Remote control instance for handling remote power state.
+      __fan (Pwmfan): PWM fan instance for controlling fan state.
+  """
   __IGN_LOW_TIME:int = 3
   __ignLowCounter:int = 0
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, fan_speed_pin:int, latch_pin:int) -> None:
+    """
+    Initializes the Ignition object and sets up GPIO pins and devices.
+    
+    Args:
+        ign_pin (int): GPIO pin number connected to the ignition signal.
+        remote_pin (int): GPIO pin connected to the remote control.
+        fan_pin (int): GPIO pin connected to the fan.
+        fan_speed_pin (int): GPIO pin connected to the fan speed control.
+        latch_pin (int): GPIO pin used for the latch power control.
+    """
     logger.info(f'Starting {__file__}, IGN_PIN:{ign_pin}, LATCH_PIN:{latch_pin}')
     self.__pin = ign_pin
     self.__remote = Remote(remote_pin)
@@ -32,11 +54,25 @@ class Ignition:
     self.__remote.on()
 
   def __keypress(self, key:str) -> None:
+    """
+    Simulates a key press event.
+
+    Args:
+        key (str): The key to be pressed.
+    """
     keycontroller.press(key)
     keycontroller.release(key)
     logger.debug('F12 keypress fired')
 
   def __latch_power(self, latch_pin) -> None:
+    """
+    Controls the latch power (GPIO output).
+    
+    Sets the latch pin to HIGH, turning on power for the system.
+
+    Args:
+        latch_pin (int): GPIO pin controlling the latch power.
+    """
     GPIO.setup(latch_pin, GPIO.OUT)
     try:
       GPIO.output(latch_pin, GPIO.HIGH)
@@ -47,6 +83,18 @@ class Ignition:
       logger.critical(f"Unexpected error: {e}")
       
   def main(self) -> None:
+    """
+    Main loop that continuously checks the ignition state and triggers shutdown 
+    if the ignition state is low for more than the defined threshold time.
+    
+    The function also manages the fan and remote control states.
+
+    The shutdown process includes:
+    - Pressing the F12 key (e.g., to trigger an event or software shutdown)
+    - Turning off the remote device
+    - Resetting system volume
+    - Shutting down the system via a shell command
+    """
     self.__fan.main()
     state = GPIO.input(self.__pin)
     if state != GPIO.HIGH:
