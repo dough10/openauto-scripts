@@ -36,7 +36,7 @@ class Ignition:
     keycontroller.release(key)
     logger.debug('F12 keypress fired')
 
-  def __latch_power(self, latch_pin):
+  def __latch_power(self, latch_pin) -> None:
     GPIO.setup(latch_pin, GPIO.OUT)
     try:
       GPIO.output(latch_pin, GPIO.HIGH)
