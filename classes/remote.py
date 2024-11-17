@@ -19,7 +19,7 @@ class Remote:
   def on(self) -> None:
     try:
       GPIO.output(self.__pin, GPIO.HIGH)
-      logger.info('Remote on')
+      logger.info('Remote turn on: on')
     except GPIO.error as e:
       logger.error(f"Error setting GPIO pin {self.__pin} high: {e}")
     except Exception as e:
@@ -28,7 +28,7 @@ class Remote:
   def off(self) -> None:
     try:
       GPIO.output(self.__pin, GPIO.LOW)
-      logger.info('remote off')
+      logger.info('Remote turn on: off')
     except GPIO.error as e:
       logger.error(f"Error setting GPIO pin {self.__pin} low: {e}")
     except Exception as e:
