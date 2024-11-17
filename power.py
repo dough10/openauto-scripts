@@ -27,22 +27,25 @@ class Ignition:
     self.__remote = Remote(remote_pin)
     self.__fan = Pwnfan(fan_pin, fan_speed_pin)
     GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(latch_pin, GPIO.OUT)
+    self.__latch_power(latch_pin)
     time.sleep(3) # give time for system to complete boot before turning on remote
     self.__remote.on()
-    try:
-      GPIO.output(latch_pin, GPIO.HIGH)
-      logger.info('latch on')
-    except GPIO.error as e:
-      logger.error(f"Error setting GPIO pin {latch_pin} high: {e}")
-    except Exception as e:
-      logger.critical(f"Unexpected error: {e}")
 
   def __keypress(self, key:str) -> None:
     keycontroller.press(key)
     keycontroller.release(key)
     logger.debug('F12 keypress fired')
 
+  def __latch_power(self, latch_pin):
+    GPIO.setup(latch_pin, GPIO.OUT)
+    try:
+      GPIO.output(latch_pin, GPIO.HIGH)
+      logger.info('power latch: on')
+    except GPIO.error as e:
+      logger.error(f"Error setting GPIO pin {latch_pin} high: {e}")
+    except Exception as e:
+      logger.critical(f"Unexpected error: {e}")
+      
   def main(self) -> None:
     self.__fan.main()
     state = GPIO.input(self.__pin)
