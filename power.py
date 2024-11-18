@@ -52,6 +52,7 @@ class Ignition:
     self.__remote = Remote(remote_pin)
     self.__fan = Pwmfan(fan_pin, fan_speed_pin)
     GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.add_event_detect(self.__pin, GPIO.BOTH, callback=self.__state_change, bouncetime=200)
     self.__latch_power(latch_pin)
     time.sleep(3) # give time for system to complete boot before turning on remote
     self.__remote.on()
@@ -85,19 +86,16 @@ class Ignition:
     except Exception as e:
       logger.critical(f"Unexpected error: {e}")
       
-  def main(self) -> None:
+  def __state_change(self) -> None:
     """
-    Main loop that continuously checks the ignition state and triggers shutdown 
+    checks for changes on the ignition pin and triggers shutdown 
     if the ignition state is low for more than the defined threshold time.
-    
-    The function also manages the fan and remote control states.
 
     The shutdown process includes:
     - Pressing the F12 key (e.g., to trigger volume normalization)
     - Turning off the remote device
     - Shutting down the system via a shell command
     """
-    self.__fan.main()
     state = GPIO.input(self.__pin)
     if state != GPIO.HIGH:
       logger.debug(f'IGN_PIN state: {state}, __ignLowCounter: {self.__ignLowCounter}')
@@ -113,6 +111,10 @@ class Ignition:
         return
     else:
       self.__ignLowCounter = 0
+      
+  def main(self):
+    self.__fan.main()
+    
     
     
 if __name__ == "__main__":  
