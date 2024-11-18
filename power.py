@@ -113,10 +113,8 @@ class Ignition:
         return
     else:
       self.__ignLowCounter = 0
-    time.sleep(1)
     
-
-
+    
 if __name__ == "__main__":  
   IGN_PIN = int(os.getenv('IGN_PIN', 17))
   LATCH_PIN = int(os.getenv('LATCH_PIN', 4))
@@ -129,6 +127,7 @@ if __name__ == "__main__":
   try:
     while True:
       ignition.main()
+      time.sleep(1)
   except Exception as e:
     logger.exception("main crashed. Error: %s", e) 
     exit()
