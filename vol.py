@@ -25,9 +25,10 @@ class Volume:
   def __on_press(self, key:str) -> None:
     if key == keyboard.Key.f8 and self.__pressed < 100:
       self.__pressed += 1
+      logger.debug(f'F8 pressed: {self.__pressed}')
     if key == keyboard.Key.f7 and self.__pressed > 0:
       self.__pressed -= 1
-    logger.debug(f'volume pressed: {self.__pressed}')
+      logger.debug(f'F7 pressed: {self.__pressed}')
 
   def __resetVol(self) -> None:
     while self.__pressed > self.__default_level:
