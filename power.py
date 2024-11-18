@@ -1,5 +1,7 @@
+import os
 import time
 from subprocess import call
+from dotenv import load_dotenv
 
 import RPi.GPIO as GPIO
 from pynput import keyboard
@@ -9,11 +11,12 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 keycontroller = Controller()
 
+load_dotenv()
 
 from classes.logs import Logs
 logger = Logs().get_logger()
 
-from classes.pwmfan import Pwnfan
+from classes.pwmfan import Pwmfan
 from classes.remote import Remote
 
 
@@ -24,13 +27,13 @@ class Ignition:
   and a PWM fan, as well as triggering system shutdown procedures.
 
   Attributes:
-      __IGN_LOW_TIME (int): Threshold time (in seconds) for low ignition state to trigger shutdown.
-      __ignLowCounter (int): Counter for tracking consecutive ignition pin low states.
-      __pin (int): GPIO pin used to monitor ignition state (e.g., car ignition signal).
-      __remote (Remote): Remote control instance for handling remote power state.
-      __fan (Pwmfan): PWM fan instance for controlling fan state.
+    IGN_LOW_TIME (int): Threshold time (in seconds) for low ignition state to trigger shutdown.
+    __ignLowCounter (int): Counter for tracking consecutive ignition pin low states.
+    __pin (int): GPIO pin used to monitor ignition state (e.g., car ignition signal).
+    __remote (Remote): Remote control instance for handling remote power state.
+    __fan (Pwmfan): PWM fan instance for controlling fan state.
   """
-  __IGN_LOW_TIME:int = 3
+  IGN_LOW_TIME:int = int(os.getenv('IGN_LOW_TIME', 3))
   __ignLowCounter:int = 0
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, fan_speed_pin:int, latch_pin:int) -> None:
@@ -38,16 +41,16 @@ class Ignition:
     Initializes the Ignition object and sets up GPIO pins and devices.
     
     Args:
-        ign_pin (int): GPIO pin number connected to the ignition signal.
-        remote_pin (int): GPIO pin connected to the remote control.
-        fan_pin (int): GPIO pin connected to the fan.
-        fan_speed_pin (int): GPIO pin connected to the fan speed control.
-        latch_pin (int): GPIO pin used for the latch power control.
+      ign_pin (int): GPIO pin number connected to the ignition signal.
+      remote_pin (int): GPIO pin connected to the remote control.
+      fan_pin (int): GPIO pin connected to the fan.
+      fan_speed_pin (int): GPIO pin connected to the fan speed tachometer.
+      latch_pin (int): GPIO pin used for the latch power control.
     """
     logger.info(f'Starting {__file__}, IGN_PIN:{ign_pin}, LATCH_PIN:{latch_pin}')
     self.__pin = ign_pin
     self.__remote = Remote(remote_pin)
-    self.__fan = Pwnfan(fan_pin, fan_speed_pin)
+    self.__fan = Pwmfan(fan_pin, fan_speed_pin)
     GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     self.__latch_power(latch_pin)
     time.sleep(3) # give time for system to complete boot before turning on remote
@@ -58,7 +61,7 @@ class Ignition:
     Simulates a key press event.
 
     Args:
-        key (str): The key to be pressed.
+      key (str): The key to be pressed.
     """
     keycontroller.press(key)
     keycontroller.release(key)
@@ -68,10 +71,10 @@ class Ignition:
     """
     Controls the latch power (GPIO output).
     
-    Sets the latch pin to HIGH, turning on power for the system.
+    Sets the latch pin to HIGH, turning on power that will keep a relay closed until system shutdown.
 
     Args:
-        latch_pin (int): GPIO pin controlling the latch power.
+      latch_pin (int): GPIO pin controlling the power latch.
     """
     GPIO.setup(latch_pin, GPIO.OUT)
     try:
@@ -90,9 +93,8 @@ class Ignition:
     The function also manages the fan and remote control states.
 
     The shutdown process includes:
-    - Pressing the F12 key (e.g., to trigger an event or software shutdown)
+    - Pressing the F12 key (e.g., to trigger volume normalization)
     - Turning off the remote device
-    - Resetting system volume
     - Shutting down the system via a shell command
     """
     self.__fan.main()
@@ -100,7 +102,7 @@ class Ignition:
     if state != GPIO.HIGH:
       logger.debug(f'IGN_PIN state: {state}, __ignLowCounter: {self.__ignLowCounter}')
       self.__ignLowCounter += 1
-      if self.__ignLowCounter >= self.__IGN_LOW_TIME:
+      if self.__ignLowCounter >= self.IGN_LOW_TIME:
         self.__keypress(keyboard.Key.f12)
         self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
         time.sleep(2) # leave enough time for volume to fully reset
@@ -115,12 +117,7 @@ class Ignition:
     
 
 
-if __name__ == "__main__":
-  import os
-  from dotenv import load_dotenv
-  
-  load_dotenv()
-  
+if __name__ == "__main__":  
   IGN_PIN = int(os.getenv('IGN_PIN', 17))
   LATCH_PIN = int(os.getenv('LATCH_PIN', 4))
   REMOTE_PIN = int(os.getenv('REMOTE_PIN', 25))

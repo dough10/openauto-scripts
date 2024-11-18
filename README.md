@@ -8,7 +8,7 @@ python3 scripts for openauto pro. watch GPIO pins and perform actions when state
 
 ## Environment configuration
 
-environment config is only needed if you need to change the GPIO configuration or log level and only changed values need to be added  
+environment config is used if you need to change the GPIO configuration, log level or time till shutdown. Only changed values need to be added  
 
 `nano ~/openauto-scripts/.env` to create or edit the environment config file.  
 
@@ -22,6 +22,10 @@ environment config is only needed if you need to change the GPIO configuration o
 
 GPIO pin configuration use `GPIO.BCM` numbering standard  
 <img src='https://roboticsbackend.com/wp-content/uploads/2019/05/raspberry-pi-3-pinout.jpg' alt='GPIO header' height='400px' width='400px'>
+
+### Shutdown timer
+
+`IGN_LOW_TIME=3` time in seconds to delay before shutdown initiated after ignition is turned off  
 
 ## Logging
 
