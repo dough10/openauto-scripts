@@ -16,6 +16,7 @@ load_dotenv()
 from classes.logs import Logs
 from classes.pwmfan import Pwmfan
 from classes.remote import Remote
+from classes.dashcam import Dashcam
 
 logger = Logs().get_logger()
 
@@ -55,6 +56,7 @@ class Ignition:
     self.__latch_power(latch_pin)
     time.sleep(3) # give time for system to complete boot before turning on remote
     self.__remote.on()
+    self.__dashcam = Dashcam(os.getenv('DASHCAM_RECORDINGS', None))
 
   def __keypress(self, key:str) -> None:
     """
@@ -103,6 +105,7 @@ class Ignition:
       self.__ignLowCounter += 1
       if self.__ignLowCounter >= self.__IGN_LOW_TIME:
         self.__keypress(keyboard.Key.f12)
+        self.__dashcam.stop()
         time.sleep(2) # leave enough time for volume to fully reset
         self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
         self.__remote.cleanup()
