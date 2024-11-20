@@ -14,10 +14,10 @@ keycontroller = Controller()
 load_dotenv()
 
 from classes.logs import Logs
-logger = Logs().get_logger()
-
 from classes.pwmfan import Pwmfan
 from classes.remote import Remote
+
+logger = Logs().get_logger()
 
 
 class Ignition:
