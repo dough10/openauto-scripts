@@ -3,6 +3,13 @@ import time
 import subprocess
 from datetime import datetime
 
+try:
+  from classes.logs import Logs
+except ModuleNotFoundError:
+  from logs import Logs
+
+logger = Logs().get_logger()
+
 def wait(delay:int = 10):
   """
   Pauses the execution of the program for a given number of seconds, 
@@ -60,7 +67,7 @@ class Dashcam:
         
     now = datetime.now()
     timestring = now.strftime("%m.%d.%Y.%H.%M")
-            
+
     self.__file_path:str = f'{os.path.join(location, timestring)}.h264'
     self.__process = subprocess.Popen([
       "raspivid",
@@ -72,6 +79,7 @@ class Dashcam:
       "-t", "0",
       "-o", self.__file_path
     ])
+    logger.info(f'Starting {__file__}, path:{self.__file_path}')     
         
   def stop(self):
     """
@@ -80,7 +88,7 @@ class Dashcam:
     This method terminates the subprocess running `raspivid`, thus stopping the recording,
     and prints the location where the video has been saved.
     """
-    print(f'{self.__file_path} saved')
+    logger.info(f'{self.__file_path} saved')
     self.__process.terminate()
  
 if __name__ == "__main__":
