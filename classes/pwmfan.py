@@ -33,7 +33,7 @@ class Pwmfan:
     (30.0, 30.0)    # Above 30°C, fan speed at 30%
   ]
   __default_duty:float = 25.0
-  __t = time.time()
+  __t:float = time.time()
   __pulse:int = 2
   __frequency:int = 25000
   
@@ -105,7 +105,7 @@ class Pwmfan:
 
     freq = 1 / dt
     self.rpm = round((freq / self.__pulse) * 60, 1)
-    self.__t = time.time()
+    self.__t:float = time.time()
 
 
 if __name__ == "__main__":
