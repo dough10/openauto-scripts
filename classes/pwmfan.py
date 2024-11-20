@@ -109,9 +109,13 @@ class Pwmfan:
 
 
 if __name__ == "__main__":
-  # GPIO pin number
-  fan_pin = 12
-  fan_tach = 24
+  import os
+  from dotenv import load_dotenv
+  
+  load_dotenv()
+  
+  fan_pin = int(os.getenv('FAN_PIN', 12))
+  fan_tach = int(os.getenv('FAN_SPEED_PIN', 24))
   
   fan = Pwmfan(fan_pin, fan_tach)
   
