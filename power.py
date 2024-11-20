@@ -103,7 +103,7 @@ class Ignition:
       self.__ignLowCounter += 1
       if self.__ignLowCounter >= self.__IGN_LOW_TIME:
         self.__keypress(keyboard.Key.f12)
-        time.sleep(5) # leave enough time for volume to fully reset
+        time.sleep(2) # leave enough time for volume to fully reset
         self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
         self.__remote.cleanup()
         self.__fan.cleanup()
