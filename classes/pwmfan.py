@@ -68,8 +68,8 @@ class Pwmfan:
       logger.error(f"Error reading temperature: {e}")
       return
 
-    reading_c = float(result.stdout.split('=')[1].split("'")[0])
-    reading_f = round(((reading_c * 9) / 5) + 32, 1)
+    reading_c:float = float(result.stdout.split('=')[1].split("'")[0])
+    reading_f:float = round(((reading_c * 9) / 5) + 32, 1)
     
     for threshold, duty in self.__duty_cycles:
       if reading_c >= threshold:
