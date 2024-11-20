@@ -20,6 +20,7 @@ class Volume:
 
   def __on_release(self, key:str) -> None:
     if key == keyboard.Key.f12:
+      logger.debug('F12 keypress fired')
       self.__resetVol()
 
   def __on_press(self, key:str) -> None:

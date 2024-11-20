@@ -15,9 +15,21 @@ except AttributeError:
   raise ValueError(f"Invalid log level: {log_level_str}. Must be one of: DEBUG, INFO, WARNING, ERROR, CRITICAL.")
 
 class Logs:
-  def __init__(self, max_bytes: int = 5_000_000, backup_count: int = 5):
-
+  """
+  A class that sets up logging for the application.
+  
+  This class provides a logging setup with rotating log files and console output.
+  The log level can be configured via an environment variable, and it defaults to 'WARNING'.
+  It supports log rotation to prevent log files from becoming too large.
+  """
+  def __init__(self, max_bytes: int = 5_000_000, backup_count: int = 5) -> None:
+    """
+    Initializes the logger and sets up log rotation and console output.
     
+    Args:
+      max_bytes (int): The maximum size of the log file before it rotates (in bytes). Default is 5 MB.
+      backup_count (int): The number of backup log files to keep. Default is 5.
+    """ 
     self.__logger = logging.getLogger('openauto-scripts')
     self.__logger.setLevel(log_level)
 
@@ -35,12 +47,18 @@ class Logs:
 
       self.__logger.info(f"Log level set to: {log_level_str}")
 
-  def get_logger(self):
+  def get_logger(self) -> logging:
+    """
+    Returns the logger instance.
+    
+    Returns:
+      logging: The logger instance configured with file and console handlers.
+    """
     return self.__logger
 
 # Example usage
 if __name__ == "__main__":
-  log = Logs(filename="example")
+  log = Logs()
   logger = log.get_logger()
   logger.debug("This is a debug message")
   logger.info("This is an info message")

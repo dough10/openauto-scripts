@@ -27,13 +27,13 @@ class Ignition:
   and a PWM fan, as well as triggering system shutdown procedures.
 
   Attributes:
-    IGN_LOW_TIME (int): Threshold time (in seconds) for low ignition state to trigger shutdown.
+    __IGN_LOW_TIME (int): Threshold time (in seconds) for low ignition state to trigger shutdown.
     __ignLowCounter (int): Counter for tracking consecutive ignition pin low states.
     __pin (int): GPIO pin used to monitor ignition state (e.g., car ignition signal).
     __remote (Remote): Remote control instance for handling remote power state.
     __fan (Pwmfan): PWM fan instance for controlling fan state.
   """
-  IGN_LOW_TIME:int = int(os.getenv('IGN_LOW_TIME', 3))
+  __IGN_LOW_TIME:int = int(os.getenv('IGN_LOW_TIME', 3))
   __ignLowCounter:int = 0
 
   def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, fan_speed_pin:int, latch_pin:int) -> None:
@@ -65,9 +65,8 @@ class Ignition:
     """
     keycontroller.press(key)
     keycontroller.release(key)
-    logger.debug('F12 keypress fired')
 
-  def __latch_power(self, latch_pin) -> None:
+  def __latch_power(self, latch_pin:int) -> None:
     """
     Controls the latch power (GPIO output).
     
@@ -102,10 +101,10 @@ class Ignition:
     if state != GPIO.HIGH:
       logger.debug(f'IGN_PIN state: {state}, __ignLowCounter: {self.__ignLowCounter}')
       self.__ignLowCounter += 1
-      if self.__ignLowCounter >= self.IGN_LOW_TIME:
+      if self.__ignLowCounter >= self.__IGN_LOW_TIME:
         self.__keypress(keyboard.Key.f12)
         self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
-        time.sleep(2) # leave enough time for volume to fully reset
+        time.sleep(5) # leave enough time for volume to fully reset
         self.__remote.cleanup()
         self.__fan.cleanup()
         logger.info('shutting down')
@@ -127,7 +126,7 @@ if __name__ == "__main__":
   try:
     while True:
       ignition.main()
-      time.sleep(1)
+      time.sleep(2)
   except Exception as e:
     logger.exception("main crashed. Error: %s", e) 
     exit()
