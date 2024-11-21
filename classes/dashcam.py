@@ -43,7 +43,7 @@ class Dashcam:
     stop(self):
         Stops the video recording and saves the file.
   """
-  def __init__(self, location:str = '/home/pi/Videos', width:int = 1280, height:int = 720, bitrate:float = 3.5, fps:int = 30):
+  def __init__(self, location:str = '/home/pi/Videos', width:int = 1280, height:int = 720, bitrate:float = 3.5, fps:int = 30) -> None:
     """
     Initializes the Dashcam object, starts video recording, and saves it to a timestamped file.
     
@@ -79,7 +79,7 @@ class Dashcam:
       "-o", self.__file_path
     ])
         
-  def stop(self):
+  def stop(self) -> None:
     """
     Stops the video recording and saves the file.
 
@@ -90,7 +90,7 @@ class Dashcam:
     self.__process.terminate()
  
 if __name__ == "__main__":
-  wait_time = 120
+  wait_time:int = 120
 
   cam = Dashcam()
   try:

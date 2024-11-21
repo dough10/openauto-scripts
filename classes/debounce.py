@@ -1,7 +1,7 @@
 import time
 from functools import wraps
 
-def debounce(wait_time):
+def debounce(wait_time:int):
   def decorator(fn):
     last_called = [0]
 
