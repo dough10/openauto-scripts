@@ -25,7 +25,6 @@ def wait(delay:int = 10):
     print(f'{delay}')
     delay -= 1
     time.sleep(1)
-  return
 
 class Dashcam:
   """
@@ -49,8 +48,7 @@ class Dashcam:
     Initializes the Dashcam object, starts video recording, and saves it to a timestamped file.
     
     Args:
-      location (str): The directory where the video file will be saved. 
-                        Default is '/home/pi/Videos'.
+      location (str): The directory where the video file will be saved. Default is '/home/pi/Videos'.
       width (int): The width (in pixels) of the video frame. Default is 1280.
       height (int): The height (in pixels) of the video frame. Default is 720.
       bitrate (float): The bitrate for video encoding in Mbps. Default is 3.5.
@@ -63,12 +61,13 @@ class Dashcam:
       try:
         os.makedirs(location)
       except Exception as e:
-        print('error creating file location: ', e)
+        logger.critical('error creating file location: ', e)
         
     now = datetime.now()
     timestring = now.strftime("%m.%d.%Y.%H.%M")
-
     self.__file_path:str = f'{os.path.join(location, timestring)}.h264'
+
+    logger.info(f'Starting {__file__}, path:{self.__file_path}')     
     self.__process = subprocess.Popen([
       "raspivid",
       "-n",
@@ -79,7 +78,6 @@ class Dashcam:
       "-t", "0",
       "-o", self.__file_path
     ])
-    logger.info(f'Starting {__file__}, path:{self.__file_path}')     
         
   def stop(self):
     """
