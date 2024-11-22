@@ -64,8 +64,8 @@ class Dashcam:
         logger.critical('error creating file location: ', e)
         
     now = datetime.now()
-    timestring = now.strftime("%m.%d.%Y.%H.%M")
-    self.__file_path:str = f'{os.path.join(location, timestring)}.h264'
+    time_str = now.strftime("%m.%d.%Y.%H.%M")
+    self.__file_path:str = f'{os.path.join(location, time_str)}.h264'
 
     logger.info(f'Starting {__file__}, path:{self.__file_path}')     
     self.__process = subprocess.Popen([
@@ -90,7 +90,7 @@ class Dashcam:
     self.__process.terminate()
  
 if __name__ == "__main__":
-  wait_time:int = 120
+  wait_time:int = 10
 
   cam = Dashcam()
   try:
