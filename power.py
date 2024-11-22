@@ -55,7 +55,7 @@ class Ignition:
     self.__latch_power(latch_pin)
     time.sleep(3) # give time for system to complete boot before turning on remote
     self.__remote.on()
-    self.__dashcam = Dashcam(rec_loc)
+    self.__dashcam = Dashcam(location=rec_loc)
 
   def __keypress(self, key:str) -> None:
     """
