@@ -43,7 +43,7 @@ class Dashcam:
     stop(self):
         Stops the video recording and saves the file.
   """
-  def __init__(self, location:str = '/home/pi/Videos', width:int = 1280, height:int = 720, bitrate:float = 3.5, fps:int = 30) -> None:
+  def __init__(self, location:str = '~/Videos', width:int = 1280, height:int = 720, bitrate:float = 3.5, fps:int = 30) -> None:
     """
     Initializes the Dashcam object, starts video recording, and saves it to a timestamped file.
     
@@ -57,17 +57,21 @@ class Dashcam:
     Raises:
       Exception: If the specified location cannot be created or accessed.
     """
+    if location.startswith('~'):
+      location = os.path.expanduser(location)
+      
     if not os.path.exists(location):
       try:
         os.makedirs(location)
       except Exception as e:
-        logger.critical('error creating file location: ', e)
+        logger.critical(f'Error creating file location: {e}')
+        raise
         
     now = datetime.now()
     time_str = now.strftime("%m.%d.%Y.%H.%M")
-    self.__file_path:str = f'{os.path.join(location, time_str)}.h264'
+    self.__file_path:str = os.path.join(location, f'{time_str}.h264')
 
-    logger.info(f'Starting {__file__}, path:{self.__file_path}')     
+    logger.info(f'Starting {__file__}, saving to: {self.__file_path}')     
     self.__process = subprocess.Popen([
       "raspivid",
       "-n",
@@ -86,8 +90,13 @@ class Dashcam:
     This method terminates the subprocess running `raspivid`, thus stopping the recording,
     and prints the location where the video has been saved.
     """
-    logger.info(f'{self.__file_path} saved')
     self.__process.terminate()
+    stdout, stderr = self.__process.communicate()
+    
+    if stderr:
+      logger.error(f"Error in raspivid command: {stderr.decode()}")
+    
+    logger.info(f'{self.__file_path} saved')
  
 if __name__ == "__main__":
   wait_time:int = 10
