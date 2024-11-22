@@ -134,7 +134,7 @@ if __name__ == "__main__":
   FAN_PIN = int(os.getenv('FAN_PIN', 12))
   FAN_SPEED_PIN = int(os.getenv('FAN_SPEED_PIN', 24))
   IGN_LOW_TIME = int(os.getenv('IGN_LOW_TIME', 3))
-  REC_LOC = os.getenv('REC_LOC', '$HOME/Videos')
+  REC_LOC = os.getenv('REC_LOC', '~/Videos')
 
   ignition = Ignition(IGN_PIN, REMOTE_PIN, FAN_PIN, FAN_SPEED_PIN, LATCH_PIN, IGN_LOW_TIME, REC_LOC)
 
