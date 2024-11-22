@@ -110,7 +110,6 @@ class Pwmfan:
 
 
 if __name__ == "__main__":
-  import os
   from dotenv import load_dotenv
   
   load_dotenv()
