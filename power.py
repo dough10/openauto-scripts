@@ -1,7 +1,5 @@
-import os
 import time
 from subprocess import call
-from dotenv import load_dotenv
 
 import RPi.GPIO as GPIO
 from pynput import keyboard
@@ -10,8 +8,6 @@ from pynput.keyboard import Controller
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 keycontroller = Controller()
-
-load_dotenv()
 
 from classes.logs import Logs
 from classes.pwmfan import Pwmfan
@@ -89,17 +85,31 @@ class Ignition:
     except Exception as e:
       logger.critical(f"Unexpected error: {e}")
       
+  def __shutdown(self) -> None:
+    """
+    Perform the shutdown process
+    
+    The function also manages the fan dashcam and remote control states.
+
+    The shutdown process includes:
+    - Pressing the F12 key (e.g., to trigger volume normalization)
+    - Stops dashcam recording
+    - Turning off the remote device
+    - Shutting down the system via a shell command
+    """
+    self.__keypress(keyboard.Key.f12)
+    self.__dashcam.stop()
+    time.sleep(2) # leave enough time for volume to fully reset
+    self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
+    self.__remote.cleanup()
+    self.__fan.cleanup()
+    logger.info('shutting down')
+    call("sudo shutdown -h now", shell=True) 
+      
   def main(self) -> None:
     """
     Main loop that continuously checks the ignition state and triggers shutdown 
     if the ignition state is low for more than the defined threshold time.
-    
-    The function also manages the fan and remote control states.
-
-    The shutdown process includes:
-    - Pressing the F12 key (e.g., to trigger volume normalization)
-    - Turning off the remote device
-    - Shutting down the system via a shell command
     """
     self.__fan.main()
     state = GPIO.input(self.__pin)
@@ -107,20 +117,17 @@ class Ignition:
       logger.debug(f'IGN_PIN state: {state}, __ignLowCounter: {self.__ignLowCounter}')
       self.__ignLowCounter += 1
       if self.__ignLowCounter >= self.__IGN_LOW_TIME:
-        self.__keypress(keyboard.Key.f12)
-        self.__dashcam.stop()
-        time.sleep(2) # leave enough time for volume to fully reset
-        self.__remote.off() # shut off remote to reduce chance of pop or noise as system shuts down
-        self.__remote.cleanup()
-        self.__fan.cleanup()
-        logger.info('shutting down')
-        call("sudo shutdown -h now", shell=True)
-        return
+        self.__shutdown()
     else:
       self.__ignLowCounter = 0
     
     
-if __name__ == "__main__":  
+if __name__ == "__main__":
+  import os
+  from dotenv import load_dotenv
+  
+  load_dotenv()
+  
   IGN_PIN = int(os.getenv('IGN_PIN', 17))
   LATCH_PIN = int(os.getenv('LATCH_PIN', 4))
   REMOTE_PIN = int(os.getenv('REMOTE_PIN', 25))
