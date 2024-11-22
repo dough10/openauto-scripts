@@ -4,7 +4,7 @@ python3 scripts for openauto pro. watch GPIO pins and perform actions when state
 
 ## Install
 
-`cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh`
+`cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/dashcam/install.sh && bash install.sh && rm install.sh`
 
 ## Environment configuration
 
@@ -43,7 +43,7 @@ to view log stream `tail -f ~/openauto-scripts.log`
 
 ## Uninstall & Reinstall
 
-`bash ~/openauto-scripts/uninstall.sh cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh`
+`bash ~/openauto-scripts/uninstall.sh cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/dashcam/install.sh && bash install.sh && rm install.sh`
 
 ## Uninstall
 
