@@ -1,3 +1,4 @@
+import os
 from pynput import keyboard
 from pynput.keyboard import Controller, Listener
 
@@ -14,7 +15,7 @@ class Volume:
   __pressed = 10
 
   def __init__(self) -> None:
-    logger.info(f'Starting {__file__}')
+    logger.info(f'Starting {os.path.basename(__file__)}')
     with Listener(on_press=self.__on_press, on_release=self.__on_release) as monitor:
       monitor.join()
 

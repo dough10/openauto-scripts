@@ -1,3 +1,4 @@
+import os
 import subprocess
 import time
 from typing import List, Tuple
@@ -47,7 +48,7 @@ class Pwmfan:
       fan_pin (int): The GPIO pin number controlling the fan's power (PWM signal).
       speed_pin (int): The GPIO pin number connected to the fan's tachometer (for RPM feedback).
     """
-    logger.info(f'Starting {__file__}, FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
+    logger.info(f'Starting {os.path.basename(__file__)}, FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
     GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
     GPIO.setup(fan_pin, GPIO.OUT)

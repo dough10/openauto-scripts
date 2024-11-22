@@ -1,3 +1,4 @@
+import os
 import RPi.GPIO as GPIO
 
 try:
@@ -25,7 +26,7 @@ class Remote:
     Args:
       pin (int): The GPIO pin number connected to the remote device (e.g., relay or switch).
     """
-    logger.info(f'Starting {__file__}, REMOTE_PIN:{pin}')
+    logger.info(f'Starting {os.path.basename(__file__)}, REMOTE_PIN:{pin}')
     self.__pin:int = pin
     GPIO.setup(self.__pin, GPIO.OUT)
 

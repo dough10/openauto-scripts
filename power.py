@@ -1,3 +1,4 @@
+import os
 import time
 from subprocess import call
 
@@ -46,7 +47,7 @@ class Ignition:
       ign_low_time (int): time to wait before shutdown code is ran
       rec_loc (str):  The directory where the video file will be saved.
     """
-    logger.info(f'Starting {__file__}, IGN_PIN:{ign_pin}, LATCH_PIN:{latch_pin}')
+    logger.info(f'Starting {os.path.basename(__file__)}, IGN_PIN:{ign_pin}, LATCH_PIN:{latch_pin}')
     self.__IGN_LOW_TIME = ign_low_time
     self.__pin = ign_pin
     self.__remote = Remote(remote_pin)
@@ -123,7 +124,6 @@ class Ignition:
     
     
 if __name__ == "__main__":
-  import os
   from dotenv import load_dotenv
   
   load_dotenv()

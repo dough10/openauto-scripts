@@ -71,7 +71,7 @@ class Dashcam:
     time_str = now.strftime("%m.%d.%Y.%H.%M")
     self.__file_path:str = os.path.join(location, f'{time_str}.h264')
 
-    logger.info(f'Starting {__file__}, saving to: {self.__file_path}')     
+    logger.info(f'Starting {os.path.basename(__file__)}, saving to: {self.__file_path}')     
     self.__process = subprocess.Popen([
       "raspivid",
       "-n",
