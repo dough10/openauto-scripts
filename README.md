@@ -14,11 +14,11 @@ environment config is used if you need to change the GPIO configuration, log lev
 
 ### GPIO configuration defaults
 
-`IGN_PIN=17`  
-`REMOTE_PIN=25`  
-`FAN_PIN=12`  
-`LATCH_PIN=4`  
-`FAN_SPEED_PIN=24`
+`IGN_PIN=17` - HIGH if the ignigtion is on LOW when off  
+`LATCH_PIN=4` - relay control  
+`REMOTE_PIN=25` - remote turn on  
+`FAN_PIN=12` - fan PWM pin  
+`FAN_SPEED_PIN=24` - fan Tach pin
 
 GPIO pin configuration use `GPIO.BCM` numbering standard  
 <img src='https://roboticsbackend.com/wp-content/uploads/2019/05/raspberry-pi-3-pinout.jpg' alt='GPIO header' height='400px' width='400px'>
@@ -27,22 +27,24 @@ GPIO pin configuration use `GPIO.BCM` numbering standard
 
 `IGN_LOW_TIME=3` time in seconds to delay before shutdown initiated after ignition is turned off  
 
-## Logging
+### Dashcam recording
 
-logs are saved to users home directory. *(**openauto-scripts.log**)* Default logging level can be changed in the environment config file
+`REC_LOC=$HOME/Videos` folder location to store dashcam recordings
 
-### default value
+### Logging
 
 `LOG_LEVEL=WARNING`
+
+logs are saved to users home directory. *(**openauto-scripts.log**)*
 
 Options: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
 
 to view log stream `tail -f ~/openauto-scripts.log`
 
-## reinstall
+## Uninstall & Reinstall
 
 `bash ~/openauto-scripts/uninstall.sh cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh`
 
-## uninstall
+## Uninstall
 
 `bash ~/openauto-scripts/uninstall.sh`
