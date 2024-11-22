@@ -61,7 +61,7 @@ cp -u -p -v ~/openauto-scripts/shortcuts/*.desktop ~/.config/autostart
 
 chmod +x ~/openauto-scripts/*.sh
 
-sudo ln -s ~/openauto-scripts/purge_recording.sh /usr/local/bin/purge_recordings 
+sudo ln -s ~/openauto-scripts/purge_recordings.sh /usr/local/bin/purge_recordings 
 
 chmod +x ~/.config/autostart/*.desktop
 
