@@ -33,7 +33,7 @@ class Ignition:
   """
   __ignLowCounter:int = 0
 
-  def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, fan_speed_pin:int, latch_pin:int, ign_low_time:int, rec_loc:str = '') -> None:
+  def __init__(self, ign_pin:int, remote_pin:int, fan_pin:int, fan_speed_pin:int, latch_pin:int, ign_low_time:int, rec_loc:str) -> None:
     """
     Initializes the Ignition object and sets up GPIO pins and devices.
     
