@@ -42,7 +42,7 @@ echo -e "${YELLOW}Dependencies Installed${NC}"
 
 echo -e "${YELLOW}Clone Github repo${NC}"
 cd ~/
-git clone https://github.com/dough10/openauto-scripts
+git clone -b dashcam https://github.com/dough10/openauto-scripts
 echo -e "${YELLOW}Github repo cloned${NC}"
 
 echo -e "${YELLOW}Setup virtual environment${NC}"
@@ -58,6 +58,10 @@ createFolder "~/.config/autostart"
 
 echo -e "${YELLOW}Installing autostart shortcuts${NC}"
 cp -u -p -v ~/openauto-scripts/shortcuts/*.desktop ~/.config/autostart
+
+chmod +x ~/openauto-scripts/*.sh
+
+sudo ln -s ~/openauto-scripts/purge_recording.sh /usr/local/bin/purge_recordings 
 
 chmod +x ~/.config/autostart/*.desktop
 
