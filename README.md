@@ -8,7 +8,7 @@ python3 scripts for openauto pro. watch GPIO pins and perform actions when state
 
 ## Environment configuration
 
-environment config is used if you need to change the GPIO configuration, log level or time till shutdown. Only changed values need to be added  
+environment config is used if you need to change the GPIO configuration, log level, dashcam recording location or time till shutdown. Only changed values need to be added  
 
 `nano ~/openauto-scripts/.env` to create or edit the environment config file.  
 
@@ -29,7 +29,7 @@ GPIO pin configuration use `GPIO.BCM` numbering standard
 
 ### Dashcam recording
 
-`REC_LOC=$HOME/Videos` folder location to store dashcam recordings
+`REC_LOC=~/Videos` folder location to store dashcam recordings
 
 ### Logging
 
