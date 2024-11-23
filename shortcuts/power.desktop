@@ -3,5 +3,5 @@ Type=Application
 Name=power
 Comment=Control system shutdown based on GPIO state
 Terminal=false
-Exec=bash -c '$HOME/openauto-scripts/.venv/bin/python3 $HOME/openauto-scripts/power.py'
+Exec=bash -c '$HOME/.openauto-scripts/.venv/bin/python3 $HOME/.openauto-scripts/power.py'
 Icon=python3

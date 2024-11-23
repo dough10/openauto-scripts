@@ -3,5 +3,5 @@ Type=Application
 Name=vol
 Comment=Track volume & reset to original position on F12 keypress
 Terminal=false
-Exec=bash -c '$HOME/openauto-scripts/.venv/bin/python3 $HOME/openauto-scripts/vol.py'
+Exec=bash -c '$HOME/.openauto-scripts/.venv/bin/python3 $HOME/.openauto-scripts/vol.py'
 Icon=python3

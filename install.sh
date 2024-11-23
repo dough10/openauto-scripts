@@ -43,26 +43,27 @@ echo -e "${YELLOW}Dependencies Installed${NC}"
 echo -e "${YELLOW}Clone Github repo${NC}"
 cd ~/
 git clone -b dashcam https://github.com/dough10/openauto-scripts
+mv ~/openauto-scripts ~/.openauto-scripts
 echo -e "${YELLOW}Github repo cloned${NC}"
 
 echo -e "${YELLOW}Setup virtual environment${NC}"
-python3 -m venv ~/openauto-scripts/.venv
-echo -e "${YELLOW}virtual environment ~/openauto-scripts/.venv created${NC}"
+python3 -m venv ~/.openauto-scripts/.venv
+echo -e "${YELLOW}virtual environment ~/.openauto-scripts/.venv created${NC}"
 
 echo -e "${YELLOW}Installing requirments.txt${NC}"
-~/openauto-scripts/.venv/bin/python3 -m pip install -r ~/openauto-scripts/requirments.txt
+~/.openauto-scripts/.venv/bin/python3 -m pip install -r ~/.openauto-scripts/requirments.txt
 echo -e "${YELLOW}requirments.txt installed${NC}"
 
 echo -e "${YELLOW}Creating autostart folder${NC}"
 createFolder "~/.config/autostart"
 
 echo -e "${YELLOW}Installing autostart shortcuts${NC}"
-cp -u -p -v ~/openauto-scripts/shortcuts/*.desktop ~/.config/autostart
+cp -u -p -v ~/.openauto-scripts/shortcuts/*.desktop ~/.config/autostart
 
-chmod +x ~/openauto-scripts/*.sh
+chmod +x ~/.openauto-scripts/*.sh
 
-sudo ln -s ~/openauto-scripts/purge_recordings.sh /usr/local/bin/purge_recordings 
+sudo ln -s ~/.openauto-scripts/purge_recordings.sh /usr/local/bin/purge_recordings 
 
 chmod +x ~/.config/autostart/*.desktop
 
-echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/openauto-scripts/.env${NC}${YELLOW} to configure environment${NC}"
+echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/.openauto-scripts/.env${NC}${YELLOW} to configure environment${NC}"
