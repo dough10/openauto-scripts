@@ -21,10 +21,10 @@ FAN_SPEED_PIN = int(os.getenv('FAN_SPEED_PIN', 24))
 IGN_LOW_TIME = int(os.getenv('IGN_LOW_TIME', 3))
 REC_LOC = os.getenv('REC_LOC', '~/Videos')
 
-Volume()
 fan = Pwmfan(FAN_PIN, FAN_SPEED_PIN)
 rem = Remote(REMOTE_PIN)
 cam = Dashcam(locations=REC_LOC)
+Volume()
 
 def shutdown():
   cam.stop()
