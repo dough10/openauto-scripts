@@ -11,6 +11,7 @@ logger = Logs().get_logger()
 class Volume:
   __default_level = 10
   __pressed = 10
+  __listener_active = True 
 
   def __init__(self) -> None:
     logger.info(f'Starting {os.path.basename(__file__)}')
@@ -20,7 +21,9 @@ class Volume:
 
   def __start_listener(self):
     with Listener(on_press=self.__on_press, on_release=self.__on_release) as monitor:
-      monitor.join()
+      while self.__listener_active:
+        monitor.join(timeout=1)  
+    logger.info("Listener stopped.")
 
   def __on_release(self, key:str) -> None:
     if key == keyboard.Key.f12:
@@ -44,6 +47,13 @@ class Volume:
       keycontroller.release(keyboard.Key.f8)
     logger.info('volume reset')
 
+  def stop_listener(self):
+    """Method to stop the listener thread."""
+    self.__listener_active = False
+    logger.info("Stop listener request issued.")
 
 if __name__ == "__main__":
-  Volume()
+  vol = Volume()
+  import time
+  time.sleep(10)
+  vol.stop_listener() 
