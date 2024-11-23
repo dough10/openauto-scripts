@@ -23,17 +23,17 @@ if __name__ == "__main__":
   REC_LOC = os.getenv('REC_LOC', '~/Videos')
   
   Volume()
+  fan = Pwmfan(FAN_PIN, FAN_SPEED_PIN)
+  rem = Remote(REMOTE_PIN)
+  cam = Dashcam(locations=REC_LOC)
   
   def shutdown():
     cam.stop()
     rem.off()
     rem.cleanup()
     fan.cleanup()
-  
+      
   ign = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME, shutdown)
-  fan = Pwmfan(FAN_PIN, FAN_SPEED_PIN)
-  rem = Remote(REMOTE_PIN)
-  cam = Dashcam(locations=REC_LOC)
   
   time.sleep(5)
   rem.on()
