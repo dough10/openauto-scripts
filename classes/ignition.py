@@ -1,7 +1,7 @@
 import os
 import time
+from typing import Callable
 from subprocess import call
-
 import RPi.GPIO as GPIO
 from pynput import keyboard
 from pynput.keyboard import Controller
@@ -31,7 +31,7 @@ class Ignition:
   """
   __ignLowCounter:int = 0
 
-  def __init__(self, ign_pin:int, latch_pin:int, ign_low_time:int, external_options) -> None:
+  def __init__(self, ign_pin:int, latch_pin:int, ign_low_time:int, external_options:Callable[[], None]) -> None:
     """
     Initializes the Ignition object and sets up GPIO pins and devices.
     
