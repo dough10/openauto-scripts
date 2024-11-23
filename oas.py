@@ -8,6 +8,10 @@ from classes.dashcam import Dashcam
 from classes.ignition import Ignition
 from classes.vol import Volume
 
+def feature_is_enabled(feature:str):
+  env = os.getenv(feature, 'true')
+  return env.lower() in ['true', '1', 't', 'y', 'yes']
+
 load_dotenv()
 
 IGN_PIN = int(os.getenv('IGN_PIN', 17))
@@ -20,11 +24,11 @@ REC_LOC = os.getenv('REC_LOC', '~/Videos')
 
 fan = Pwmfan(FAN_PIN, FAN_SPEED_PIN)
 rem = Remote(REMOTE_PIN)
-cam = Dashcam(location=REC_LOC)
 vol = Volume()
+if feature_is_enabled('DASHCAM'): cam = Dashcam(location=REC_LOC)
 
 def shutdown():
-  cam.stop()
+  if cam: cam.stop()
   rem.off()
   rem.cleanup()
   fan.cleanup()
