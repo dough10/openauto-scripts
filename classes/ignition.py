@@ -10,7 +10,10 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 keycontroller = Controller()
 
-from logs import Logs
+try:
+  from classes.logs import Logs
+except ModuleNotFoundError:
+  from logs import Logs
 
 logger = Logs().get_logger()
 
