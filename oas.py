@@ -24,7 +24,7 @@ REC_LOC = os.getenv('REC_LOC', '~/Videos')
 fan = Pwmfan(FAN_PIN, FAN_SPEED_PIN)
 rem = Remote(REMOTE_PIN)
 cam = Dashcam(location=REC_LOC)
-# Volume()
+Volume()
 
 def shutdown():
   cam.stop()

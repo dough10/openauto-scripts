@@ -1,10 +1,8 @@
 import os
+import threading
 from pynput import keyboard
 from pynput.keyboard import Controller, Listener
-
-
 from classes.logs import Logs
-
   
 keycontroller = Controller()
 logger = Logs().get_logger()
@@ -16,6 +14,11 @@ class Volume:
 
   def __init__(self) -> None:
     logger.info(f'Starting {os.path.basename(__file__)}')
+    listener_thread = threading.Thread(target=self.__start_listener)
+    listener_thread.daemon = True
+    listener_thread.start()
+
+  def __start_listener(self):
     with Listener(on_press=self.__on_press, on_release=self.__on_release) as monitor:
       monitor.join()
 
