@@ -60,7 +60,7 @@ createFolder "~/.config/autostart"
 echo -e "${YELLOW}Installing autostart shortcuts${NC}"
 cp -u -p -v ~/.openauto-scripts/shortcuts/*.desktop ~/.config/autostart
 
-chmod +x ~/.openauto-scripts/*.sh
+chmod +x ~/.openauto-scripts/*/*.sh
 
 sudo ln -s ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_recordings 
 
