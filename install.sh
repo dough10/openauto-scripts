@@ -65,4 +65,4 @@ sudo ln -s ~/openauto-scripts/purge_recordings.sh /usr/local/bin/purge_recording
 
 chmod +x ~/.config/autostart/*.desktop
 
-echo -e "${YELLOW}Install complete${NC}"
+echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/openauto-scripts/.env${NC}${YELLOW} to configure environment${NC}"
