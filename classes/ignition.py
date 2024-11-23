@@ -31,7 +31,7 @@ class Ignition:
   """
   __ignLowCounter:int = 0
 
-  def __init__(self, ign_pin:int, latch_pin:int, ign_low_time:int, external_options:function) -> None:
+  def __init__(self, ign_pin:int, latch_pin:int, ign_low_time:int, external_options) -> None:
     """
     Initializes the Ignition object and sets up GPIO pins and devices.
     
