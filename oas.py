@@ -2,7 +2,6 @@ import os
 import time
 from dotenv import load_dotenv
 
-from classes.logs import Logs
 from classes.pwmfan import Pwmfan
 from classes.remote import Remote
 from classes.dashcam import Dashcam
@@ -10,8 +9,6 @@ from classes.ignition import Ignition
 from classes.vol import Volume
 
 load_dotenv()
-
-logger = Logs().get_logger()
 
 IGN_PIN = int(os.getenv('IGN_PIN', 17))
 LATCH_PIN = int(os.getenv('LATCH_PIN', 4))
