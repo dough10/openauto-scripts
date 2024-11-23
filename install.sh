@@ -2,17 +2,7 @@
 set -e
 version="1.4"
 
-BLACK='\033[0;30m'
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-GREY='\033[0;37m'
-YELLOW='\033[1;33m'
-WHITE='\033[1;37m'
-NC='\033[0m'
+source ./sh/colors.sh
 
 createFolder () {
   folderPath="${1/#\~/$HOME}"
