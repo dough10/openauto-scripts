@@ -100,12 +100,12 @@ class Pwmfan:
     Args:
       n: The GPIO pin number (not used in this implementation).
     """
-    logger.debug(f'fell: {n}')
     dt = time.time() - self.__t
     if dt < 0.005: return
 
     freq = 1 / dt
     self.rpm = round((freq / self.__pulse) * 60, 1)
+    logger.debug(f'fell: {n}, freq: {freq}, rpm: {self.rpm}')
     self.__t:float = time.time()
 
 
