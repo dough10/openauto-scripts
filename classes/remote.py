@@ -26,7 +26,7 @@ class Remote:
     Args:
       pin (int): The GPIO pin number connected to the remote device (e.g., relay or switch).
     """
-    logger.info(f'Starting {os.path.basename(__file__)}, REMOTE_PIN:{pin}')
+    logger.info(f'REMOTE_PIN:{pin}')
     self.__pin:int = pin
     GPIO.setup(self.__pin, GPIO.OUT)
 
@@ -38,7 +38,7 @@ class Remote:
     """
     try:
       GPIO.output(self.__pin, GPIO.HIGH)
-      logger.info('Remote turn on: on')
+      logger.info('Remote: on')
     except GPIO.error as e:
       logger.error(f"Error setting GPIO pin {self.__pin} high: {e}")
     except Exception as e:
@@ -52,7 +52,7 @@ class Remote:
     """
     try:
       GPIO.output(self.__pin, GPIO.LOW)
-      logger.info('Remote turn on: off')
+      logger.info('Remote: off')
     except GPIO.error as e:
       logger.error(f"Error setting GPIO pin {self.__pin} low: {e}")
     except Exception as e:

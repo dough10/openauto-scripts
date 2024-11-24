@@ -40,7 +40,7 @@ class Ignition:
       latch_pin (int): GPIO pin used for the latch power control.
       ign_low_time (int): time to wait before shutdown code is ran
     """
-    logger.info(f'Starting {os.path.basename(__file__)}, IGN_PIN:{ign_pin}, LATCH_PIN:{latch_pin}')
+    logger.info(f'IGN_PIN:{ign_pin}, LATCH_PIN:{latch_pin}')
     self.__IGN_LOW_TIME = ign_low_time
     self.__pin = ign_pin
     self.__external_options = external_options
@@ -70,7 +70,7 @@ class Ignition:
     GPIO.setup(latch_pin, GPIO.OUT)
     try:
       GPIO.output(latch_pin, GPIO.HIGH)
-      logger.info('power latch: on')
+      logger.info('Latch: on')
     except GPIO.error as e:
       logger.error(f"Error setting GPIO pin {latch_pin} high: {e}")
     except Exception as e:
