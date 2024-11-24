@@ -44,11 +44,11 @@ echo -e "${YELLOW}Cloning Github repo${NC}"
 cd ~/
 git clone -b dashcam https://github.com/dough10/openauto-scripts
 mv ~/openauto-scripts ~/.openauto-scripts
-echo -e "${YELLOW}Github repo cloned and moved to ~/.openauto-scripts${NC}"
+echo -e "${YELLOW}Github repo cloned and moved to ${NC}${GREEN}~/.openauto-scripts${NC}"
 
 echo -e "${YELLOW}Setting virtual environment${NC}"
 python3 -m venv ~/.openauto-scripts/.venv
-echo -e "${YELLOW}virtual environment ~/.openauto-scripts/.venv created${NC}"
+echo -e "${YELLOW}virtual environment ${NC}${GREEN}~/.openauto-scripts/.venv created${NC}"
 
 echo -e "${YELLOW}Installing requirments.txt${NC}"
 ~/.openauto-scripts/.venv/bin/python3 -m pip install -r ~/.openauto-scripts/requirments.txt
