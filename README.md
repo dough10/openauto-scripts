@@ -29,7 +29,7 @@ GPIO pin configuration use `GPIO.BCM` numbering standard
 
 ### Dashcam recording
 
-`DASHCAM=false` enables or disables dashcam recording `(true, false, t, f, 1, 0, yes, no y , n,)`  
+`DASHCAM=false` enables or disables dashcam recording `(true, t, 1, yes, y)`  
 `REC_LOC=~/Videos` folder location to store dashcam recordings
 
 ### Logging
