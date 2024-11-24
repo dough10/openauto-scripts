@@ -1,4 +1,3 @@
-import os
 import threading
 from pynput import keyboard
 from pynput.keyboard import Controller, Listener
@@ -49,7 +48,7 @@ class Volume:
     logger.info("Stop listener request issued.")
 
 if __name__ == "__main__":
-  vol = Volume()
   import time
+  vol = Volume()
   time.sleep(10)
   vol.stop_listener() 
