@@ -35,7 +35,7 @@ echo -e "${YELLOW}Install Dependencies${NC}"
 sudo apt-get update && sudo apt-get install git xterm python3 python3-pip -y
 PYTHON_VERSION=$(python3 --version | awk '{print $2}' | cut -d. -f1-2)
 PYTHON_VENV_PACKAGE="python${PYTHON_VERSION}-venv"
-if ! sudo apt install "$PYTHON_VENV_PACKAGE" -y; then
+if ! sudo apt-get install "$PYTHON_VENV_PACKAGE" -y; then
   echo -e "${RED}Warning: ${PYTHON_VENV_PACKAGE} installation failed. Attempting to continue...${NC}"
 fi
 echo -e "${YELLOW}Dependencies Installed${NC}"
