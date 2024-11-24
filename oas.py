@@ -29,15 +29,15 @@ if feature_is_enabled('DASHCAM'):
   cam = Dashcam(location=REC_LOC)
 
 def shutdown() -> None:
-  if cam: cam.stop()
+  vol.stop_listener()
   rem.off()
+  if cam: cam.stop()
   rem.cleanup()
   fan.cleanup()
-  vol.stop_listener()
     
 ign = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME, shutdown)
 
-time.sleep(5)
+time.sleep(3)
 rem.on()
 
 while True:
