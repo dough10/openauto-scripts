@@ -62,7 +62,7 @@ cp -u -p -v ~/.openauto-scripts/shortcuts/oas.desktop ~/.config/autostart
 
 echo -e "${YELLOW}Adding execute permissions${NC}"
 chmod +x -v ~/.openauto-scripts/*.sh
-chmod +x -v ~/.openauto-scripts/*/*.sh
+chmod +x -v ~/.openauto-scripts/sh/*.sh
 chmod +x -v ~/.config/autostart/*.desktop
 
 sudo ln -s ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_recordings 
