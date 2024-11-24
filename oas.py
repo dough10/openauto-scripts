@@ -1,6 +1,6 @@
 import os
 import time
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 
 from classes.pwmfan import Pwmfan
 from classes.remote import Remote
