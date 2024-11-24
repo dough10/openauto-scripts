@@ -42,13 +42,9 @@ class Volume:
     while self.__pressed > self.__default_level:
       keycontroller.press(keyboard.Key.f7)
       keycontroller.release(keyboard.Key.f7)
-    while self.__pressed < self.__default_level:
-      keycontroller.press(keyboard.Key.f8)
-      keycontroller.release(keyboard.Key.f8)
     logger.info('volume reset')
 
   def stop_listener(self):
-    """Method to stop the listener thread."""
     self.__listener_active = False
     logger.info("Stop listener request issued.")
 
