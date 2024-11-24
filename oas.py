@@ -9,7 +9,7 @@ from classes.ignition import Ignition
 from classes.vol import Volume
 
 def feature_is_enabled(feature:str):
-  env = os.getenv(feature, 'true')
+  env = os.getenv(feature, 'false')
   return env.lower() in ['true', '1', 't', 'y', 'yes']
 
 load_dotenv()
