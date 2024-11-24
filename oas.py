@@ -32,8 +32,8 @@ if feature_is_enabled('DASHCAM'):
 
 def shutdown() -> None:
   if vol: vol.stop_listener()
-  rem.off()
   if cam: cam.stop()
+  rem.off()
   rem.cleanup()
   if fan: fan.cleanup()
     
