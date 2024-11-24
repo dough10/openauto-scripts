@@ -14,7 +14,7 @@ class Volume:
   __listener_active = True 
 
   def __init__(self) -> None:
-    logger.info(f'Starting Volume Monitor')
+    logger.info(f'Starting volume monitor')
     listener_thread = threading.Thread(target=self.__start_listener)
     listener_thread.daemon = True
     listener_thread.start()
