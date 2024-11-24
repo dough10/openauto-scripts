@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ENV_FILE="../.env"
+ENV_FILE=~/.openauto-scripts/.env
 
 if [[ -f "$ENV_FILE" ]]; then
   echo ".env file found, sourcing variables..."
