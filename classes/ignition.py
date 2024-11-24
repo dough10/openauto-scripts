@@ -39,6 +39,7 @@ class Ignition:
       ign_pin (int): GPIO pin number connected to the ignition signal.
       latch_pin (int): GPIO pin used for the latch power control.
       ign_low_time (int): time to wait before shutdown code is ran
+      external_options (function): additional methods that need to be executed before shutdown
     """
     logger.info(f'IGN_PIN:{ign_pin}, LATCH_PIN:{latch_pin}')
     self.__IGN_LOW_TIME = ign_low_time
@@ -46,7 +47,6 @@ class Ignition:
     self.__external_options = external_options
     GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     self.__latch_power(latch_pin)
-    time.sleep(3) # give time for system to complete boot before turning on remote
 
   def __keypress(self, key:str) -> None:
     """
