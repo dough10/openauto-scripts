@@ -48,7 +48,7 @@ echo -e "${YELLOW}Github repo cloned and moved to ${NC}${GREEN}~/.openauto-scrip
 
 echo -e "${YELLOW}Setting virtual environment${NC}"
 python3 -m venv ~/.openauto-scripts/.venv
-echo -e "${YELLOW}virtual environment ${NC}${GREEN}~/.openauto-scripts/.venv created${NC}"
+echo -e "${YELLOW}virtual environment ${NC}${GREEN}~/.openauto-scripts/.venv${NC}${YELLOW} created${NC}"
 
 echo -e "${YELLOW}Installing requirments.txt${NC}"
 ~/.openauto-scripts/.venv/bin/python3 -m pip install -r ~/.openauto-scripts/requirments.txt
