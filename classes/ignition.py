@@ -70,7 +70,7 @@ class Ignition:
     GPIO.setup(latch_pin, GPIO.OUT)
     try:
       GPIO.output(latch_pin, GPIO.HIGH)
-      logger.info('Latch: on')
+      logger.info('LATCH_PIN: HIGH')
     except GPIO.error as e:
       logger.error(f"Error setting GPIO pin {latch_pin} high: {e}")
     except Exception as e:
@@ -89,7 +89,6 @@ class Ignition:
     - Shutting down the system via a shell command
     """
     self.__keypress(keyboard.Key.f12)
-    time.sleep(2) # leave enough time for volume to fully reset
     if self.__external_options:
       self.__external_options()
     logger.info('shutting down')
