@@ -1,6 +1,6 @@
 import os
 import time
-from dotenv import load_dotenv # type: ignore
+from dotenv import load_dotenv
 
 from classes.pwmfan import Pwmfan
 from classes.remote import Remote
@@ -52,4 +52,4 @@ while True:
       fan.main()
     time.sleep(1)
   except KeyboardInterrupt:
-    pass
+    break
