@@ -39,6 +39,7 @@ def shutdown() -> None:
   rem.cleanup()
   if 'fan' in globals(): 
     fan.cleanup()
+  time.sleep(2)
     
 ign = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME, shutdown)
 
