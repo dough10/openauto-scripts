@@ -31,11 +31,14 @@ if feature_is_enabled('DASHCAM'):
   cam = Dashcam(location=REC_LOC)
 
 def shutdown() -> None:
-  if vol: vol.stop_listener()
-  if cam: cam.stop()
+  if 'vol' in globals():
+    vol.stop_listener()
+  if 'cam' in globals(): 
+    cam.stop()
   rem.off()
   rem.cleanup()
-  if fan: fan.cleanup()
+  if 'fan' in globals(): 
+    fan.cleanup()
     
 ign = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME, shutdown)
 
@@ -45,7 +48,8 @@ rem.on()
 while True:
   try:
     ign.main()
-    if fan: fan.main()
+    if 'fan' in globals(): 
+      fan.main()
     time.sleep(1)
   except KeyboardInterrupt:
     pass
