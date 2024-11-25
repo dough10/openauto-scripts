@@ -45,7 +45,7 @@ rem.on()
 while True:
   try:
     ign.main()
-    fan.main()
+    if fan: fan.main()
     time.sleep(1)
   except KeyboardInterrupt:
     pass
