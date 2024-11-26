@@ -125,7 +125,7 @@ class Pwmfan:
   
   rpm:int = 0
   
-  def __init__(self, fan_pin:int, speed_pin:int, fan_curve:str) -> None:
+  def __init__(self, fan_pin:int, speed_pin:int, fan_curve:str = None) -> None:
     """
     Initialize the PWM fan controller.
     
