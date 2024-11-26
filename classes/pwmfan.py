@@ -84,8 +84,8 @@ def load_fan_curve(fan_curve:str) -> List[Tuple[float, float]]:
     Exception: Any other unexpected errors during file handling or parsing.
   
   Example:
-    >>> fan_curve_path = "path/to/fan_curve.json"
-    >>> load_fan_curve(fan_curve_path)
+    >>> fan_curve_name = "fan_curve"
+    >>> load_fan_curve(fan_curve_name)
     [(30.0, 1500.0), (40.0, 2000.0), (50.0, 2500.0)]
   """
   try:
@@ -135,7 +135,7 @@ class Pwmfan:
     Args:
       fan_pin (int): The GPIO pin number controlling the fan's power (PWM signal).
       speed_pin (int): The GPIO pin number connected to the fan's tachometer (for RPM feedback).
-      fan_curve (str): The name of the custom fan curve json file
+      fan_curve (str): The name of the custom fan curve json file (i.e. test loads file test.json)
     """
     if 'fan_curve' in locals() and fan_curve:
       self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
