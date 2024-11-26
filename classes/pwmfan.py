@@ -89,7 +89,7 @@ def load_fan_curve(fan_curve:str) -> List[Tuple[float, float]]:
     [(30.0, 1500.0), (40.0, 2000.0), (50.0, 2500.0)]
   """
   try:
-    with open(os.path.join('~/fan_curve', f"{fan_curve}.json")) as file:
+    with open(os.path.join('~/fan_curves', f"{fan_curve}.json")) as file:
       try:
         return parse_duty_cycles(json.load(file))
       except json.JSONDecodeError as e:
