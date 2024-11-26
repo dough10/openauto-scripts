@@ -64,10 +64,10 @@ echo -e "${YELLOW}Adding execute permissions${NC}"
 chmod +x -v ~/.openauto-scripts/*.sh
 chmod +x -v ~/.openauto-scripts/sh/*.sh
 chmod +x -v ~/.config/autostart/*.desktop
-
+chmod +x -v ~/.openauto-scripts/oas.py
 sudo ln -s ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_recordings 
 
-echo -e "${YELLOW}Creating fan curves folder${NC}"
+echo -e "${YELLOW}Creating custom fan curves folder${NC}"
 createFolder ~/fan_curves
 
 echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/.openauto-scripts/.env${NC}${YELLOW} to configure environment${NC}"
