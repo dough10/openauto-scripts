@@ -1,4 +1,4 @@
-# import os
+import os
 import time
 import json
 import subprocess
@@ -62,7 +62,7 @@ def parse_duty_cycles(data:dict) -> List[Tuple[float, float]]:
     raise ValueError("One or more temperature or speed values are invalid. Could not convert to float.") from e
 
 
-def load_fan_curve(fan_curve) -> List[Tuple[float, float]]:
+def load_fan_curve(fan_curve:str) -> List[Tuple[float, float]]:
   """
   Load and parse a fan curve file containing duty cycle data.
 
@@ -71,7 +71,7 @@ def load_fan_curve(fan_curve) -> List[Tuple[float, float]]:
   are logged and appropriate exceptions are raised.
 
   Args:
-    fan_curve (str): The file path to the JSON file containing the fan curve data.
+    fan_curve (str): The filename of the JSON file containing the fan curve data.
 
   Returns:
     list of tuple: A list of duty cycles (temperature, fan speed) parsed from the file.
@@ -89,7 +89,7 @@ def load_fan_curve(fan_curve) -> List[Tuple[float, float]]:
     [(30.0, 1500.0), (40.0, 2000.0), (50.0, 2500.0)]
   """
   try:
-    with open(fan_curve) as file:
+    with open(os.path.join('~/fan_curve', f"{fan_curve}.json")) as file:
       try:
         return parse_duty_cycles(json.load(file))
       except json.JSONDecodeError as e:
@@ -132,8 +132,10 @@ class Pwmfan:
     Args:
       fan_pin (int): The GPIO pin number controlling the fan's power (PWM signal).
       speed_pin (int): The GPIO pin number connected to the fan's tachometer (for RPM feedback).
+      fan_curve (str): The name of the custom fan curve json file
     """
     if 'fan_curve' in locals() and fan_curve:
+      logger.info(f'loading custom curve file: ~/fan_curves/{fan_curve}.json')
       self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
     logger.info(f'FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
     GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
