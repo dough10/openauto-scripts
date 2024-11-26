@@ -134,9 +134,7 @@ class Pwmfan:
       speed_pin (int): The GPIO pin number connected to the fan's tachometer (for RPM feedback).
     """
     if 'fan_curve' in locals() and fan_curve:
-      try: 
-        self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
-      except: pass
+      self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
     logger.info(f'FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
     GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
