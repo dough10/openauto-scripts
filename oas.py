@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import time
 from dotenv import load_dotenv
