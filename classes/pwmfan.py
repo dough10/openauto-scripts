@@ -1,6 +1,7 @@
-import os
-import subprocess
+# import os
 import time
+import json
+import subprocess
 from typing import List, Tuple
 
 import RPi.GPIO as GPIO
@@ -18,21 +19,105 @@ GPIO.setwarnings(False)
 
 logger = Logs().get_logger()
 
+default_curve:List[Tuple[float, float]] = [
+  (75.0, 100.0),  # Above 75°C, fan speed at 100%
+  (70.0, 85.0),   # Above 70°C, fan speed at 85%
+  (65.0, 70.0),   # Above 65°C, fan speed at 70%
+  (60.0, 55.0),   # Above 60°C, fan speed at 55%
+  (50.0, 45.0),   # Above 50°C, fan speed at 45%
+  (40.0, 35.0),   # Above 40°C, fan speed at 35%
+  (30.0, 30.0)    # Above 30°C, fan speed at 30%
+]
+
+def parse_duty_cycles(data:dict) -> List[Tuple[float, float]]:
+  """
+  Parse the duty cycles data from a given dictionary.
+
+  This function assumes that the input data is a dictionary with a key 'duty_cycles'
+  which holds a list of tuples, where each tuple consists of a temperature and fan speed.
+  It converts the values into a list of tuples with floats representing the temperature and speed.
+
+  Args:
+    data (dict): A dictionary containing the fan curve data, with a key 'duty_cycles'.
+                  The value associated with this key should be a list of tuples,
+                  where each tuple contains two values (temperature, speed).
+
+  Returns:
+    list of tuple: A list of tuples, each containing two float values (temperature, speed).
+
+  Raises:
+    KeyError: If 'duty_cycles' key is not present in the input data.
+    ValueError: If the temperature or speed values are not convertible to floats.
+  
+  Example:
+    >>> data = {"duty_cycles": [(30, 1500), (40, 2000), (50, 2500)]}
+    >>> parse_duty_cycles(data)
+    [(30.0, 1500.0), (40.0, 2000.0), (50.0, 2500.0)]
+  """
+  try:
+    return [(float(temp), float(speed)) for temp, speed in data["duty_cycles"]]
+  except KeyError:
+    raise KeyError("'duty_cycles' key is missing in the input data.")
+  except ValueError as e:
+    raise ValueError("One or more temperature or speed values are invalid. Could not convert to float.") from e
+
+
+def load_fan_curve(fan_curve) -> List[Tuple[float, float]]:
+  """
+  Load and parse a fan curve file containing duty cycle data.
+
+  This function attempts to read a JSON file specified by the `fan_curve` path, then parses
+  the duty cycles from it. If there are issues during reading or parsing, detailed error messages 
+  are logged and appropriate exceptions are raised.
+
+  Args:
+    fan_curve (str): The file path to the JSON file containing the fan curve data.
+
+  Returns:
+    list of tuple: A list of duty cycles (temperature, fan speed) parsed from the file.
+
+  Raises:
+    FileNotFoundError: If the specified file does not exist.
+    PermissionError: If the program does not have permission to access the file.
+    IOError: For any IO-related errors when attempting to open or read the file.
+    ValueError: If the file contains invalid JSON or the duty cycles data is malformed.
+    Exception: Any other unexpected errors during file handling or parsing.
+  
+  Example:
+    >>> fan_curve_path = "path/to/fan_curve.json"
+    >>> load_fan_curve(fan_curve_path)
+    [(30.0, 1500.0), (40.0, 2000.0), (50.0, 2500.0)]
+  """
+  try:
+    with open(fan_curve) as file:
+      try:
+        return parse_duty_cycles(json.load(file))
+      except json.JSONDecodeError as e:
+        logger.critical(f"Failed to decode JSON in file '{fan_curve}': {e}")
+        raise ValueError(f"Invalid JSON in file '{fan_curve}'") from e
+      except Exception as e:
+        logger.critical(f"Unexpected error while loading duty cycles from '{fan_curve}': {e}")
+        raise  # Re-raise the original exception
+  except FileNotFoundError as e:
+    logger.critical(f"File '{fan_curve}' not found: {e}")
+    raise FileNotFoundError(f"Could not find the specified fan curve file '{fan_curve}'") from e
+  except PermissionError as e:
+    logger.critical(f"Permission denied to access file '{fan_curve}': {e}")
+    raise PermissionError(f"Permission denied to read the file '{fan_curve}'") from e
+  except IOError as e:
+    logger.critical(f"IO error while opening file '{fan_curve}': {e}")
+    raise IOError(f"Error while opening file '{fan_curve}'") from e
+  except Exception as e:
+    logger.critical(f"Unexpected error occurred: {e}")
+    raise  # Re-raise any other unexpected exceptions
+
 class Pwmfan:
   """
   This class controls a PWM fan based on the temperature readings of the Raspberry Pi.
   The fan speed is adjusted according to predefined temperature thresholds and their corresponding duty cycles.
   """
   # List of tuples defining temperature thresholds (°C) and corresponding fan speeds (duty cycle in percentage)
-  __duty_cycles: List[Tuple[float, float]] = [
-    (75.0, 100.0),  # Above 75°C, fan speed at 100%
-    (70.0, 85.0),   # Above 70°C, fan speed at 85%
-    (65.0, 70.0),   # Above 65°C, fan speed at 70%
-    (60.0, 55.0),   # Above 60°C, fan speed at 55%
-    (50.0, 45.0),   # Above 50°C, fan speed at 45%
-    (40.0, 35.0),   # Above 40°C, fan speed at 35%
-    (30.0, 30.0)    # Above 30°C, fan speed at 30%
-  ]
+  __duty_cycles = default_curve
   __default_duty:float = 25.0
   __t:float = time.time()
   __pulse:int = 2
@@ -40,7 +125,7 @@ class Pwmfan:
   
   rpm:int = 0
   
-  def __init__(self, fan_pin:int, speed_pin:int) -> None:
+  def __init__(self, fan_pin:int, speed_pin:int, fan_curve:str) -> None:
     """
     Initialize the PWM fan controller.
     
@@ -48,6 +133,10 @@ class Pwmfan:
       fan_pin (int): The GPIO pin number controlling the fan's power (PWM signal).
       speed_pin (int): The GPIO pin number connected to the fan's tachometer (for RPM feedback).
     """
+    if 'fan_curve' in locals():
+      try: 
+        self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
+      except: pass
     logger.info(f'FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
     GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
@@ -110,12 +199,8 @@ class Pwmfan:
 
 
 if __name__ == "__main__":
-  from dotenv import load_dotenv
-  
-  load_dotenv()
-  
-  fan_pin = int(os.getenv('FAN_PIN', 12))
-  fan_tach = int(os.getenv('FAN_SPEED_PIN', 24))
+  fan_pin = 12
+  fan_tach = 24
   
   fan = Pwmfan(fan_pin, fan_tach)
   
