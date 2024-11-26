@@ -16,15 +16,17 @@ def feature_is_enabled(feature:str) -> bool:
 
 IGN_PIN = int(os.getenv('IGN_PIN', 17))
 LATCH_PIN = int(os.getenv('LATCH_PIN', 4))
+IGN_LOW_TIME = int(os.getenv('IGN_LOW_TIME', 3))
 REMOTE_PIN = int(os.getenv('REMOTE_PIN', 25))
 FAN_PIN = int(os.getenv('FAN_PIN', 12))
 FAN_SPEED_PIN = int(os.getenv('FAN_SPEED_PIN', 24))
-IGN_LOW_TIME = int(os.getenv('IGN_LOW_TIME', 3))
+CUSTOM_CURVE = os.getenv('CUSTOM_CURVE', None)
 REC_LOC = os.getenv('REC_LOC', '~/Videos')
+
 
 rem = Remote(REMOTE_PIN)
 if feature_is_enabled('PWM'): 
-  fan = Pwmfan(FAN_PIN, FAN_SPEED_PIN)
+  fan = Pwmfan(FAN_PIN, FAN_SPEED_PIN, CUSTOM_CURVE)
 if feature_is_enabled('VOL'): 
   vol = Volume()
 if feature_is_enabled('DASHCAM'): 
