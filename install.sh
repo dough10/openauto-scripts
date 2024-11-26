@@ -67,4 +67,7 @@ chmod +x -v ~/.config/autostart/*.desktop
 
 sudo ln -s ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_recordings 
 
+echo -e "${YELLOW}Creating fan curves folder${NC}"
+createFolder ~/fan_curves
+
 echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/.openauto-scripts/.env${NC}${YELLOW} to configure environment${NC}"
