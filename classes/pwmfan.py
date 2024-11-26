@@ -90,7 +90,9 @@ def load_fan_curve(fan_curve:str) -> List[Tuple[float, float]]:
   """
   try:
     path = os.path.expanduser('~/fan_curves')
-    with open(os.path.join(path, f"{fan_curve}.json")) as file:
+    json_filepath = os.path.join(path, f"{fan_curve}.json")
+    logger.info(f'Loading custom fan curve file: {json_filepath}')
+    with open(json_filepath) as file:
       try:
         return parse_duty_cycles(json.load(file))
       except json.JSONDecodeError as e:
@@ -136,7 +138,6 @@ class Pwmfan:
       fan_curve (str): The name of the custom fan curve json file
     """
     if 'fan_curve' in locals() and fan_curve:
-      logger.info(f'loading custom curve file: ~/fan_curves/{fan_curve}.json')
       self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
     logger.info(f'FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
     GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
