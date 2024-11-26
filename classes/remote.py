@@ -1,3 +1,4 @@
+import os
 import RPi.GPIO as GPIO
 
 try:
@@ -18,15 +19,15 @@ class Remote:
   a specified GPIO pin to either HIGH (on) or LOW (off). It also includes cleanup functionality
   to reset the GPIO state when finished.
   """
-  def __init__(self, pin) -> None:
+  def __init__(self, pin:int) -> None:
     """
     Initialize the Remote object and configure the GPIO pin.
     
     Args:
       pin (int): The GPIO pin number connected to the remote device (e.g., relay or switch).
     """
-    logger.info(f'Starting {__file__}, REMOTE_PIN:{pin}')
-    self.__pin = pin
+    logger.info(f'REMOTE_PIN:{pin}')
+    self.__pin:int = pin
     GPIO.setup(self.__pin, GPIO.OUT)
 
   def on(self) -> None:
@@ -37,7 +38,7 @@ class Remote:
     """
     try:
       GPIO.output(self.__pin, GPIO.HIGH)
-      logger.info('Remote turn on: on')
+      logger.info('REMOTE_PIN: HIGH')
     except GPIO.error as e:
       logger.error(f"Error setting GPIO pin {self.__pin} high: {e}")
     except Exception as e:
@@ -51,7 +52,7 @@ class Remote:
     """
     try:
       GPIO.output(self.__pin, GPIO.LOW)
-      logger.info('Remote turn on: off')
+      logger.info('REMOTE_PIN: LOW')
     except GPIO.error as e:
       logger.error(f"Error setting GPIO pin {self.__pin} low: {e}")
     except Exception as e:

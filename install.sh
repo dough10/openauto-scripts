@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-version="1.3"
+version="1.4"
 
 BLACK='\033[0;30m'
 RED='\033[0;31m'
@@ -18,9 +18,9 @@ createFolder () {
   folderPath="${1/#\~/$HOME}"
   if [ -d "$folderPath" ]
   then
-    echo -e "Directory ${GREEN}$folderPath${NC} exists."
+    echo -e "${WHITE}Directory ${NC}${GREEN}$folderPath${NC}${WHITE} exists.${NC}"
   else
-    echo -e "Creating ${GREEN}$folderPath${NC} folder"
+    echo -e "${WHITE}Creating ${NC}${GREEN}$folderPath${NC}${WHITE} folder${NC}"
     mkdir -p "$folderPath"
   fi 
 }
@@ -35,30 +35,36 @@ echo -e "${YELLOW}Install Dependencies${NC}"
 sudo apt-get update && sudo apt-get install git xterm python3 python3-pip -y
 PYTHON_VERSION=$(python3 --version | awk '{print $2}' | cut -d. -f1-2)
 PYTHON_VENV_PACKAGE="python${PYTHON_VERSION}-venv"
-if ! sudo apt install "$PYTHON_VENV_PACKAGE" -y; then
+if ! sudo apt-get install "$PYTHON_VENV_PACKAGE" -y; then
   echo -e "${RED}Warning: ${PYTHON_VENV_PACKAGE} installation failed. Attempting to continue...${NC}"
 fi
 echo -e "${YELLOW}Dependencies Installed${NC}"
 
-echo -e "${YELLOW}Clone Github repo${NC}"
+echo -e "${YELLOW}Cloning Github repo${NC}"
 cd ~/
 git clone https://github.com/dough10/openauto-scripts
-echo -e "${YELLOW}Github repo cloned${NC}"
+mv ~/openauto-scripts ~/.openauto-scripts
+echo -e "${YELLOW}Github repo cloned and moved to ${NC}${GREEN}~/.openauto-scripts${NC}"
 
-echo -e "${YELLOW}Setup virtual environment${NC}"
-python3 -m venv ~/openauto-scripts/.venv
-echo -e "${YELLOW}virtual environment ~/openauto-scripts/.venv created${NC}"
+echo -e "${YELLOW}Setting virtual environment${NC}"
+python3 -m venv ~/.openauto-scripts/.venv
+echo -e "${YELLOW}virtual environment ${NC}${GREEN}~/.openauto-scripts/.venv${NC}${YELLOW} created${NC}"
 
 echo -e "${YELLOW}Installing requirments.txt${NC}"
-~/openauto-scripts/.venv/bin/python3 -m pip install -r ~/openauto-scripts/requirments.txt
+~/.openauto-scripts/.venv/bin/python3 -m pip install -r ~/.openauto-scripts/requirments.txt
 echo -e "${YELLOW}requirments.txt installed${NC}"
 
-echo -e "${YELLOW}Creating autostart folder${NC}"
-createFolder "~/.config/autostart"
+echo -e "${YELLOW}Checking for autostart folder${NC}"
+createFolder ~/.config/autostart
 
 echo -e "${YELLOW}Installing autostart shortcuts${NC}"
-cp -u -p -v ~/openauto-scripts/shortcuts/*.desktop ~/.config/autostart
+cp -u -p -v ~/.openauto-scripts/shortcuts/oas.desktop ~/.config/autostart
 
-chmod +x ~/.config/autostart/*.desktop
+echo -e "${YELLOW}Adding execute permissions${NC}"
+chmod +x -v ~/.openauto-scripts/*.sh
+chmod +x -v ~/.openauto-scripts/sh/*.sh
+chmod +x -v ~/.config/autostart/*.desktop
 
-echo -e "${YELLOW}Install complete${NC}"
+sudo ln -s ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_recordings 
+
+echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/.openauto-scripts/.env${NC}${YELLOW} to configure environment${NC}"

@@ -36,7 +36,7 @@ class Logs:
     if not self.__logger.hasHandlers():
       # Create a rotating file handler
       file_handler = RotatingFileHandler('openauto-scripts.log', maxBytes=max_bytes, backupCount=backup_count)
-      formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+      formatter = logging.Formatter('%(asctime)s %(filename)s:%(levelname)s - %(message)s')
       file_handler.setFormatter(formatter)
       self.__logger.addHandler(file_handler)
 
