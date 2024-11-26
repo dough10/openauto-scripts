@@ -42,7 +42,7 @@ echo -e "${YELLOW}Dependencies Installed${NC}"
 
 echo -e "${YELLOW}Cloning Github repo${NC}"
 cd ~/
-git clone -b dashcam https://github.com/dough10/openauto-scripts
+git clone https://github.com/dough10/openauto-scripts
 mv ~/openauto-scripts ~/.openauto-scripts
 echo -e "${YELLOW}Github repo cloned and moved to ${NC}${GREEN}~/.openauto-scripts${NC}"
 
