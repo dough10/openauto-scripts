@@ -133,7 +133,7 @@ class Pwmfan:
       fan_pin (int): The GPIO pin number controlling the fan's power (PWM signal).
       speed_pin (int): The GPIO pin number connected to the fan's tachometer (for RPM feedback).
     """
-    if 'fan_curve' in locals():
+    if 'fan_curve' in locals() and fan_curve:
       try: 
         self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
       except: pass
