@@ -122,7 +122,4 @@ class Volume:
     logger.info("Stop listener request issued.")
 
 if __name__ == "__main__":
-  import time
-  vol = Volume()
-  time.sleep(10)
-  vol.stop_listener() 
+  Volume() 
