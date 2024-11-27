@@ -65,7 +65,7 @@ chmod +x -v ~/.openauto-scripts/*.sh
 chmod +x -v ~/.openauto-scripts/sh/*.sh
 chmod +x -v ~/.config/autostart/*.desktop
 chmod +x -v ~/.openauto-scripts/oas.py
-sudo ln -s ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_recordings 
+sudo ln -sf ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_recordings 
 
 echo -e "${YELLOW}Creating custom fan curves folder${NC}"
 createFolder ~/fan_curves
