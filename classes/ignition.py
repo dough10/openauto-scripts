@@ -77,7 +77,7 @@ class Ignition:
     except Exception as e:
       logger.critical(f"Unexpected error: {e}")
       
-  @debounce(30)
+  @debounce(120)
   def __shutdown(self) -> None:
     """
     Perform the shutdown process
