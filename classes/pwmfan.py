@@ -133,7 +133,10 @@ class Pwmfan:
     """
     logger.info(f'FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
     if 'fan_curve' in locals() and fan_curve:
-      self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
+      try:
+        self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
+      except (FileExistsError, PermissionError, IOError, ValueError) as e:
+        logger.error('error loading fan curve: ', e)
     GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
     GPIO.setup(fan_pin, GPIO.OUT)
