@@ -95,7 +95,7 @@ def load_fan_curve(fan_curve:str) -> List[Tuple[float, float]]:
         raise ValueError(f"Invalid JSON in file '{fan_curve}'") from e
       except Exception as e:
         logger.critical(f"Unexpected error while loading duty cycles from '{fan_curve}': {e}")
-        raise  # Re-raise the original exception
+        raise
   except FileNotFoundError as e:
     logger.critical(f"File '{fan_curve}' not found: {e}")
     raise FileNotFoundError(f"Could not find the specified fan curve file '{fan_curve}'") from e
@@ -107,14 +107,13 @@ def load_fan_curve(fan_curve:str) -> List[Tuple[float, float]]:
     raise IOError(f"Error while opening file '{fan_curve}'") from e
   except Exception as e:
     logger.critical(f"Unexpected error occurred: {e}")
-    raise  # Re-raise any other unexpected exceptions
+    raise
 
 class Pwmfan:
   """
   This class controls a PWM fan based on the temperature readings of the Raspberry Pi.
   The fan speed is adjusted according to predefined temperature thresholds and their corresponding duty cycles.
   """
-  # List of tuples defining temperature thresholds (°C) and corresponding fan speeds (duty cycle in percentage)
   __duty_cycles = default_curve
   __default_duty:float = 25.0
   __t:float = time.time()
@@ -130,7 +129,7 @@ class Pwmfan:
     Args:
       fan_pin (int): The GPIO pin number controlling the fan's power (PWM signal).
       speed_pin (int): The GPIO pin number connected to the fan's tachometer (for RPM feedback).
-      fan_curve (str): The name of the custom fan curve json file (i.e. test loads file test.json)
+      fan_curve (str): The name of the custom fan curve json file (i.e. test loads the file test.json)
     """
     if 'fan_curve' in locals() and fan_curve:
       self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
