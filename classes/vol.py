@@ -1,7 +1,13 @@
 import threading
 from pynput import keyboard
 from pynput.keyboard import Controller, Listener
-from classes.logs import Logs
+
+try:
+  from classes.logs import Logs
+  from classes.debounce import debounce
+except ModuleNotFoundError:
+  from debounce import debounce
+  from logs import Logs
   
 keycontroller = Controller()
 logger = Logs().get_logger()
@@ -92,9 +98,9 @@ class Volume:
       key (str): The key that was released.
     """
     if key == keyboard.Key.f12:
-      logger.debug('F12 keypress fired')
       self.__resetVol()
       
+  debounce(5)
   def __resetVol(self) -> None:
     """
     Resets the volume to the default level by simulating key presses (`F7`).
