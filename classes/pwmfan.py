@@ -84,8 +84,8 @@ def load_fan_curve(fan_curve:str) -> List[Tuple[float, float]]:
     [(30.0, 1500.0), (40.0, 2000.0), (50.0, 2500.0)]
   """
   try:
-    path = os.path.expanduser('~/fan_curves')
-    json_filepath = os.path.join(path, f"{fan_curve}.json")
+    root_path = os.path.expanduser('~/fan_curves')
+    json_filepath = os.path.join(root_path, f"{fan_curve}.json")
     logger.info(f'Loading custom fan curve file: {json_filepath}')
     with open(json_filepath) as file:
       try:
@@ -131,9 +131,9 @@ class Pwmfan:
       speed_pin (int): The GPIO pin number connected to the fan's tachometer (for RPM feedback).
       fan_curve (str): The name of the custom fan curve json file (i.e. test loads the file test.json)
     """
+    logger.info(f'FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
     if 'fan_curve' in locals() and fan_curve:
       self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
-    logger.info(f'FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
     GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
     GPIO.setup(fan_pin, GPIO.OUT)
