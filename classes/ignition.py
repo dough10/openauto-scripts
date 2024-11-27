@@ -1,4 +1,3 @@
-import os
 import time
 from typing import Callable
 from subprocess import call
@@ -12,7 +11,9 @@ keycontroller = Controller()
 
 try:
   from classes.logs import Logs
+  from classes.debounce import debounce
 except ModuleNotFoundError:
+  from debounce import debounce
   from logs import Logs
 
 logger = Logs().get_logger()
@@ -76,6 +77,7 @@ class Ignition:
     except Exception as e:
       logger.critical(f"Unexpected error: {e}")
       
+  @debounce(30)
   def __shutdown(self) -> None:
     """
     Perform the shutdown process
@@ -110,13 +112,9 @@ class Ignition:
     
     
 if __name__ == "__main__":
-  from dotenv import load_dotenv
-  
-  load_dotenv()
-  
-  IGN_PIN = int(os.getenv('IGN_PIN', 17))
-  LATCH_PIN = int(os.getenv('LATCH_PIN', 4))
-  IGN_LOW_TIME = int(os.getenv('IGN_LOW_TIME', 3))
+  IGN_PIN = 17
+  LATCH_PIN = 4
+  IGN_LOW_TIME = 3
 
 
   ignition = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME)
