@@ -100,7 +100,7 @@ class Volume:
     if key == keyboard.Key.f12:
       self.__resetVol()
       
-  debounce(5)
+  @debounce(5)
   def __resetVol(self) -> None:
     """
     Resets the volume to the default level by simulating key presses (`F7`).
