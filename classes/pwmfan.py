@@ -33,31 +33,26 @@ def parse_duty_cycles(data:dict) -> List[Tuple[float, float]]:
   """
   Parse the duty cycles data from a given dictionary.
 
-  This function assumes that the input data is a dictionary with a key 'duty_cycles'
-  which holds a list of tuples, where each tuple consists of a temperature and fan speed.
-  It converts the values into a list of tuples with floats representing the temperature and speed.
+  This function now assumes that the input data is a dictionary where the keys are temperatures
+  (as strings or numbers) and the values are corresponding fan speeds (as numbers or floats).
+  The function converts each key-value pair into a tuple of floats (temperature, fan speed).
 
   Args:
-    data (dict): A dictionary containing the fan curve data, with a key 'duty_cycles'.
-                  The value associated with this key should be a list of tuples,
-                  where each tuple contains two values (temperature, speed).
+    data (dict): A dictionary where each key is a temperature (int or float) and each value is the corresponding fan speed (int or float).
 
   Returns:
-    list of tuple: A list of tuples, each containing two float values (temperature, speed).
+    list of tuple: A list of tuples, each containing two float values (temperature, fan speed), sorted by temperature.
 
   Raises:
-    KeyError: If 'duty_cycles' key is not present in the input data.
     ValueError: If the temperature or speed values are not convertible to floats.
-  
+
   Example:
-    >>> data = {"duty_cycles": [(30, 1500), (40, 2000), (50, 2500)]}
+    >>> data = {"70": 100.0, "65": 85.0, "60": 70.0, "55": 55.0, "45": 45.0, "35": 35.0, "30": 30.0}
     >>> parse_duty_cycles(data)
-    [(30.0, 1500.0), (40.0, 2000.0), (50.0, 2500.0)]
+    [(30.0, 30.0), (35.0, 35.0), (45.0, 45.0), (55.0, 55.0), (60.0, 70.0), (65.0, 85.0), (70.0, 100.0)]
   """
   try:
-    return [(float(temp), float(speed)) for temp, speed in data["duty_cycles"]]
-  except KeyError:
-    raise KeyError("'duty_cycles' key is missing in the input data.")
+    return [(float(temp), float(speed)) for temp, speed in data.items()]
   except ValueError as e:
     raise ValueError("One or more temperature or speed values are invalid. Could not convert to float.") from e
 
