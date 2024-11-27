@@ -69,5 +69,6 @@ sudo ln -s ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_recor
 
 echo -e "${YELLOW}Creating custom fan curves folder${NC}"
 createFolder ~/fan_curves
+cp -n ~/.openauto-scripts/curves/* ~/fan_curves/*
 
 echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/.openauto-scripts/.env${NC}${YELLOW} to configure environment${NC}"
