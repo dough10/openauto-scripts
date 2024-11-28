@@ -21,7 +21,7 @@ createFolder () {
     echo -e "${WHITE}Directory ${NC}${GREEN}$folderPath${NC}${WHITE} exists.${NC}"
   else
     echo -e "${WHITE}Creating ${NC}${GREEN}$folderPath${NC}${WHITE} folder${NC}"
-    mkdir -p "$folderPath"
+    mkdir -pv "$folderPath"
   fi 
 }
 
@@ -65,13 +65,7 @@ chmod +x -v ~/.openauto-scripts/*.sh
 chmod +x -v ~/.openauto-scripts/sh/*.sh
 chmod +x -v ~/.config/autostart/*.desktop
 chmod +x -v ~/.openauto-scripts/oas.py
-sudo ln -sf ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_recordings 
-
-echo -e "${YELLOW}Backing up ~/.bashrc to ~/.bashrc-backup${NC}"
-cp  ~/.bashrc  ~/.bashrc-backup 
-
-echo -e "${YELLOW}Adding clock command to ~/.bashrc${NC}"
-echo -e ~/.openauto-scripts/sh/rm_old_recordings.sh >> ~/.bashrc
+sudo ln -sf ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_recordings
 
 echo -e "${YELLOW}Creating custom fan curves folder${NC}"
 createFolder ~/fan_curves
