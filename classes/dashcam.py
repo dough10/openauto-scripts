@@ -77,7 +77,7 @@ class Dashcam:
       "-n",
       "-h", str(height),
       "-w", str(width),
-      "-b", str(bitrate * 1000000),
+      "-b", str(round(bitrate * 1000000)),
       "-fps", str(fps),
       "-t", "0",
       "-o", self.__file_path
