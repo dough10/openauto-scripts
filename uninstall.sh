@@ -9,3 +9,4 @@ read -r response
 if [ "$response" == "y" ] || [ "$response" == "Y" ]; then
   rm -rf ~/fan_curves
 fi
+cp  ~/.bashrc-backup  ~/.bashrc 

@@ -12,8 +12,8 @@ fi
 LOC=${REC_LOC:-"$HOME/Videos"}
 
 if [[ -d "$LOC" ]]; then
-  echo "removing recording from: $LOC"
-  rm -v "$LOC"/*.h264
+  echo "Removing .h264 files older than 2 weeks from: $LOC"
+  find "$LOC" -name "*.h264" -mtime +14 -exec rm -v {} \;
 else
   echo "Directory $LOC does not exist."
 fi
