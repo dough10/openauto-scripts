@@ -69,6 +69,7 @@ sudo ln -sf ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/purge_reco
 
 echo -e "${YELLOW}Creating custom fan curves folder${NC}"
 createFolder ~/fan_curves
+
 echo -e "${YELLOW}Copying premade fan curves${NC}"
 cp -n -v ~/.openauto-scripts/curves/*.json ~/fan_curves
 
