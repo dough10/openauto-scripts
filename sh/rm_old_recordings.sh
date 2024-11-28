@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOG_FILE=~/rm.log
+LOG_FILE=~/.openauto-scripts/rm.log
 
 ENV_FILE=~/.openauto-scripts/.env
 
