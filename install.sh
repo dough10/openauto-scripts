@@ -58,7 +58,7 @@ echo -e "${YELLOW}Checking for autostart folder${NC}"
 createFolder ~/.config/autostart
 
 echo -e "${YELLOW}Installing autostart shortcuts${NC}"
-cp -u -p -v ~/.openauto-scripts/shortcuts/oas.desktop ~/.config/autostart
+cp -u -p -v ~/.openauto-scripts/shortcuts/*.desktop ~/.config/autostart
 
 echo -e "${YELLOW}Adding execute permissions${NC}"
 chmod +x -v ~/.openauto-scripts/*.sh
