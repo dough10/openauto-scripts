@@ -71,7 +71,7 @@ echo -e "${YELLOW}Backing up ~/.bashrc to ~/.bashrc-backup${NC}"
 cp  ~/.bashrc  ~/.bashrc-backup 
 
 echo -e "${YELLOW}Adding clock command to ~/.bashrc${NC}"
-echo -e '~/.openauto-scripts/sh/rm_old_recordings.sh' >> ~/.bashrc
+echo -e ~/.openauto-scripts/sh/rm_old_recordings.sh >> ~/.bashrc
 
 echo -e "${YELLOW}Creating custom fan curves folder${NC}"
 createFolder ~/fan_curves
