@@ -4,3 +4,4 @@ Name=OAS-RM
 Comment=Removes old recordings
 Terminal=false
 Exec=bash -c '$HOME/.openauto-scripts/sh/rm_old_recordings.sh'
+Icon=preferences-desktop
