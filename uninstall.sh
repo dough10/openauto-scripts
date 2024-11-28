@@ -7,6 +7,6 @@ sudo rm -f /usr/local/bin/purge_recordings
 echo "remove ~/fan_curves folder? (y,n)"
 read -r response
 if [ "$response" == "y" ] || [ "$response" == "Y" ]; then
-  rm -rf ~/fan_curves
+  rm -rfv ~/fan_curves
 fi
 cp  ~/.bashrc-backup  ~/.bashrc 
