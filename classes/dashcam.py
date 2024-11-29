@@ -91,7 +91,7 @@ class Dashcam:
     and prints the location where the video has been saved.
     """
     self.__process.terminate()
-    stdout, stderr = self.__process.communicate()
+    _, stderr = self.__process.communicate()
     
     if stderr:
       logger.error(f"Error in raspivid command: {stderr.decode()}")
