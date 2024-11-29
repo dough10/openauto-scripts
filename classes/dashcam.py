@@ -71,13 +71,15 @@ class Dashcam:
     time_str = now.strftime("%m.%d.%Y.%H.%M")
     self.__file_path:str = os.path.join(location, f'{time_str}.h264')
 
+    rounded_bitrate = round(bitrate * 1000000)
+
     logger.info(f'Saving to: {self.__file_path}')     
     self.__process = subprocess.Popen([
       "raspivid",
       "-n",
       "-h", str(height),
       "-w", str(width),
-      "-b", str(round(bitrate * 1000000)),
+      "-b", str(rounded_bitrate),
       "-fps", str(fps),
       "-t", "0",
       "-o", self.__file_path
