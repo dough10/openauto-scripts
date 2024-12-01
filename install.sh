@@ -54,7 +54,7 @@ echo -e "${YELLOW}Installing requirments.txt${NC}"
 ~/.openauto-scripts/.venv/bin/python3 -m pip install -r ~/.openauto-scripts/requirments.txt
 echo -e "${YELLOW}requirments.txt installed${NC}"
 
-echo -e "${YELLOW}Checking for autostart folder${NC}"
+echo -e "${YELLOW}Creating autostart folder${NC}"
 createFolder ~/.config/autostart
 
 echo -e "${YELLOW}Installing autostart shortcuts${NC}"
