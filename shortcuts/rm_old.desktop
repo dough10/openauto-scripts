@@ -3,5 +3,5 @@ Type=Application
 Name=OAS-RM
 Comment=Removes old recordings
 Terminal=false
-Exec=bash -c '$HOME/.openauto-scripts/sh/rm_old_recordings.sh' >> ~/.openauto-scripts/rm_recordings.log 2>&1
+Exec=bash -c "$HOME/.openauto-scripts/sh/rm_old_recordings.sh" >> "$HOME/.openauto-scripts/rm_recordings.log" 2>&1
 Icon=media-removable
