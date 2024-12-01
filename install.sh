@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-version="1.4"
+version="1.5"
 
 BLACK='\033[0;30m'
 RED='\033[0;31m'
@@ -65,9 +65,12 @@ chmod +x -v ~/.openauto-scripts/*.sh
 chmod +x -v ~/.openauto-scripts/sh/*.sh
 chmod +x -v ~/.config/autostart/*.desktop
 chmod +x -v ~/.openauto-scripts/oas.py
+
+echo -e "${YELLOW}Adding globals${NC}"
+sudo ln -sf ~/.openauto-scripts/uninstall.sh /usr/local/bin/oas_uninstall
+sudo ln -sf ~/.openauto-scripts/sh/reinstall.sh /usr/local/bin/oas_reinstall
 sudo ln -sf ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/oas_purge
 sudo ln -sf ~/.openauto-scripts/sh/update.sh /usr/local/bin/oas_update
-
 
 echo -e "${YELLOW}Creating custom fan curves folder${NC}"
 createFolder ~/fan_curves
