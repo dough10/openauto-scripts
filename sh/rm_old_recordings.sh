@@ -18,4 +18,4 @@ else
   echo "$(date '+%Y-%m-%d %H:%M:%S') - Directory $LOC does not exist."
 fi
 
-echo "$(date '+%Y-%m-%d %H:%M:%S') - old recording removed"
+echo "$(date '+%Y-%m-%d %H:%M:%S') - complete"
