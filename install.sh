@@ -18,9 +18,9 @@ createFolder () {
   folderPath="${1/#\~/$HOME}"
   if [ -d "$folderPath" ]
   then
-    echo -e "${WHITE}Directory ${NC}${GREEN}$folderPath${NC}${WHITE} exists.${NC}"
+    echo -e "${YELLOW}Directory ${NC}${GREEN}$folderPath${NC}${YELLOW} exists.${NC}"
   else
-    echo -e "${WHITE}Creating folder ${NC}${GREEN}$folderPath${NC}"
+    echo -e "${YELLOW}Creating folder ${NC}${GREEN}$folderPath${NC}"
     mkdir -pv "$folderPath"
   fi 
 }
@@ -54,7 +54,6 @@ echo -e "${YELLOW}Installing requirments.txt${NC}"
 ~/.openauto-scripts/.venv/bin/python3 -m pip install -r ~/.openauto-scripts/requirments.txt
 echo -e "${YELLOW}requirments.txt installed${NC}"
 
-echo -e "${YELLOW}Creating autostart folder${NC}"
 createFolder ~/.config/autostart
 
 echo -e "${YELLOW}Installing autostart shortcuts${NC}"
@@ -73,7 +72,6 @@ sudo ln -sfv ~/.openauto-scripts/sh/reinstall.sh /usr/local/bin/oas_reinstall
 sudo ln -sfv ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/oas_purge
 sudo ln -sfv ~/.openauto-scripts/sh/update.sh /usr/local/bin/oas_update
 
-echo -e "${YELLOW}Creating custom fan curves folder${NC}"
 createFolder ~/fan_curves
 
 echo -e "${YELLOW}Copying premade fan curves${NC}"
