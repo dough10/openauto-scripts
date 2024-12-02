@@ -5,7 +5,7 @@ read -r response
 if [ "$response" == "y" ] || [ "$response" == "Y" ]; then
   rm -rfv ~/fan_curves
 fi
-rm -rfv ~/.openauto-scripts
+rm -rf ~/.openauto-scripts
 rm -fv ~/.config/autostart/oas*.desktop
 rm -fv ~/openauto-scripts.log
 sudo rm -fv /usr/local/bin/oas_*
