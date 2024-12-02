@@ -47,7 +47,7 @@ mv -v ~/openauto-scripts ~/.openauto-scripts
 echo -e "${YELLOW}Github repo cloned and moved to ${NC}${GREEN}~/.openauto-scripts${NC}"
 
 echo -e "${YELLOW}Setting virtual environment${NC}"
-python3 -m venv --verbose ~/.openauto-scripts/.venv
+python3 -m venv ~/.openauto-scripts/.venv
 echo -e "${YELLOW}virtual environment ${NC}${GREEN}~/.openauto-scripts/.venv${NC}${YELLOW} created${NC}"
 
 echo -e "${YELLOW}Installing requirments.txt to ${NC}${GREEN}~/.openauto-scripts/.venv${NC}"
