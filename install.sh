@@ -20,7 +20,7 @@ createFolder () {
   then
     echo -e "${WHITE}Directory ${NC}${GREEN}$folderPath${NC}${WHITE} exists.${NC}"
   else
-    echo -e "${WHITE}Creating ${NC}${GREEN}$folderPath${NC}${WHITE} folder${NC}"
+    echo -e "${WHITE}Creating folder ${NC}${GREEN}$folderPath${NC}"
     mkdir -pv "$folderPath"
   fi 
 }
@@ -66,7 +66,7 @@ chmod +x -v ~/.openauto-scripts/sh/*.sh
 chmod +x -v ~/.config/autostart/*.desktop
 chmod +x -v ~/.openauto-scripts/oas.py
 
-echo -e "${YELLOW}Adding globals${NC}"
+echo -e "${YELLOW}Installing global commands${NC}"
 sudo ln -sfv ~/.openauto-scripts/uninstall.sh /usr/local/bin/oas_uninstall
 sudo ln -sfv ~/.openauto-scripts/sh/tail_log.sh /usr/local/bin/oas_log
 sudo ln -sfv ~/.openauto-scripts/sh/reinstall.sh /usr/local/bin/oas_reinstall

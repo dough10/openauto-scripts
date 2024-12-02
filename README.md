@@ -43,16 +43,16 @@ GPIO pin configuration use `GPIO.BCM` numbering standard
 
 `LOG_LEVEL=WARNING`: Set the log level.
 
-Logs are saved to the user's home directory as openauto-scripts.log.
+Logs are saved to the user's home directory as `openauto-scripts.log`
 
 Log levels: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
 
-To view the log stream: `tail -f ~/openauto-scripts.log`
+To view the log stream: `oas_log`
 
 ## Uninstall & Reinstall
 
-To uninstall and reinstall the script, run the following: `bash ~/.openauto-scripts/uninstall.sh && cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh`  
+To uninstall and reinstall the script, run the following: `oas_reinstall`  
 
 ## Uninstall
 
-To uninstall the script, run: `bash ~/.openauto-scripts/uninstall.sh`
+To uninstall the script, run: `oas_uninstall`
