@@ -68,6 +68,7 @@ chmod +x -v ~/.openauto-scripts/oas.py
 
 echo -e "${YELLOW}Adding globals${NC}"
 sudo ln -sfv ~/.openauto-scripts/uninstall.sh /usr/local/bin/oas_uninstall
+sudo ln -sfv ~/.openauto-scripts/sh/tail_log.sh /usr/local/bin/oas_log
 sudo ln -sfv ~/.openauto-scripts/sh/reinstall.sh /usr/local/bin/oas_reinstall
 sudo ln -sfv ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/oas_purge
 sudo ln -sfv ~/.openauto-scripts/sh/update.sh /usr/local/bin/oas_update
