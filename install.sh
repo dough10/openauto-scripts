@@ -50,7 +50,7 @@ echo -e "${YELLOW}Setting virtual environment${NC}"
 python3 -m venv ~/.openauto-scripts/.venv
 echo -e "${YELLOW}virtual environment ${NC}${GREEN}~/.openauto-scripts/.venv${NC}${YELLOW} created${NC}"
 
-echo -e "${YELLOW}Installing requirments.txt${NC}"
+echo -e "${YELLOW}Installing requirments.txt to ${NC}${GREEN}~/.openauto-scripts/.venv${NC}"
 ~/.openauto-scripts/.venv/bin/python3 -m pip install -r ~/.openauto-scripts/requirments.txt
 echo -e "${YELLOW}requirments.txt installed${NC}"
 
@@ -67,10 +67,10 @@ chmod +x -v ~/.openauto-scripts/oas.py
 
 echo -e "${YELLOW}Installing global commands${NC}"
 sudo ln -sfv ~/.openauto-scripts/uninstall.sh /usr/local/bin/oas_uninstall
-sudo ln -sfv ~/.openauto-scripts/sh/tail_log.sh /usr/local/bin/oas_log
 sudo ln -sfv ~/.openauto-scripts/sh/reinstall.sh /usr/local/bin/oas_reinstall
-sudo ln -sfv ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/oas_purge
 sudo ln -sfv ~/.openauto-scripts/sh/update.sh /usr/local/bin/oas_update
+sudo ln -sfv ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/oas_purge
+sudo ln -sfv ~/.openauto-scripts/sh/tail_log.sh /usr/local/bin/oas_log
 
 createFolder ~/fan_curves
 
