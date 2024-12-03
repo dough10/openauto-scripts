@@ -49,9 +49,9 @@ class Dashcam:
     
     Args:
       location (str): The directory where the video file will be saved. Default is '/home/pi/Videos'.
-      width (int): The width (in pixels) of the video frame. Default is 1280.
-      height (int): The height (in pixels) of the video frame. Default is 720.
-      bitrate (float): The bitrate for video encoding in Mbps. Default is 3.5.
+      width (int): The width (in pixels) of the video frame. Default is 1920.
+      height (int): The height (in pixels) of the video frame. Default is 1080.
+      bitrate (float): The bitrate for video encoding in Mbps. Default is 10.
       fps (int): The frames per second for the video recording. Default is 30.
     
     Raises:
