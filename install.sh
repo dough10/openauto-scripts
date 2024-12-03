@@ -77,4 +77,5 @@ createFolder ~/fan_curves
 echo -e "${YELLOW}Copying premade fan curves${NC}"
 cp -n -v ~/.openauto-scripts/curves/*.json ~/fan_curves
 
-echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/.openauto-scripts/.env${NC}${YELLOW} to configure environment${NC}"
+echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/.openauto-scripts/.env${NC}${YELLOW} to configure environment.${NC}"
+echo -e "${YELLOW}Then reboot after${NC}"
