@@ -54,12 +54,21 @@ Logs are saved to the user's home directory as `openauto-scripts.log`
 
 Log levels: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
 
-To view the log stream: ```oas_log```
+To view the log stream: 
+```text
+oas_log
+```
 
 ## Uninstall & Reinstall
 
-To uninstall and reinstall the script, run the following: ```oas_reinstall```  
+To uninstall and reinstall the script, run the following:
+```text
+oas_reinstall
+```  
 
 ## Uninstall
 
-To uninstall the script, run: ```oas_uninstall```
+To uninstall the script, run:
+```text
+oas_uninstall
+```
