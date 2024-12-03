@@ -1,3 +1,4 @@
+import time
 import threading
 from pynput import keyboard
 from pynput.keyboard import Controller, Listener
@@ -100,7 +101,7 @@ class Volume:
     if key == keyboard.Key.f12:
       self.__resetVol()
       
-  @debounce(5)
+  @debounce(60)
   def __resetVol(self) -> None:
     """
     Resets the volume to the default level by simulating key presses (`F7`).
@@ -111,6 +112,7 @@ class Volume:
     while self.__pressed > self.__default_level:
       keycontroller.press(keyboard.Key.f7)
       keycontroller.release(keyboard.Key.f7)
+      time.sleep(0.1)
 
   def stop_listener(self):
     """
