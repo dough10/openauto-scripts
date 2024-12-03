@@ -43,15 +43,15 @@ class Dashcam:
     stop(self):
         Stops the video recording and saves the file.
   """
-  def __init__(self, location:str = '~/Videos', width:int = 1920, height:int = 1080, bitrate:float = 10, fps:int = 30) -> None:
+  def __init__(self, location:str = '~/Videos', width:int = 1280, height:int = 720, bitrate:float = 5, fps:int = 30) -> None:
     """
     Initializes the Dashcam object, starts video recording, and saves it to a timestamped file.
     
     Args:
       location (str): The directory where the video file will be saved. Default is '/home/pi/Videos'.
-      width (int): The width (in pixels) of the video frame. Default is 1920.
-      height (int): The height (in pixels) of the video frame. Default is 1080.
-      bitrate (float): The bitrate for video encoding in Mbps. Default is 10.
+      width (int): The width (in pixels) of the video frame. Default is 1280.
+      height (int): The height (in pixels) of the video frame. Default is 720.
+      bitrate (float): The bitrate for video encoding in Mbps. Default is 5.
       fps (int): The frames per second for the video recording. Default is 30.
     
     Raises:
