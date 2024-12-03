@@ -68,7 +68,7 @@ class Dashcam:
         raise
         
     now = datetime.now()
-    time_str = now.strftime("%m.%d.%Y.%H.%M")
+    time_str:str = now.strftime("%m.%d.%Y.%H.%M")
     self.__file_path:str = os.path.join(location, f'{time_str}.h264')
 
     rounded_bitrate = round(bitrate * 1000000)
