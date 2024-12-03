@@ -14,7 +14,8 @@ cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs
 
 The environment configuration is used to enable features, change GPIO settings, adjust log levels, specify dashcam recording location, or set the shutdown delay. Only modify the values you need to change.
 
-To create or edit the environment configuration file: 
+To create or edit the environment configuration file:
+
 ```text
 nano ~/.openauto-scripts/.env
 ```
@@ -54,7 +55,8 @@ Logs are saved to the user's home directory as `openauto-scripts.log`
 
 Log levels: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
 
-To view the log stream: 
+View the log stream:
+
 ```text
 oas_log
 ```
@@ -62,6 +64,7 @@ oas_log
 ## Uninstall & Reinstall
 
 To uninstall and reinstall the script, run the following:
+
 ```text
 oas_reinstall
 ```  
@@ -69,6 +72,7 @@ oas_reinstall
 ## Uninstall
 
 To uninstall the script, run:
+
 ```text
 oas_uninstall
 ```
