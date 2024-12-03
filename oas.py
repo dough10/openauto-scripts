@@ -51,7 +51,7 @@ rem.on()
 
 while ign.running:
   try:
-    ign.main()
+    # ign.main()
     if 'fan' in globals(): 
       fan.main()
     time.sleep(1)

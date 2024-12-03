@@ -50,11 +50,19 @@ class Ignition:
     self.__pin = ign_pin
     self.__external_options = external_options
     GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.add_event_detect(self.__pin, GPIO.FALLING, callback=self.__test)
+    GPIO.add_event_detect(self.__pin, GPIO.FALLING, callback=self.__falling)
     self.__latch_power(latch_pin)
 
-  def __test(self, n):
-    logger.info(n)
+  @debounce(1)
+  def __falling(self, pin):
+    state = GPIO.input(pin)
+    if state != GPIO.HIGH:
+      logger.debug(f'IGN_PIN state: {state}, __ignLowCounter: {self.__ignLowCounter}')
+      self.__ignLowCounter += 1
+      if self.__ignLowCounter >= self.__IGN_LOW_TIME:
+        self.__shutdown()
+    else:
+      self.__ignLowCounter = 0
 
   def __keypress(self, key:str) -> None:
     """
@@ -128,8 +136,7 @@ if __name__ == "__main__":
   ignition = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME)
 
   try:
-    while True:
-      ignition.main()
+    while ignition.running:
       time.sleep(1)
   except Exception as e:
     logger.exception("main crashed. Error: %s", e) 
