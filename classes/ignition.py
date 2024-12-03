@@ -87,9 +87,8 @@ class Ignition:
     The function also manages the fan dashcam and remote control states.
 
     The shutdown process includes:
+    - Stops external processes
     - Pressing the F12 key (e.g., to trigger volume normalization)
-    - Stops dashcam recording
-    - Turning off the remote device
     - Shutting down the system via a shell command
     """
     if self.__external_options:
@@ -119,8 +118,10 @@ if __name__ == "__main__":
   LATCH_PIN = 4
   IGN_LOW_TIME = 3
 
+  def shutdown():
+    print('Good Bye!')
 
-  ignition = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME)
+  ignition = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME, shutdown)
 
   try:
     while ignition.running:

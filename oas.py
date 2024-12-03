@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import os
 import time
 from dotenv import load_dotenv
@@ -14,16 +15,7 @@ logger = Logs().get_logger()
 
 load_dotenv()
 
-def feature_is_enabled(feature:str) -> bool:
-  env:str = os.getenv(feature, 'false')
-  return env.lower() in ['true', '1', 't', 'y', 'yes']
-
-def delay_start(count):
-  while count > 0:
-    logger.debug(f'Starting in: {count}')
-    count -= 1
-    time.sleep(1)
-
+START_DELAY = int(os.getenv('START_DELAY', 3))
 IGN_PIN = int(os.getenv('IGN_PIN', 17))
 LATCH_PIN = int(os.getenv('LATCH_PIN', 4))
 IGN_LOW_TIME = int(os.getenv('IGN_LOW_TIME', 3))
@@ -33,6 +25,15 @@ FAN_SPEED_PIN = int(os.getenv('FAN_SPEED_PIN', 24))
 CUSTOM_CURVE = os.getenv('CUSTOM_CURVE', None)
 REC_LOC = os.getenv('REC_LOC', '~/Videos')
 
+def feature_is_enabled(feature:str) -> bool:
+  env:str = os.getenv(feature, 'false')
+  return env.lower() in ['true', '1', 't', 'y', 'yes']
+
+def delay_start(count:int):
+  while count > 0:
+    logger.debug(f'Starting in: {count}')
+    count -= 1
+    time.sleep(1)
 
 rem = Remote(REMOTE_PIN)
 if feature_is_enabled('PWM'): 
@@ -55,7 +56,7 @@ def shutdown() -> None:
     
 ign = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME, shutdown)
 
-delay_start(3)
+delay_start(START_DELAY)
 
 rem.on()
 
