@@ -4,13 +4,13 @@ Python3 scripts for OpenAuto Pro. Monitors GPIO pins and performs actions when t
 
 ## Install
 
-To install, run the following command: `cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh`
+To install, run the following command: ```cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh```
 
 ## Environment configuration
 
 The environment configuration is used to enable features, change GPIO settings, adjust log levels, specify dashcam recording location, or set the shutdown delay. Only modify the values you need to change.
 
-To create or edit the environment configuration file: `nano ~/.openauto-scripts/.env`
+To create or edit the environment configuration file: ```nano ~/.openauto-scripts/.env```
 
 ### Features
 
@@ -47,12 +47,12 @@ Logs are saved to the user's home directory as `openauto-scripts.log`
 
 Log levels: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
 
-To view the log stream: `oas_log`
+To view the log stream: ```oas_log```
 
 ## Uninstall & Reinstall
 
-To uninstall and reinstall the script, run the following: `oas_reinstall`  
+To uninstall and reinstall the script, run the following: ```oas_reinstall```  
 
 ## Uninstall
 
-To uninstall the script, run: `oas_uninstall`
+To uninstall the script, run: ```oas_uninstall```
