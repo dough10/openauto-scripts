@@ -43,7 +43,7 @@ class Dashcam:
     stop(self):
         Stops the video recording and saves the file.
   """
-  def __init__(self, location:str = '~/Videos', width:int = 1920, height:int = 1080, bitrate:float = 5, fps:int = 30) -> None:
+  def __init__(self, location:str = '~/Videos', width:int = 1920, height:int = 1080, bitrate:float = 10, fps:int = 30) -> None:
     """
     Initializes the Dashcam object, starts video recording, and saves it to a timestamped file.
     
