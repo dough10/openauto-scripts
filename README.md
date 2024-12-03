@@ -4,7 +4,9 @@ Python3 scripts for OpenAuto Pro. Monitors GPIO pins and performs actions when t
 
 ## Install
 
-To install, run the following command: ```cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh```
+To install, run the following command: ```
+cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh
+```
 
 ## Environment configuration
 
