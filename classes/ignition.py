@@ -94,6 +94,7 @@ class Ignition:
     if self.__external_options:
       self.__external_options()
     self.__keypress(keyboard.Key.f12)
+    time.sleep(2)
     logger.info('shutting down')
     call("sudo shutdown -h now", shell=True) 
     self.running = False
