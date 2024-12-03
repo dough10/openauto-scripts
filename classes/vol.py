@@ -107,10 +107,10 @@ class Volume:
     
     This method decreases the volume by pressing `F7` until the volume reaches the default level.
     """
+    logger.info('volume reset')
     while self.__pressed > self.__default_level:
       keycontroller.press(keyboard.Key.f7)
       keycontroller.release(keyboard.Key.f7)
-    logger.info('volume reset')
 
   def stop_listener(self):
     """
