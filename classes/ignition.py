@@ -62,6 +62,7 @@ class Ignition:
         self.__shutdown()
     else:
       self.__ignLowCounter = 0
+    time.sleep(1)
 
   def __keypress(self, key:str) -> None:
     """
@@ -104,12 +105,12 @@ class Ignition:
     - Turning off the remote device
     - Shutting down the system via a shell command
     """
-    self.running = False
     self.__keypress(keyboard.Key.f12)
     if self.__external_options:
       self.__external_options()
     logger.info('shutting down')
     call("sudo shutdown -h now", shell=True) 
+    self.running = False
       
   def main(self) -> None:
     """

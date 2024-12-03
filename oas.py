@@ -3,11 +3,14 @@ import os
 import time
 from dotenv import load_dotenv
 
+from classes.logs import Logs
 from classes.pwmfan import Pwmfan
 from classes.remote import Remote
 from classes.dashcam import Dashcam
 from classes.ignition import Ignition
 from classes.vol import Volume
+
+logger = Logs().get_logger()
 
 load_dotenv()
 
@@ -46,7 +49,12 @@ def shutdown() -> None:
     
 ign = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME, shutdown)
 
-time.sleep(3)
+count = 3
+while count > 0:
+  logger.debug(f'Starting in: {count}')
+  count -= 1
+  time.sleep(1)
+  
 rem.on()
 
 while ign.running:
