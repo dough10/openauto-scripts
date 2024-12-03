@@ -29,7 +29,7 @@ def feature_is_enabled(feature:str) -> bool:
   env:str = os.getenv(feature, 'false')
   return env.lower() in ['true', '1', 't', 'y', 'yes']
 
-def delay_start(count:int):
+def delay_start(count:int) -> None:
   while count > 0:
     logger.debug(f'Starting in: {count}')
     count -= 1
