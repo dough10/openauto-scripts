@@ -53,7 +53,6 @@ class Ignition:
     GPIO.add_event_detect(self.__pin, GPIO.FALLING, callback=self.__falling)
     self.__latch_power(latch_pin)
 
-  @debounce(1)
   def __falling(self, pin):
     state = GPIO.input(pin)
     if state != GPIO.HIGH:
