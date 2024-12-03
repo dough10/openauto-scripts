@@ -50,19 +50,7 @@ class Ignition:
     self.__pin = ign_pin
     self.__external_options = external_options
     GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.add_event_detect(self.__pin, GPIO.FALLING, callback=self.__falling)
     self.__latch_power(latch_pin)
-
-  def __falling(self, pin):
-    state = GPIO.input(pin)
-    if state != GPIO.HIGH:
-      logger.debug(f'IGN_PIN state: {state}, __ignLowCounter: {self.__ignLowCounter}')
-      self.__ignLowCounter += 1
-      if self.__ignLowCounter >= self.__IGN_LOW_TIME:
-        self.__shutdown()
-    else:
-      self.__ignLowCounter = 0
-    time.sleep(1)
 
   def __keypress(self, key:str) -> None:
     """
@@ -92,7 +80,6 @@ class Ignition:
     except Exception as e:
       logger.critical(f"Unexpected error: {e}")
       
-  @debounce(120)
   def __shutdown(self) -> None:
     """
     Perform the shutdown process
@@ -105,9 +92,9 @@ class Ignition:
     - Turning off the remote device
     - Shutting down the system via a shell command
     """
-    self.__keypress(keyboard.Key.f12)
     if self.__external_options:
       self.__external_options()
+    self.__keypress(keyboard.Key.f12)
     logger.info('shutting down')
     call("sudo shutdown -h now", shell=True) 
     self.running = False
@@ -137,6 +124,7 @@ if __name__ == "__main__":
 
   try:
     while ignition.running:
+      ignition.main()
       time.sleep(1)
   except Exception as e:
     logger.exception("main crashed. Error: %s", e) 

@@ -54,12 +54,12 @@ while count > 0:
   logger.debug(f'Starting in: {count}')
   count -= 1
   time.sleep(1)
-  
+
 rem.on()
 
 while ign.running:
   try:
-    # ign.main()
+    ign.main()
     if 'fan' in globals(): 
       fan.main()
     time.sleep(1)
