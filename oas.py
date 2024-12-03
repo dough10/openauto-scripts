@@ -18,6 +18,12 @@ def feature_is_enabled(feature:str) -> bool:
   env:str = os.getenv(feature, 'false')
   return env.lower() in ['true', '1', 't', 'y', 'yes']
 
+def delay_start(count):
+  while count > 0:
+    logger.debug(f'Starting in: {count}')
+    count -= 1
+    time.sleep(1)
+
 IGN_PIN = int(os.getenv('IGN_PIN', 17))
 LATCH_PIN = int(os.getenv('LATCH_PIN', 4))
 IGN_LOW_TIME = int(os.getenv('IGN_LOW_TIME', 3))
@@ -49,11 +55,7 @@ def shutdown() -> None:
     
 ign = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME, shutdown)
 
-count = 3
-while count > 0:
-  logger.debug(f'Starting in: {count}')
-  count -= 1
-  time.sleep(1)
+delay_start(3)
 
 rem.on()
 
