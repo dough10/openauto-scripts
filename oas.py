@@ -49,7 +49,7 @@ ign = Ignition(IGN_PIN, LATCH_PIN, IGN_LOW_TIME, shutdown)
 time.sleep(3)
 rem.on()
 
-while True:
+while ign.running:
   try:
     ign.main()
     if 'fan' in globals(): 

@@ -29,8 +29,11 @@ class Ignition:
     __IGN_LOW_TIME (int): Threshold time (in seconds) for low ignition state to trigger shutdown.
     __ignLowCounter (int): Counter for tracking consecutive ignition pin low states.
     __pin (int): GPIO pin used to monitor ignition state (e.g., car ignition signal).
+    running (bool): controls application main loop
   """
   __ignLowCounter:int = 0
+
+  running:bool = True
 
   def __init__(self, ign_pin:int, latch_pin:int, ign_low_time:int, external_options:Callable[[], None]) -> None:
     """
@@ -47,7 +50,11 @@ class Ignition:
     self.__pin = ign_pin
     self.__external_options = external_options
     GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.add_event_detect(self.__pin, GPIO.FALLING, callback=self.__test)
     self.__latch_power(latch_pin)
+
+  def __test(self, n):
+    logger.info(n)
 
   def __keypress(self, key:str) -> None:
     """
@@ -90,6 +97,7 @@ class Ignition:
     - Turning off the remote device
     - Shutting down the system via a shell command
     """
+    self.running = False
     self.__keypress(keyboard.Key.f12)
     if self.__external_options:
       self.__external_options()
