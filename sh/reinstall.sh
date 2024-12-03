@@ -6,4 +6,4 @@ cd ~/
 curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh
 bash install.sh
 rm install.sh
-[ -f ~/.oas-env ] && cp -vn ~/.oas-env ~/.openauto-scripts/.env
+[ -f ~/.oas-env ] && cp -v ~/.oas-env ~/.openauto-scripts/.env
