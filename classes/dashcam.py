@@ -77,8 +77,8 @@ class Dashcam:
     self.__process = subprocess.Popen([
       "raspivid",
       "-n",
-      "-h", str(height),
       "-w", str(width),
+      "-h", str(height),
       "-b", str(rounded_bitrate),
       "-fps", str(fps),
       "-t", "0",
