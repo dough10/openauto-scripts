@@ -35,8 +35,8 @@ REC_BITRATE = int(os.getenv('REC_BITRATE', 5))
 REC_FPS = int(os.getenv('REC_FPS', 30))
 
 def feature_is_enabled(feature:str) -> bool:
-  env:str = os.getenv(feature, 'false')
-  return env.lower() in ['true', '1', 't', 'y', 'yes']
+  env_state:str = os.getenv(feature, 'false')
+  return env_state.lower() in ['true', '1', 't', 'y', 'yes']
 
 def delay_start(count:int) -> None:
   while count > 0:
