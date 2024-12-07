@@ -57,7 +57,7 @@ echo -e "${YELLOW}requirments.txt installed${NC}"
 createFolder ~/.config/autostart
 
 echo -e "${YELLOW}Installing autostart shortcuts${NC}"
-cp -u -p -v ~/.openauto-scripts/shortcuts/*.desktop ~/.config/autostart
+cp -upv ~/.openauto-scripts/shortcuts/*.desktop ~/.config/autostart
 
 echo -e "${YELLOW}Adding execute permissions${NC}"
 chmod +x -v ~/.openauto-scripts/*.sh
@@ -75,7 +75,7 @@ sudo ln -sfv ~/.openauto-scripts/sh/tail_log.sh /usr/local/bin/oas_log
 createFolder ~/fan_curves
 
 echo -e "${YELLOW}Copying premade fan curves${NC}"
-cp -n -v ~/.openauto-scripts/curves/*.json ~/fan_curves
+cp -nv ~/.openauto-scripts/curves/*.json ~/fan_curves
 
 echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/.openauto-scripts/.env${NC}${YELLOW} to configure environment.${NC}"
 echo -e "${YELLOW}Then reboot after${NC}"
