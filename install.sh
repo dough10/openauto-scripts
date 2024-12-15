@@ -70,11 +70,12 @@ sudo ln -sfv ~/.openauto-scripts/uninstall.sh /usr/local/bin/oas_uninstall
 sudo ln -sfv ~/.openauto-scripts/sh/reinstall.sh /usr/local/bin/oas_reinstall
 sudo ln -sfv ~/.openauto-scripts/sh/purge_recordings.sh /usr/local/bin/oas_purge
 sudo ln -sfv ~/.openauto-scripts/sh/tail_log.sh /usr/local/bin/oas_log
+sudo ln -sfv ~/.openauto-scripts/sh/configure.sh /usr/local/bin/oas_env
 
 createFolder ~/fan_curves
 
 echo -e "${YELLOW}Copying premade fan curves${NC}"
 cp -nv ~/.openauto-scripts/curves/*.json ~/fan_curves
 
-echo -e "${YELLOW}Install complete. run ${NC}${CYAN}nano ~/.openauto-scripts/.env${NC}${YELLOW} to configure environment.${NC}"
+echo -e "${YELLOW}Install complete. run ${NC}${CYAN}oas_env${NC}${YELLOW} to configure environment.${NC}"
 echo -e "${YELLOW}Then reboot after${NC}"
