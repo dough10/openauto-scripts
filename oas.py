@@ -73,6 +73,6 @@ while ign.running:
     ign.main()
     if 'fan' in globals(): 
       fan.main()
-    time.sleep(1)
+    time.sleep(0.5)
   except KeyboardInterrupt:
     break
