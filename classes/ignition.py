@@ -31,7 +31,7 @@ class Ignition:
     __pin (int): GPIO pin used to monitor ignition state (e.g., car ignition signal).
     running (bool): controls application main loop
   """
-  __ignLowCounter:int = 0
+  __ign_low_count:int = 0
 
   running:bool = True
 
@@ -46,7 +46,7 @@ class Ignition:
       external_options (function): additional methods that need to be executed before shutdown
     """
     logger.info(f'IGN_PIN:{ign_pin}, LATCH_PIN:{latch_pin}')
-    self.__IGN_LOW_TIME = ign_low_time
+    self.__ign_low_time = ign_low_time
     self.__pin = ign_pin
     self.__external_options = external_options
     GPIO.setup(self.__pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -107,12 +107,12 @@ class Ignition:
     """
     state = GPIO.input(self.__pin)
     if state != GPIO.HIGH:
-      logger.debug(f'IGN_PIN state: {state}, __ignLowCounter: {self.__ignLowCounter}')
-      self.__ignLowCounter += 1
-      if self.__ignLowCounter >= self.__IGN_LOW_TIME:
+      logger.debug(f'IGN_PIN state: {state}, __ign_low_count: {self.__ign_low_count}')
+      self.__ign_low_count += 1
+      if self.__ign_low_count >= self.__ign_low_time:
         self.__shutdown()
     else:
-      self.__ignLowCounter = 0
+      self.__ign_low_count = 0
     
     
 if __name__ == "__main__":
