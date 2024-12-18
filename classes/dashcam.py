@@ -86,7 +86,7 @@ class Dashcam:
         "-o", self.__file_path
       ])
     except Exception as e:
-      logger.critical(f'Failes to run raspivid: {e}')
+      logger.critical(f'Failed to run raspivid: {e}')
         
   def stop(self) -> None:
     """
