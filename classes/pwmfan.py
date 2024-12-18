@@ -170,7 +170,7 @@ class Pwmfan:
     reading_c:float = float(result.stdout.split('=')[1].split("'")[0])
     reading_f:float = round(((reading_c * 9) / 5) + 32, 1)
     
-    if not '__fan' in self: return
+    if not getattr(self,'__fan'): return
     for threshold, duty in self.__duty_cycles:
       if reading_c >= threshold:
         self.__fan.ChangeDutyCycle(duty)
