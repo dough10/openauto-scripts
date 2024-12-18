@@ -86,7 +86,16 @@ class Dashcam:
         "-o", self.__file_path
       ])
     except Exception as e:
-      logger.critical(f'Failed to run raspivid: {e}')
+      self.__process = subprocess.Popen([
+        "rpicam-vid",
+        "-n",
+        "-w", str(width),
+        "-h", str(height),
+        "-b", str(rounded_bitrate),
+        "-fps", str(fps),
+        "-t", "0",
+        "-o", self.__file_path
+      ])
         
   def stop(self) -> None:
     """
