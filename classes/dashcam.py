@@ -86,6 +86,7 @@ class Dashcam:
         "-o", self.__file_path
       ])
     except Exception:
+      logger.error(f'failed running raspivid trying rpicam-vid')
       try:
         self.__process = subprocess.Popen([
           "rpicam-vid",
