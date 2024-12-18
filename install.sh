@@ -30,7 +30,9 @@ echo -e "${ORANGE}| | \ \  / |  | \ | |  | | | | ____ | |  | |   ${NC}";
 echo -e "${ORANGE}| | | |  | |  | | | |  | | | |  | | | |--| |   ${NC}";
 echo -e "${ORANGE}|_|_/_/  \_|__|_/ \_|__|_| |_|__|_| |_|  |_|   ${NC}";
 echo -e "${WHITE}Openauto Script Installer v${NC}${GREEN}${version}${NC}";
-echo -e ""
+echo ""
+echo -e "Legend: ${YELLOW}Status${NC} - ${GREEN}Paths${NC} - ${CYAN}Commands${NC} - ${GREY}Prompt for input${NC} - ${RED}Warnings${NC}"
+echo ""
 echo -e "${YELLOW}Install Dependencies${NC}"
 sudo apt-get update && sudo apt-get install git xterm python3 python3-pip -y
 PYTHON_VERSION=$(python3 --version | awk '{print $2}' | cut -d. -f1-2)
