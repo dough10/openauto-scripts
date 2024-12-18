@@ -73,7 +73,6 @@ class Dashcam:
 
     rounded_bitrate = round(bitrate * 1000000)
 
-    logger.info(f'Saving to: {self.__file_path}')
     try:    
       self.__process = subprocess.Popen([
         "raspivid",
@@ -85,8 +84,7 @@ class Dashcam:
         "-t", "0",
         "-o", self.__file_path
       ])
-    except Exception:
-      logger.error(f'failed running raspivid trying rpicam-vid')
+    except Exception as e1:
       try:
         self.__process = subprocess.Popen([
           "rpicam-vid",
@@ -98,9 +96,13 @@ class Dashcam:
           "-t", "0",
           "-o", self.__file_path
         ])
-      except Exception as e:
-        logger.critical(f'Failed running dashcam.py: {e}')
+      except Exception as e2:
+        logger.critical(f'raspivid: {e1}')
+        logger.critical(f'rpicam-vid: {e2}')
+        return
           
+    logger.info(f'Saving to: {self.__file_path}')
+
   def stop(self) -> None:
     """
     Stops the video recording and saves the file.
