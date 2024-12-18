@@ -73,17 +73,20 @@ class Dashcam:
 
     rounded_bitrate = round(bitrate * 1000000)
 
-    logger.info(f'Saving to: {self.__file_path}')     
-    self.__process = subprocess.Popen([
-      "raspivid",
-      "-n",
-      "-w", str(width),
-      "-h", str(height),
-      "-b", str(rounded_bitrate),
-      "-fps", str(fps),
-      "-t", "0",
-      "-o", self.__file_path
-    ])
+    logger.info(f'Saving to: {self.__file_path}')
+    try:    
+      self.__process = subprocess.Popen([
+        "raspivid",
+        "-n",
+        "-w", str(width),
+        "-h", str(height),
+        "-b", str(rounded_bitrate),
+        "-fps", str(fps),
+        "-t", "0",
+        "-o", self.__file_path
+      ])
+    except Exception as e:
+      logger.critical(f'Failes to run raspivid: {e}')
         
   def stop(self) -> None:
     """
