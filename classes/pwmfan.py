@@ -138,6 +138,7 @@ class Pwmfan:
 
     try:
       GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+      time.sleep(0.5)
       GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
     except Exception as e:
       logger.critical(f'Failed to configure PWM Tach pin ({speed_pin}): {e}')
