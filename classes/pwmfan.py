@@ -134,11 +134,15 @@ class Pwmfan:
     logger.info(f'FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
     if fan_curve:
       self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
-    GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
-    GPIO.setup(fan_pin, GPIO.OUT)
-    self.__fan = GPIO.PWM(fan_pin, self.__frequency)
-    self.__fan.start(0)
+    try:
+      GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+      GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
+      GPIO.setup(fan_pin, GPIO.OUT)
+      self.__fan = GPIO.PWM(fan_pin, self.__frequency)
+      self.__fan.start(0)
+    except Exception as e:
+      logger.critical(f'Failed configuring PWM GPIO pins: {e}')
+      return
     
   @debounce(30)
   def main(self) -> None:
