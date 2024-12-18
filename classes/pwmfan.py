@@ -153,6 +153,9 @@ class Pwmfan:
     except (subprocess.CalledProcessError, ValueError, IndexError) as e:
       logger.error(f"Error reading temperature: {e}")
       return
+    except Exception as e:
+      logger.error(f'An unknown error accured: {e}')
+      return
 
     reading_c:float = float(result.stdout.split('=')[1].split("'")[0])
     reading_f:float = round(((reading_c * 9) / 5) + 32, 1)
