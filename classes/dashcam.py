@@ -90,10 +90,10 @@ class Dashcam:
         self.__process = subprocess.Popen([
           "rpicam-vid",
           "-n",
-          "-w", str(width),
-          "-h", str(height),
-          "-b", str(rounded_bitrate),
-          "-fps", str(fps),
+          "--width", str(width),
+          "--height", str(height),
+          "--level", '4.2',
+          "-framerate", str(fps),
           "-t", "0",
           "-o", self.__file_path
         ])
