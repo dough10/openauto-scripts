@@ -85,18 +85,21 @@ class Dashcam:
         "-t", "0",
         "-o", self.__file_path
       ])
-    except Exception as e:
-      self.__process = subprocess.Popen([
-        "rpicam-vid",
-        "-n",
-        "-w", str(width),
-        "-h", str(height),
-        "-b", str(rounded_bitrate),
-        "-fps", str(fps),
-        "-t", "0",
-        "-o", self.__file_path
-      ])
-        
+    except Exception:
+      try:
+        self.__process = subprocess.Popen([
+          "rpicam-vid",
+          "-n",
+          "-w", str(width),
+          "-h", str(height),
+          "-b", str(rounded_bitrate),
+          "-fps", str(fps),
+          "-t", "0",
+          "-o", self.__file_path
+        ])
+      except Exception as e:
+        logger.critical(f'Failed running dashcam.py: {e}')
+          
   def stop(self) -> None:
     """
     Stops the video recording and saves the file.
