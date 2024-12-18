@@ -170,13 +170,13 @@ class Pwmfan:
     reading_c:float = float(result.stdout.split('=')[1].split("'")[0])
     reading_f:float = round(((reading_c * 9) / 5) + 32, 1)
     
+    if not '__fan' in self: return
     for threshold, duty in self.__duty_cycles:
       if reading_c >= threshold:
         self.__fan.ChangeDutyCycle(duty)
         logger.debug(f"Fan speed ({self.rpm}rpm) adjusted to {duty}% for temperature {reading_c}°C ({reading_f}°F)")
         return
 
-    if not '__fan' in self: return
     self.__fan.ChangeDutyCycle(self.__default_duty)
     logger.debug(f"Fan speed ({self.rpm}rpm) set to {self.__default_duty}% (default) for temperature {reading_c}°C ({reading_f}°F)")
 
