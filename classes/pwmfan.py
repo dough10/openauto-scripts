@@ -114,6 +114,7 @@ class Pwmfan:
   This class controls a PWM fan based on the temperature readings of the Raspberry Pi.
   The fan speed is adjusted according to predefined temperature thresholds and their corresponding duty cycles.
   """
+  __fan = None
   __duty_cycles = default_curve
   __default_duty:float = 25.0
   __t:float = time.time()
@@ -170,7 +171,7 @@ class Pwmfan:
     reading_c:float = float(result.stdout.split('=')[1].split("'")[0])
     reading_f:float = round(((reading_c * 9) / 5) + 32, 1)
     
-    if not getattr(self,'__fan'): return
+    if not self.__fan: return
     for threshold, duty in self.__duty_cycles:
       if reading_c >= threshold:
         self.__fan.ChangeDutyCycle(duty)
