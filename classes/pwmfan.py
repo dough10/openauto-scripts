@@ -134,14 +134,20 @@ class Pwmfan:
     logger.info(f'FAN_PIN:{fan_pin}, FAN_SPEED_PIN:{speed_pin}')
     if fan_curve:
       self.__duty_cycles:List[Tuple[float, float]] = load_fan_curve(fan_curve)
+
     try:
       GPIO.setup(speed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
       GPIO.add_event_detect(speed_pin, GPIO.FALLING, self.__fell)
+    except Exception as e:
+      logger.critical(f'Failed to configute PWM Tach pin: {e}')
+      return
+    
+    try:
       GPIO.setup(fan_pin, GPIO.OUT)
       self.__fan = GPIO.PWM(fan_pin, self.__frequency)
       self.__fan.start(0)
     except Exception as e:
-      logger.critical(f'Failed configuring PWM GPIO pins: {e}')
+      logger.critical(f'Failed to configure PWM Control pin: {e}')
       return
     
   @debounce(30)
@@ -170,6 +176,7 @@ class Pwmfan:
         logger.debug(f"Fan speed ({self.rpm}rpm) adjusted to {duty}% for temperature {reading_c}°C ({reading_f}°F)")
         return
 
+    if not self.__fan: return
     self.__fan.ChangeDutyCycle(self.__default_duty)
     logger.debug(f"Fan speed ({self.rpm}rpm) set to {self.__default_duty}% (default) for temperature {reading_c}°C ({reading_f}°F)")
 
