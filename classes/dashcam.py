@@ -92,6 +92,7 @@ class Dashcam:
           "--width", str(width),
           "--height", str(height),
           "--level", "4.2",
+          "-b", str(rounded_bitrate),
           "--framerate", str(fps),
           "-t", "0",
           "-o", self.__file_path
