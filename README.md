@@ -6,7 +6,7 @@ Python3 scripts for OpenAuto Pro. Monitors GPIO pins and performs actions when t
 
 To install, run the following command:
 
-```text
+```bash
 cd ~/ && curl -O https://raw.githubusercontent.com/dough10/openauto-scripts/refs/heads/main/install.sh && bash install.sh && rm install.sh
 ```
 
@@ -17,7 +17,7 @@ The environment configuration is used to enable features, change GPIO settings, 
 To create or edit the environment configuration file:
 
 ```text
-nano ~/.openauto-scripts/.env
+oas_env
 ```
 
 ### Features
